@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* color: #c1fe36; */
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    color: #121212;
+    background-color: #c1fe56;
+    width: 50vb; /* Define a fixed size for both width and height */
+    height: 50vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Align content vertically inside the container */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #121212; /* Matches the theme */
+}
+
+.currentDate {
+    color: #121212;
+    border: 2px solid #121212;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 1rem;
+    padding: 10px; /* Match padding with the input and button */
+    width: 80%; /* Ensure the width matches the input and button */
+    text-align: center; /* Center the text */
+}
+
+.dob {
+    width: 80%; /* Make the input wider */
+    padding: 10px;
+    border: 2px solid #121212;
+    border-radius: 5px;
+    background-color: #f8f8f8; /* Light background for better contrast */
+    color: #121212;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button {
+    width: 80%; /* Same width as input for alignment */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #121212; /* Matches the body theme */
+    color: #c1fe56; /* Matches the container background */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #333; /* Darker shade for hover effect */
+}
+
+.age {
+    font-size: 1rem;
+    color: #121212;
+    text-align: center;
+    margin-top: 10px;
+}
