@@ -1,0 +1,96 @@
+Linux commands
+
+systemctl
+  [System state management]
+  - systemctl reboot                                                  # Restart the machine.
+  - systemctl poweroff                                                # Power off the system.
+  - systemctl suspend                                                 # Suspend the system to RAM (low power mode).
+  - systemctl halt                                                    # Halt the system without powering off.
+  - systemctl rescue                                                  # Enter rescue (single-user) mode.
+  - systemctl isolate <target>                                        # Switch to a specific system target (e.g., graphical).
+  [Service management]
+  - systemctl isolate multi-user.target                               # Switch to multi-user (non-graphical) mode.
+  - systemctl start <service>                                         # Start a service manually.
+  - systemctl stop <service>                                          # Stop a running service.
+  - systemctl restart <service>                                       # Restart a service (stop and start again).
+  - systemctl reload <service>                                        # Reload configuration without stopping the service (if supported).
+  - systemctl status <service>                                        # Show the current status of a service.
+  - systemctl enable <service>                                        # Enable the service to start at boot.
+  - systemctl disable <service>                                       # Disable the service from starting at boot.
+  - systemctl is-active <service>                                     # Check if the service is active (running).
+  - systemctl is-enabled <service>                                    # Check if the service is enabled at boot.
+
+
+
+chmod
+
+
+
+General
+ - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
+ - mv [options] <source_folder> <destination>                               # move folder
+ - mv /path/to/folder /path/to/destination/
+ - dpkg -S /usr/bin/nvim                                                    # finding the package name of binary
+ - which <cli-command-name>                                                 # find the location in the executable
+ - sudo apt purge <package_name>                                            # uninstall and remove the config/residual files too
+ - uname -m                                                                 # System's architecture
+ - apt-cache policy <package-name>                                          # available versions of package
+
+
+
+Shell
+ - source <filename>                               # Reloads the file in question for the shell session(used after editing .bashrc)
+
+
+
+Nano (A text editor in command line)
+ - nano filename                                                            # Opens a file, creates if doesnt exist
+ - ctrl + o                                                                 # for output
+ - ctrl + x                                                                 # Exit nano
+ - alt + u                                                                  # Undo
+ - alt + e                                                                  # redo
+ - ctrl + w                                                                 # search for text (ctrl + w again to find next occurance)
+ - ctrl + \                                                                 # Find and Replace
+ - ctrl + c                                                                 # Show current cursor position and line number
+ - ctrl + _                                                                 # Go to a specific line
+
+
+
+Java
+ - update-alternatives --list java                                          # List outs all the java versions installed
+ - update-alternatives --config java                                        # change the default java version(have to be done as a super user)
+ - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre                   # For setting java home for the current terminal session
+
+
+
+git commands
+  - git log <branch-name>                                                   # list commits of a certain branch
+  - git show                                                                # Last commits changes (full details)
+  - git show <commit-hash>                                                  # specific commit changes (full details)
+  - git show --name-only <commit-hash>                                      # just names of files with changes
+  - git show --stat <commit-hash>                                           # names plus line changes stat
+  - git log --oneline                                                       # Concise commit details
+  - git show <commit-hash> -- <file-path>                                   # certain file from a certain commit (file path should be absolute)
+  - git diff                                                                # All file changes
+  - git diff <file-path>                                                    # specific file changes
+  - git diff --cached                                                       # changes stagged for commit
+  - git stash save "message"
+  - git stash push -m "message"
+  - git stash list
+  - git stash clear                                                         # remove all stash
+  - git stash drop stash@{n}                                                # remove a specific stash
+  - git cherry-pick <commit-hash>                                           # Add a certain commit from another branch to this branch
+  - git cherry-pick --continue                                              # complete the current cherry-pick
+  - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
+  - git cherry-pick abc1234 def5678 ghi91011
+  - git branch                                                              # all branches that exist locally
+  - git branch -r                                                           # all branches at remote repo
+  - git branch -a                                                           # at both remote and local
+  - git branch --format="%(refname:short)"                                  # Compact View
+  - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
+
+
+sqlcmd
+ - sqlcmd -?                                                            # to check if its installed
+ - sqlcmd -S <server_name> -U <username> -P <password>
+ - sqlcmd -S <server> -U <user> -P <pass> -d <database> -i <file.sql>   # For query with file
