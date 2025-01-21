@@ -88,9 +88,17 @@ git commands
   - git branch -a                                                           # at both remote and local
   - git branch --format="%(refname:short)"                                  # Compact View
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
+  - git rm -r --cached target/												# This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
 
 
 sqlcmd
  - sqlcmd -?                                                            # to check if its installed
  - sqlcmd -S <server_name> -U <username> -P <password>
  - sqlcmd -S <server> -U <user> -P <pass> -d <database> -i <file.sql>   # For query with file
+
+MVN
+ - mvn compile
+ - mvn test
+ - mvn package
+ - mvn clean
+ - mvn validate
