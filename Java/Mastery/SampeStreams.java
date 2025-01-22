@@ -1,6 +1,7 @@
 package Java.Mastery;
 
 import java.util.*;
+// import java.util.stream.Stream;
 
 public class SampeStreams {
 
@@ -21,7 +22,41 @@ public class SampeStreams {
 
         // System.out.println("The value : " + "Mike".toLowerCase());
 
+        // Integer.sum(a, b)
 
+
+        // Source
+        // from collections
+        // collection.stream()
+
+        // from arrays
+        // Arrays.stream(array)
+
+        // from values
+        // Stream<Integer> stream = Stream.of(1,2,3);
+
+        // Infinite streams
+        // Stream<Integer> infinite = Stream.iterate(0, n -> n + 1);
+
+
+        // Intermediate Operations
+        // filter: Select elements based on a condition.
+        // stream.filter(x -> x > 10);
+
+        // map: Transform each element.
+        // stream.map(String::toUpperCase);
+
+        // sorted: Sort elements.
+        // stream.sorted();
+
+        // distinct: Remove duplicates.
+        // stream.distinct();
+
+        // limit: Restrict the number of elements.
+        // stream.limit(5);
+
+        // skip: Skip the first n elements.
+        // stream.skip(3);
 
     }
 }
