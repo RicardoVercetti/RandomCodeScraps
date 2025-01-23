@@ -74,6 +74,8 @@ git commands
   - git diff                                                                # All file changes
   - git diff <file-path>                                                    # specific file changes
   - git diff --cached                                                       # changes stagged for commit
+  - git diff > changes.diff													# Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
+  - git apply changes.diff													# Apply the changes from the file changes.diff
   - git stash save "message"
   - git stash push -m "message"
   - git stash list
@@ -89,6 +91,7 @@ git commands
   - git branch --format="%(refname:short)"                                  # Compact View
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git rm -r --cached target/												# This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
+  - git reset --hard														# Discard all changes and reset the working directory
 
 
 sqlcmd
