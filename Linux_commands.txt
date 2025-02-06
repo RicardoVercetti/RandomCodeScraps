@@ -35,6 +35,7 @@ General
  - sudo apt purge <package_name>                                            # uninstall and remove the config/residual files too
  - uname -m                                                                 # System's architecture
  - apt-cache policy <package-name>                                          # available versions of package
+ - ip addr show
 
 
 
@@ -92,6 +93,11 @@ git commands
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git rm -r --cached target/												# This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
   - git reset --hard														# Discard all changes and reset the working directory
+  - git clean -f															# removed untracked files only
+  - git clean -fd															# files n directories
+  - git clean -fx															# remove ignorted files too
+  - git clean -fdx															# ignored and untracked files and directories
+  - git clean -n															# (dry run)preview before deleting
 
 
 sqlcmd
@@ -105,3 +111,11 @@ MVN
  - mvn package
  - mvn clean
  - mvn validate
+
+Firewall
+ - sudo ufw status
+ - sudo ufw allow 8089/tcp
+
+
+storage analyzer
+ - ncdu /
