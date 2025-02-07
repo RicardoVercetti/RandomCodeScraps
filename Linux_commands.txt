@@ -36,6 +36,8 @@ General
  - uname -m                                                                 # System's architecture
  - apt-cache policy <package-name>                                          # available versions of package
  - ip addr show
+ - df -h																	# check disk usage
+ - baobab																	# gnome disk usage analyzer
 
 
 
@@ -98,6 +100,13 @@ git commands
   - git clean -fx															# remove ignorted files too
   - git clean -fdx															# ignored and untracked files and directories
   - git clean -n															# (dry run)preview before deleting
+  - git clone --branch <branch-name> --single-branch <repo-url>
+  - git config --get user.name
+  - git config --get user.email
+  - git remote -v															# show remote repo links
+  - ssh -T git@github.com													# check ssh conenction w/ github
+
+
 
 
 sqlcmd
@@ -119,3 +128,6 @@ Firewall
 
 storage analyzer
  - ncdu /
+
+Gradle
+ - gradle --version
