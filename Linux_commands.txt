@@ -38,6 +38,8 @@ General
  - ip addr show
  - df -h																	# check disk usage
  - baobab																	# gnome disk usage analyzer
+ - sudo lsof -i :8080														# Find the Process Using Port 8080
+ - sudo kill -9 <PID>
 
 
 
@@ -95,6 +97,8 @@ git commands
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git rm -r --cached target/												# This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
   - git reset --hard														# Discard all changes and reset the working directory
+  - git reset --soft HEAD~1													# Undo Last Commit but Keep Changes (Soft Reset)
+  - git restore --staged .													# unstage all files
   - git clean -f															# removed untracked files only
   - git clean -fd															# files n directories
   - git clean -fx															# remove ignorted files too
