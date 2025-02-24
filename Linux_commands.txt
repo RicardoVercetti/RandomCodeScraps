@@ -65,6 +65,7 @@ Java
  - update-alternatives --list java                                          # List outs all the java versions installed
  - update-alternatives --config java                                        # change the default java version(have to be done as a super user)
  - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre                   # For setting java home for the current terminal session
+ - source ~/.bashrc															# to refresh current session shell script
 
 
 
@@ -109,6 +110,8 @@ git commands
   - git config --get user.email
   - git remote -v															# show remote repo links
   - ssh -T git@github.com													# check ssh conenction w/ github
+  - git branch --contains <commit-hash>										# check if a specific commit exists in any branch of a Git repository
+  - git fetch origin <branch-name>											# fetch only one branch changes
 
 
 
@@ -135,3 +138,6 @@ storage analyzer
 
 Gradle
  - gradle --version
+ - ./gradlew dependencies													# 
+ - ./gradlew bootRun														# run the project
+ - ./gradlew build --refresh-dependencies									# 
