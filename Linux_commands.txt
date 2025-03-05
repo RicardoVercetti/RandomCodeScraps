@@ -36,15 +36,18 @@ General
  - uname -m                                                                 # System's architecture
  - apt-cache policy <package-name>                                          # available versions of package
  - ip addr show
- - df -h																	# check disk usage
- - baobab																	# gnome disk usage analyzer
- - sudo lsof -i :8080														# Find the Process Using Port 8080
+ - df -h																	                                  # check disk usage
+ - baobab																	                                  # gnome disk usage analyzer
+ - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - sudo kill -9 <PID>
+ - tree																		                                  # show directory stucts in cli
+ - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
+ - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
 
 
 
 Shell
- - source <filename>                               # Reloads the file in question for the shell session(used after editing .bashrc)
+ - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
 
 
 
@@ -65,7 +68,7 @@ Java
  - update-alternatives --list java                                          # List outs all the java versions installed
  - update-alternatives --config java                                        # change the default java version(have to be done as a super user)
  - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre                   # For setting java home for the current terminal session
- - source ~/.bashrc															# to refresh current session shell script
+ - source ~/.bashrc															                            # to refresh current session shell script
 
 
 
@@ -80,8 +83,8 @@ git commands
   - git diff                                                                # All file changes
   - git diff <file-path>                                                    # specific file changes
   - git diff --cached                                                       # changes stagged for commit
-  - git diff > changes.diff													# Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
-  - git apply changes.diff													# Apply the changes from the file changes.diff
+  - git diff > changes.diff													                        # Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
+  - git apply changes.diff													                        # Apply the changes from the file changes.diff
   - git stash save "message"
   - git stash push -m "message"
   - git stash list
@@ -92,26 +95,28 @@ git commands
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
   - git cherry-pick abc1234 def5678 ghi91011
   - git branch                                                              # all branches that exist locally
+  - git branch -m main														                          # rename branch to main
   - git branch -r                                                           # all branches at remote repo
   - git branch -a                                                           # at both remote and local
   - git branch --format="%(refname:short)"                                  # Compact View
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
-  - git rm -r --cached target/												# This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
-  - git reset --hard														# Discard all changes and reset the working directory
-  - git reset --soft HEAD~1													# Undo Last Commit but Keep Changes (Soft Reset)
-  - git restore --staged .													# unstage all files
-  - git clean -f															# removed untracked files only
-  - git clean -fd															# files n directories
-  - git clean -fx															# remove ignorted files too
-  - git clean -fdx															# ignored and untracked files and directories
-  - git clean -n															# (dry run)preview before deleting
+  - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
+  - git reset --hard														                            # Discard all changes and reset the working directory
+  - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
+  - git restore --staged .													                        # unstage all files
+  - git clean -f															                              # removed untracked files only
+  - git clean -fd															                              # files n directories
+  - git clean -fx															                              # remove ignorted files too
+  - git clean -fdx															                            # ignored and untracked files and directories
+  - git clean -n															                              # (dry run)preview before deleting
   - git clone --branch <branch-name> --single-branch <repo-url>
   - git config --get user.name
   - git config --get user.email
-  - git remote -v															# show remote repo links
-  - ssh -T git@github.com													# check ssh conenction w/ github
-  - git branch --contains <commit-hash>										# check if a specific commit exists in any branch of a Git repository
-  - git fetch origin <branch-name>											# fetch only one branch changes
+  - git remote -v															                              # show remote repo links
+  - ssh -T git@github.com													                          # check ssh conenction w/ github
+  - git branch --contains <commit-hash>										                  # check if a specific commit exists in any branch of a Git repository
+  - git fetch origin <branch-name>											                    # fetch only one branch changes
+  - git push -u origin main													                        # -u(--set-upstream)
 
 
 
@@ -141,3 +146,6 @@ Gradle
  - ./gradlew dependencies													# 
  - ./gradlew bootRun														# run the project
  - ./gradlew build --refresh-dependencies									# 
+ - gradle --stop  															# Stop any running Gradle daemons
+ - gradle clean
+ - rm -rf ~/.gradle/caches/													# remove cache files
