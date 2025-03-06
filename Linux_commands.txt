@@ -104,6 +104,7 @@ git commands
   - git reset --hard														                            # Discard all changes and reset the working directory
   - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
   - git restore --staged .													                        # unstage all files
+  - git rebase main															# Updates your branch to match the latest state of <target-branch>
   - git clean -f															                              # removed untracked files only
   - git clean -fd															                              # files n directories
   - git clean -fx															                              # remove ignorted files too
@@ -113,10 +114,15 @@ git commands
   - git config --get user.name
   - git config --get user.email
   - git remote -v															                              # show remote repo links
+  - git remote set-url origin git@github.com:RicardoVercetti/Des3FromScratch.git						# change to ssh URL, HTTP looks t
   - ssh -T git@github.com													                          # check ssh conenction w/ github
   - git branch --contains <commit-hash>										                  # check if a specific commit exists in any branch of a Git repository
   - git fetch origin <branch-name>											                    # fetch only one branch changes
   - git push -u origin main													                        # -u(--set-upstream)
+  - git rev-list --left-right --count origin/main...main					# Compare Local and Remote Directly
+  - git log main..origin/main --oneline										# See a List of New Remote Commits
+  - git pull origin <current-branch>										# pull only one branch changes
+  - git pull --rebase														# puts the local commits on top of pulled remote commits
 
 
 
