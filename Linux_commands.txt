@@ -41,6 +41,7 @@ General
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - sudo kill -9 <PID>
  - tree																		                                  # show directory stucts in cli
+ - tree -L <depth>															# show until that deep of the file structure
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
 
