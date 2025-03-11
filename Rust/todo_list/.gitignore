@@ -1,0 +1,18 @@
+# Ignore Rust build artifacts
+/target/
+/debug/
+/release/
+
+# Ignore Cargo lock file (only for libraries, keep for binaries)
+Cargo.lock
+
+# Ignore Rust logs and IDE files
+*.log
+*.rs.bk
+
+# VS Code settings (optional)
+.vscode/
+
+# Ignore Rustup & Cargo related files
+.cargo/
+.rustup/
