@@ -84,12 +84,15 @@ git commands
   - git diff <file-path>                                                    # specific file changes
   - git diff --cached                                                       # changes stagged for commit
   - git diff > changes.diff													                        # Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
+  - git diff stash@{0}														# See the full diff of a stash
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
   - git stash save "message"
   - git stash push -m "message"
   - git stash list
+  - git stash show -p stash@{0}												# Show changes in a specific stash, The -p flag (or --patch) shows the detailed changes.
   - git stash clear                                                         # remove all stash
   - git stash drop stash@{n}                                                # remove a specific stash
+  - git stash show -p --include-untracked stash@{0}							# Show a stash in detail (including untracked files if any)
   - git cherry-pick <commit-hash>                                           # Add a certain commit from another branch to this branch
   - git cherry-pick --continue                                              # complete the current cherry-pick
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
