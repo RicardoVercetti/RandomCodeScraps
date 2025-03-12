@@ -42,6 +42,8 @@ General
  - sudo kill -9 <PID>
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
+ - tree -L 2 --prune -I "node_modules"										# Ignore certain files or directories
+ - tree -d -L 2																# only show directories
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
 
@@ -89,6 +91,8 @@ git commands
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
   - git stash save "message"
   - git stash push -m "message"
+  - git stash -u															# -u is short for --include-untracked
+  - git stash -a															# -a is short for --all, which includes untracked and ignored files
   - git stash list
   - git stash show -p stash@{0}												# Show changes in a specific stash, The -p flag (or --patch) shows the detailed changes.
   - git stash clear                                                         # remove all stash
@@ -159,3 +163,8 @@ Gradle
  - gradle --stop  															# Stop any running Gradle daemons
  - gradle clean
  - rm -rf ~/.gradle/caches/													# remove cache files
+ 
+Cargo
+ - cargo new project_name													# create new rust project with cargo build tool
+ - cargo build
+ - cargo run																# run the project
