@@ -46,6 +46,7 @@ General
  - tree -d -L 2																# only show directories
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
+ - find folder/to/work -type f -exec git update-index --no-assume-unchanged {} \;			# f → all files, execute the command after -exec, {} → placeholder for found files, \; → end for command
 
 
 
@@ -133,6 +134,10 @@ git commands
   - git log main..origin/main --oneline										# See a List of New Remote Commits
   - git pull origin <current-branch>										# pull only one branch changes
   - git pull --rebase														# puts the local commits on top of pulled remote commits
+  - git rm -r --cached the/folder											# To remove the folder/file from tracking while keeping them locally
+  - git update-index --assume-unchanged file/location						# pause tracking changes, ignore anymore changes without altering the remote file
+  - git ls-files -v															# lists all tracked files along with their status.
+  - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
 
 
 
