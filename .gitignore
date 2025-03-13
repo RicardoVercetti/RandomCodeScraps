@@ -19,3 +19,6 @@ __pycache__/
 # Ignore Rustup & Cargo related files
 .cargo/
 .rustup/
+
+# Ignore play_ground changes
+Rust/play_ground/
