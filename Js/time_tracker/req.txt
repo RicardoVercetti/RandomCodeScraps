@@ -1,0 +1,46 @@
+Project Requirements for Time Tracker CLI App
+1. Features
+
+    Activity Tracking
+        Start and stop timers for different activities (work, leisure, travel, entertainment, etc.).
+        Manually log time spent on an activity.
+        List available activities.
+
+    Data Storage
+        Store tracked time data persistently in a JSON or SQLite database.
+        Allow retrieval of past records for analysis.
+
+    Statistics & Reports
+        Show daily, weekly, and monthly summaries.
+        Display percentage breakdowns of time spent on different activities.
+        Support exporting data to JSON or CSV.
+
+    User Interface (CLI)
+        Command-based interaction (e.g., start work, stop work, stats).
+        Show ongoing activities and total logged time.
+        Use colors for better visibility.
+
+    Customization
+        Allow users to add/edit activity categories.
+        Option to set daily/weekly goals.
+
+2. Technical Requirements
+
+    Language & Runtime: Node.js with TypeScript.
+    CLI Framework: (Optional) commander.js for command handling.
+    Database:
+        JSON file storage for simplicity.
+        SQLite (using better-sqlite3) for better query support.
+    Modules:
+        fs (for file storage)
+        readline (for interactive CLI)
+        chalk (for colored CLI output)
+        commander (for structured command input)
+
+3. Basic Commands
+    time-tracker start <activity>   # Starts tracking an activity
+    time-tracker stop               # Stops the current activity
+    time-tracker log <activity> <duration>  # Manually log time
+    time-tracker stats [--daily|--weekly|--monthly]  # View statistics
+    time-tracker activities         # List all activities
+    time-tracker export [json|csv]  # Export data
