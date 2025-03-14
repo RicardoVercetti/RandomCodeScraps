@@ -1,3 +1,4 @@
+package Java.scraps;
 import java.util.Arrays;
 
 public class StringArrays {

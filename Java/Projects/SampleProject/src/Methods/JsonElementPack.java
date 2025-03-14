@@ -1,4 +1,4 @@
-package Methods;
+package Java.Projects.SampleProject.src.Methods;
 
 // import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;

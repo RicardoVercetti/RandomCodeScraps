@@ -1,4 +1,4 @@
-package Controller;
+package Java.Projects.SampleProject.src.Controller;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package Methods;
+package Java.Projects.SampleProject.src.Methods;
 
 import java.util.List;
 

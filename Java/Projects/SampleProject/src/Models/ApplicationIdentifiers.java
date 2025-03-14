@@ -1,4 +1,4 @@
-package Models;
+package Java.Projects.SampleProject.src.Models;
 
 public class ApplicationIdentifiers {
     

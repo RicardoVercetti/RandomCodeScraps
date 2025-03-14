@@ -1,8 +1,7 @@
-package Methods;
+package Java.Projects.SampleProject.src.Methods;
+import Models.ApplicationIdentifiers;
 import java.util.ArrayList;
 import java.util.List;
-
-import Models.ApplicationIdentifiers;
 
 public class CreateObjects {
     public static List<ApplicationIdentifiers> getApplicationIdInList() {
