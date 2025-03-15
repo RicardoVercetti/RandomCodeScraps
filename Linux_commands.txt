@@ -131,7 +131,8 @@ git commands
   - git push -f																# force push
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
   - git rev-list --left-right --count origin/main...main					# Compare Local and Remote Directly
-  - git log main..origin/main --oneline										# See a List of New Remote Commits
+  - git log main..origin/main --oneline										# if remote has new commits comparing local
+  - git log origin/main..main --oneline 			# local has no new compaing remote 
   - git pull origin <current-branch>										# pull only one branch changes
   - git pull --rebase														# puts the local commits on top of pulled remote commits
   - git rm -r --cached the/folder											# To remove the folder/file from tracking while keeping them locally
@@ -181,3 +182,14 @@ npm
  - npm install -g ts-node													# globally install the one-go compiler and runner
  - ts-node filename.ts														# to compile and run .ts files
  - tsc --init																# the tsconfig.json is required for running even a random file
+ - npm list									# list all the installed packages
+ - npm list -g									# global packages
+ - npm list --depth=0								# only direct dependencies
+
+nvim
+ - shift + esc                                        # mode change to normal
+ - :w                                                 # write the changes
+ - :q                                                 # quit
+ - :q!                                                # exit without saving
+ - :wq                                                # save and quit
+

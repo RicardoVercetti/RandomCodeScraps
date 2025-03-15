@@ -22,3 +22,6 @@ __pycache__/
 
 # Ignore play_ground changes
 Rust/play_ground/
+
+# ignore js node modules
+**/node_modules/
