@@ -11,6 +11,7 @@ public class LoyaltyReward {
     RewardType rewardType;
     RewardCategory rewardCategory;
     RewardTriggerCondition triggerCondition;
+    int pointsRequired;
 
     public String getRewardName() {
         return rewardName;
@@ -41,6 +42,12 @@ public class LoyaltyReward {
     }
     public void setTriggerCondition(RewardTriggerCondition triggerCondition) {
         this.triggerCondition = triggerCondition;
+    }
+    public int getPointsRequired() {
+        return pointsRequired;
+    }
+    public void setPointsRequired(int pointsRequired) {
+        this.pointsRequired = pointsRequired;
     }
 
     @Override

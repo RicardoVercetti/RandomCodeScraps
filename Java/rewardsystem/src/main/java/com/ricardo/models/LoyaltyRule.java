@@ -13,7 +13,7 @@ public class LoyaltyRule {
     RuleType ruleType;
     ArrayList<RuleTargetType> targetArray = new ArrayList<>();
     RuleCondition ruleCondition;
-    String ruleValue;
+    int ruleValue;
     int pointsAllocated;
 
     public String getRuleName() {
@@ -63,6 +63,18 @@ public class LoyaltyRule {
     }
     public void setPointsAllocated(int pointsAllocated) {
         this.pointsAllocated = pointsAllocated;
+    }
+    public RuleCondition getRuleCondition() {
+        return ruleCondition;
+    }
+    public void setRuleCondition(RuleCondition ruleCondition) {
+        this.ruleCondition = ruleCondition;
+    }
+    public int getRuleValue() {
+        return ruleValue;
+    }
+    public void setRuleValue(int ruleValue) {
+        this.ruleValue = ruleValue;
     }
 
     @Override
