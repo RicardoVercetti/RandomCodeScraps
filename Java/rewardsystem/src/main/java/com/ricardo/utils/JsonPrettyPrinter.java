@@ -13,6 +13,7 @@ public class JsonPrettyPrinter {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public static String jsonifyObject(Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
