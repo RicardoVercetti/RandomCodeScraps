@@ -3,10 +3,20 @@ package com.ricardo.models;
 import java.util.ArrayList;
 
 import com.ricardo.constants.RuleCondition;
+import com.ricardo.constants.RuleRewardStatus;
 import com.ricardo.constants.RuleTargetType;
 import com.ricardo.constants.RuleType;
 import com.ricardo.utils.JsonPrettyPrinter;
 
+/**
+ * The {@code LoyaltyRule} defines the condition for allocating points to transactions done
+ * <ul>
+ *     <li>{@code RuleType} defines if the rule have to be applied when the transaction is done to a certain merchant or by a certain product</li>
+ *     <li>{@code targetArray} can have the target entities in an array that the {@code RuleType} defines </li>
+ *     <li>{@code RuleCondition} is the actual condition to apply this rule</li>
+ *     <li>{@code ruleValue} is used for the condition defined</li>
+ * </ul>
+ */
 public class LoyaltyRule {
     String ruleName;
     String ruleId;
@@ -15,6 +25,7 @@ public class LoyaltyRule {
     RuleCondition ruleCondition;
     int ruleValue;
     int pointsAllocated;
+    RuleRewardStatus ruleStatus;
 
     public String getRuleName() {
         return ruleName;
@@ -75,6 +86,12 @@ public class LoyaltyRule {
     }
     public void setRuleValue(int ruleValue) {
         this.ruleValue = ruleValue;
+    }
+    public RuleRewardStatus getRuleStatus() {
+        return ruleStatus;
+    }
+    public void setRuleStatus(RuleRewardStatus ruleStatus) {
+        this.ruleStatus = ruleStatus;
     }
 
     @Override

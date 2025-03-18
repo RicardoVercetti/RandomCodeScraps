@@ -1,6 +1,7 @@
 package com.ricardo.models;
 
 import com.ricardo.constants.RewardCategory;
+import com.ricardo.constants.RuleRewardStatus;
 import com.ricardo.constants.RewardType;
 import com.ricardo.constants.RewardTriggerCondition;
 import com.ricardo.utils.JsonPrettyPrinter;
@@ -12,6 +13,8 @@ public class LoyaltyReward {
     RewardCategory rewardCategory;
     RewardTriggerCondition triggerCondition;
     int pointsRequired;
+    RuleRewardStatus rewardStatus;
+    int expiryPeriodInDays;
 
     public String getRewardName() {
         return rewardName;
@@ -48,6 +51,24 @@ public class LoyaltyReward {
     }
     public void setPointsRequired(int pointsRequired) {
         this.pointsRequired = pointsRequired;
+    }
+    public RuleRewardStatus getRewardStatus() {
+        return rewardStatus;
+    }
+    public void setRewardStatus(RuleRewardStatus rewardStatus) {
+        this.rewardStatus = rewardStatus;
+    }
+    public boolean isActive() {
+        return this.rewardStatus == RuleRewardStatus.ACTIVE;
+    }
+    public boolean isAuto() {
+        return this.triggerCondition == RewardTriggerCondition.AUTO;
+    }
+    public int getExpiryPeriodInDays() {
+        return expiryPeriodInDays;
+    }
+    public void setExpiryPeriodInDays(int expiryPeriodInDays) {
+        this.expiryPeriodInDays = expiryPeriodInDays;
     }
 
     @Override
