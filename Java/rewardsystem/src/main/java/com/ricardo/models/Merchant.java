@@ -2,6 +2,9 @@ package com.ricardo.models;
 
 import com.ricardo.constants.RuleTargetType;
 
+/**
+ * Merchants are straight up merchants in CMS, make entity if not already available
+ */
 public class Merchant implements RuleTargetType {
     String merchantName;
     String merchantId;
