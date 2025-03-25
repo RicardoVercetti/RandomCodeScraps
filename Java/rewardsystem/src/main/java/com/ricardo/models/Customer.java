@@ -4,6 +4,11 @@ import com.ricardo.utils.JsonPrettyPrinter;
 
 import java.util.ArrayList;
 
+/**
+ * This references a customer in CMS database. <br>
+ * {@code Product} is the card product(card program) used by the customer
+ * In addition, it should have {@code pointsEarned} and {@code rewardsEarned}
+ */
 public class Customer {
     String name;
     String customerId;

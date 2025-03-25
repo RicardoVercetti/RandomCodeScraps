@@ -81,10 +81,10 @@ public class AutoRewardsService {
             return;
         }
 
-        if(rw == null) {
-            Sysout.print("Error, the RewardInstance cannot be null");
-            return;
-        }
+//        if(rw == null) {
+//            Sysout.print("Error, the RewardInstance cannot be null");
+//            return;
+//        }
 
         // assign the reward instance to customer and deduce the corresponding points
         Sysout.print("Adding reward : \n" + rw.toString());
@@ -111,13 +111,6 @@ public class AutoRewardsService {
         return eligibleBagOfRewards.isEmpty() ? Optional.empty() : Optional.of(eligibleBagOfRewards);
     }
 
-//    public static void main(String[] args) {
-//        Sysout.print("Hi there...");
-//        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-//
-//        Sysout.print("The chosen one : " + getRandomElement(list));
-//    }
-
     public static <T> T getRandomElement(List<T> list) {
         if (list == null || list.isEmpty()) return null;
         Collections.shuffle(list);
@@ -125,14 +118,9 @@ public class AutoRewardsService {
     }
 
     public static List<Object> combineLists(List<?> list1, List<?> list2) {
-        List<Object> combinedList = Stream.concat(list1.stream(), list2.stream())
+        return Stream.concat(list1.stream(), list2.stream())
                 .collect(Collectors.toList());
-        return combinedList;
     }
-
-//    public static String getRewardSource(AbstractReward reward) {
-//        if(reward instanceof CashBackReward) return "CASHBACK"
-//    }
 
     public static RewardInstance createLoyaltyRewardInstance(Object oneReward, RewardInstance pointer) {
         pointer = new RewardInstance();
