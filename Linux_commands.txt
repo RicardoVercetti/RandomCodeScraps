@@ -69,10 +69,15 @@ Nano (A text editor in command line)
 
 
 Java
- - update-alternatives --list java                                          # List outs all the java versions installed
+ - update-alternatives --list java                                          # List outs all the java versions installed. Change Affects Only Java Commands (Not JAVA_HOME). 
+																			# does NOT update the JAVA_HOME environment variable, which some programs (like Gradle, Maven, and Tomcat) rely on.
+																			# after using update-alternatives, we often manually set JAVA_HOME in .bashrc or .profile
  - update-alternatives --config java                                        # change the default java version(have to be done as a super user)
- - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre                   # For setting java home for the current terminal session
+ - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre                   # For setting java home for the current terminal session.
+ - export PATH=$JAVA_HOME/bin:$PATH											# used after the above
  - source ~/.bashrc															                            # to refresh current session shell script
+
+
 
 
 
@@ -109,6 +114,7 @@ git commands
   - git branch -a                                                           # at both remote and local
   - git branch --format="%(refname:short)"                                  # Compact View
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
+  - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
   - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
   - git reset --hard														                            # Discard all changes and reset the working directory
   - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
@@ -140,6 +146,8 @@ git commands
   - git update-index --assume-unchanged file/location						# pause tracking changes, ignore anymore changes without altering the remote file
   - git ls-files -v															# lists all tracked files along with their status.
   - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
+  - git add -N .															# For untracked files, you can first add them to the staging area temporarily:
+  - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
 
 
 
@@ -166,12 +174,13 @@ storage analyzer
 
 Gradle
  - gradle --version
- - ./gradlew dependencies													# 
+ - ./gradlew dependencies													# download dependencies without building
  - ./gradlew bootRun														# run the project
- - ./gradlew build --refresh-dependencies									# 
+ - ./gradlew build --refresh-dependencies									# force gradle to redownload dependencies
  - gradle --stop  															# Stop any running Gradle daemons
  - gradle clean
  - rm -rf ~/.gradle/caches/													# remove cache files
+ - ./gradlew tasks															# list tasks available
  
 Cargo
  - cargo new project_name													# create new rust project with cargo build tool
@@ -193,4 +202,9 @@ nvim
  - :q                                                 # quit
  - :q!                                                # exit without saving
  - :wq                                                # save and quit
+
+kafka
+ - bin/zookeeper-server-start.sh config/zookeeper.properties				# start zoo keeper
+ - bin/kafka-server-start.sh config/server.properties						# start kafka broker
+
 
