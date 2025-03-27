@@ -25,11 +25,21 @@ systemctl
 chmod
 
 
+ssh
+ - ssh username@your-ubuntu-ip										# connect to a remote linux system
+ - sudo systemctl status ssh										# ssh service have to be running for connecting
+ - sudo systemctl start ssh											# start if not running
+ - sudo ufw allow ssh												# if ssh port 22 is not allowed for incoming connection, restart after that -> sudo systemctl restart ssh
+ - exit																# to close connection
+
+
 
 General
+ [file handling]
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
  - mv [options] <source_folder> <destination>                               # move folder
  - mv /path/to/folder /path/to/destination/
+ [package managers]
  - dpkg -S /usr/bin/nvim                                                    # finding the package name of binary
  - which <cli-command-name>                                                 # find the location in the executable
  - sudo apt purge <package_name>                                            # uninstall and remove the config/residual files too
@@ -40,6 +50,8 @@ General
  - baobab																	                                  # gnome disk usage analyzer
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - sudo kill -9 <PID>
+ - sudo netstat -tulnp | grep 22											# find the process running in port 22
+ [tree]
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
  - tree -L 2 --prune -I "node_modules"										# Ignore certain files or directories
@@ -88,6 +100,7 @@ git commands
   - git show --name-only <commit-hash>                                      # just names of files with changes
   - git show --stat <commit-hash>                                           # names plus line changes stat
   - git log --oneline                                                       # Concise commit details
+  - git log -n 5															# log top 5 commits
   - git show <commit-hash> -- <file-path>                                   # certain file from a certain commit (file path should be absolute)
   - git diff                                                                # All file changes
   - git diff <file-path>                                                    # specific file changes
@@ -101,9 +114,11 @@ git commands
   - git stash -a															# -a is short for --all, which includes untracked and ignored files
   - git stash list
   - git stash show -p stash@{0}												# Show changes in a specific stash, The -p flag (or --patch) shows the detailed changes.
+  - git stash apply stash@{0}												# apply changes but keep it in the stash list
   - git stash clear                                                         # remove all stash
   - git stash drop stash@{n}                                                # remove a specific stash
   - git stash show -p --include-untracked stash@{0}							# Show a stash in detail (including untracked files if any)
+  - git stash show -p stash@{0} > stash_patch.diff							# the changes from the stash, pack it into a diff file(useful in manually applying the changes if more than one stash has changes in same file)
   - git cherry-pick <commit-hash>                                           # Add a certain commit from another branch to this branch
   - git cherry-pick --continue                                              # complete the current cherry-pick
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
@@ -131,7 +146,7 @@ git commands
   - git config --get user.email
   - git remote -v															                              # show remote repo links
   - git remote set-url origin git@github.com:RicardoVercetti/Des3FromScratch.git						# change to ssh URL, HTTP looks t
-  - ssh -T git@github.com													                          # check ssh conenction w/ github
+  - ssh -T git@github.com													                          # check ssh connection w/ github
   - git branch --contains <commit-hash>										                  # check if a specific commit exists in any branch of a Git repository
   - git fetch origin <branch-name>											                    # fetch only one branch changes
   - git push -u origin main													                        # -u(--set-upstream)
@@ -148,6 +163,8 @@ git commands
   - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
   - git add -N .															# For untracked files, you can first add them to the staging area temporarily:
   - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
+  - git submodule status													# check if project has any submodules
+  - git submodule foreach --recursive 'echo $path'							# print path of each submodule
 
 
 
@@ -167,6 +184,8 @@ MVN
 Firewall
  - sudo ufw status
  - sudo ufw allow 8089/tcp
+ - sudo ufw status verbose													# Detailed status
+ - sudo ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
 
 
 storage analyzer
