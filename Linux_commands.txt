@@ -128,6 +128,7 @@ git commands
   - git branch -r                                                           # all branches at remote repo
   - git branch -a                                                           # at both remote and local
   - git branch --format="%(refname:short)"                                  # Compact View
+  - git branch --unset-upstream												# remove the upstream link
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
   - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
@@ -146,9 +147,12 @@ git commands
   - git config --get user.email
   - git remote -v															                              # show remote repo links
   - git remote set-url origin git@github.com:RicardoVercetti/Des3FromScratch.git						# change to ssh URL, HTTP looks t
+  - git remote prune origin																				# removes stale remote-tracking branches from your local repository
   - ssh -T git@github.com													                          # check ssh connection w/ github
   - git branch --contains <commit-hash>										                  # check if a specific commit exists in any branch of a Git repository
   - git fetch origin <branch-name>											                    # fetch only one branch changes
+  - git fetch --all
+  - git fetch --prune														# prune while fetching
   - git push -u origin main													                        # -u(--set-upstream)
   - git push -f																# force push
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
@@ -161,6 +165,7 @@ git commands
   - git update-index --assume-unchanged file/location						# pause tracking changes, ignore anymore changes without altering the remote file
   - git ls-files -v															# lists all tracked files along with their status.
   - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
+  - git ls-remote --heads origin											# list remote upstreams
   - git add -N .															# For untracked files, you can first add them to the staging area temporarily:
   - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
   - git submodule status													# check if project has any submodules
