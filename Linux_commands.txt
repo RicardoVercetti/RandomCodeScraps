@@ -59,6 +59,7 @@ General
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
  - find folder/to/work -type f -exec git update-index --no-assume-unchanged {} \;			# f → all files, execute the command after -exec, {} → placeholder for found files, \; → end for command
+ - find ~ -name '*text*' 2>/dev/null                                       # 2> means redirect stderr, /dev/null is a 'black hole' that discards anything sent to it
  - exec bash                                                               # restart shell(sometimes the shell tries to execute a binary thats long gone due to stale session
 
 
