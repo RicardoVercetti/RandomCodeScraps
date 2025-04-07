@@ -35,12 +35,14 @@ ssh
 
 
 General
+ - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
  - which <cli-command-name>                                                 # find the location in the executable
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show
+ - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  [file handling]
  - ls -l filename															# basic file information
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
@@ -49,6 +51,8 @@ General
  - file filename															# file type
  - find folder/to/work -type f -exec git update-index --no-assume-unchanged {} \;			# f → all files, execute the command after -exec, {} → placeholder for found files, \; → end for command
  - find ~ -name '*text*' 2>/dev/null                                       # 2> means redirect stderr, /dev/null is a 'black hole' that discards anything sent to it
+ - wc -l filename.txt														# number of lines in a text file
+ - wc -l < filename.txt														# number of lines without the filename
  [package managers]
  - dpkg -S /usr/bin/nvim                                                    # finding the package name of binary
  - dpkg -l																	# list all installed packages
