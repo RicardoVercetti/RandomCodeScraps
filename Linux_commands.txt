@@ -74,6 +74,14 @@ General
  - du -h filename														   # disk usage of file
  - df -h																	                                  # check disk usage
  - baobab																	                                  # gnome disk usage analyzer
+ [running processes]
+ - ps aux																	# Show all running processes.a | Show processes for all users, not just yours.
+																			# u | Show the user who owns the process along with extra details. x | Include processes not attached to a terminal (like background apps, daemons, or GUI apps like IntelliJ)
+ - top																		# Live process Monitor(Press P to sort by CPU|Press M to sort by memory|Press k then type a PID to kill a process|Press q to quit)																
+ [users]
+ - who																		# Who are the users logged in
+ - last																		# sign in history
+ - w																		# who's logged in, what they're doing, and system load
 
 
 
@@ -140,11 +148,13 @@ git commands
   - git cherry-pick --continue                                              # complete the current cherry-pick
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
   - git cherry-pick abc1234 def5678 ghi91011
+  - git checkout -b new-branch												# creates and checkout if it doesn't exist(-b "branch", -c "create")(alternatively `git switch -c new-branch`)
   - git branch                                                              # all branches that exist locally
   - git branch -m main														                          # rename branch to main
   - git branch -r                                                           # all branches at remote repo
   - git branch -a                                                           # at both remote and local
   - git branch --format="%(refname:short)"                                  # Compact View
+  - git branch --show-current
   - git branch --unset-upstream												# remove the upstream link
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
