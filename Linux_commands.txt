@@ -63,6 +63,9 @@ General
  - apt list --installed														# list all installed
  - apt show <package_name>													# Check available version in APT before installing
  - apt-cache show ripgrep													# the apt show equivalent
+ - flatpak list
+ - flatpak uninstall --unused
+ - flatpak uninstall com.jetbrains.PyCharm-Community						# uninstall with ID
  [tree]
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
