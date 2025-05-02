@@ -91,6 +91,8 @@ General
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
  - exec bash                                                                # restart shell(sometimes the shell tries to execute a binary thats long gone due to stale session
+ - ssh -T git@gitlab.com
+ - ssh -vT git@gitlab.com
 
 
 
@@ -180,9 +182,10 @@ git commands
   - git remote prune origin																				# removes stale remote-tracking branches from your local repository
   - ssh -T git@github.com													                          # check ssh connection w/ github
   - git branch --contains <commit-hash>										                  # check if a specific commit exists in any branch of a Git repository
+  - git branch -r --contains <commit-hash>									# if remote contains the commit
   - git fetch origin <branch-name>											                    # fetch only one branch changes
   - git fetch --all
-  - git fetch --prune														# prune while fetching
+  - git fetch --prune														# prune/remove missing branches comparing remote while fetching
   - git push -u origin main													                        # -u(--set-upstream)
   - git push -f																# force push
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
