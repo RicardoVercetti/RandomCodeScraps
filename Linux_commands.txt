@@ -41,7 +41,7 @@ General
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
- - ip addr show
+ - ip addr show																# or `ip address`
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  [file handling]
  - ls -l filename															# basic file information
