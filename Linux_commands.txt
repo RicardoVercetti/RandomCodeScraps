@@ -123,6 +123,7 @@ Java
 
 
 git commands
+  - git add -p <filename>													# lets you review each "hunk" in the file and choose what to stage(y - to stage the hunk, n to skip, s to split the hunk, q to quit)
   - git log <branch-name>                                                   # list commits of a certain branch
   - git commit --amend --reset-author										# resets the author of last commit
   - git show                                                                # Last commits changes (full details)
