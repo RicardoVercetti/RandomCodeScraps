@@ -164,13 +164,14 @@ git commands
   - git branch --unset-upstream												# remove the upstream link
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
+  - git rm <file-path> 														# remove tracked files
   - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
   - git reset --hard														                            # Discard all changes and reset the working directory
   - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
   - git restore																# restore the changes back as in the HEAD commit
   - git restore --staged .													                        # unstage all files
   - git rebase main															# Updates your branch to match the latest state of <target-branch>
-  - git clean -f															                              # removed untracked files only
+  - git clean -f															                              # if tracked, git doesn't remove it
   - git clean -fd															                              # files n directories
   - git clean -fx															                              # remove ignorted files too
   - git clean -fdx															                            # ignored and untracked files and directories
