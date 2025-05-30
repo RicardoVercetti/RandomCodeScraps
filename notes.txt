@@ -1,2 +1,6 @@
+---------------------------------------------------------- Adv
+-- for starters
 1. begenner problem in X/ begenner exercises in X
 2. Clone it, MVP(minimal viable product) 
+----------------------------------------------------------
+
