@@ -4,3 +4,38 @@
 2. Clone it, MVP(minimal viable product) 
 ----------------------------------------------------------
 
+
+---------------------------------------------------------- Exp
+-- PO
+make the db faster
+Querying highest, second highest
+
+
+spring boot annotations
+linked lists
+design patterns
+
+
+
+
+-- Valor
+Java
+ collections
+ frameworks - spring vs springboot
+ annotations
+ 
+
+js
+ var
+ events
+ virtual DOM
+ onClick
+ Promise Vs Async
+ hook like thing
+ 
+
+Relational Vs Non Relational DB
+choise of DB
+
+
+----------------------------------------------------------
