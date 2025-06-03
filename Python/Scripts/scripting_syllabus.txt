@@ -1,0 +1,301 @@
+-- Python Scripting Syllabus --
+
+---
+
+✅ 1. Core Python (Foundational Concepts)
+
+Before jumping into scripting, get comfortable with:
+
+Variables & Data Types
+
+Operators (arithmetic, comparison, logical, bitwise)
+
+Control Flow (if, else, elif)
+
+Loops (for, while, break, continue)
+
+Functions (default args, *args, **kwargs)
+
+Error Handling (try, except, finally)
+
+File I/O (open(), read/write modes)
+
+Modules and Imports
+
+List, Dict, Set, Tuple (and comprehensions)
+
+String Manipulation (important for parsing)
+
+
+> 📦 Built-ins to explore: open, os, sys, enumerate, range, zip, map, filter, lambda, type, isinstance, dir, help, input, print, len, str, int, float, bool
+
+
+
+
+---
+
+✅ 2. OS-Level Scripting
+
+Automate system tasks and process control.
+
+Topics:
+
+Working with the filesystem
+
+Running shell commands
+
+Reading environment variables
+
+Argument parsing
+
+Scheduling scripts (with cron or task scheduler)
+
+
+Built-in & External Packages:
+
+os – working with files, dirs, environment
+
+shutil – high-level file operations
+
+sys – system-specific params and functions
+
+subprocess – run shell commands (safer than os.system)
+
+argparse – parsing CLI arguments
+
+pathlib – modern path handling
+
+glob – file matching using wildcards
+
+
+
+---
+
+✅ 3. Text and File Processing
+
+For log analysis, config parsing, data extraction, etc.
+
+Topics:
+
+Reading/writing text, CSV, JSON, XML
+
+String formatting and regular expressions
+
+Log parsing and transformation
+
+
+Packages:
+
+re – regular expressions
+
+csv – CSV file handling
+
+json – JSON parsing and serialization
+
+xml.etree.ElementTree – basic XML parsing
+
+configparser – INI-style config files
+
+logging – robust logging instead of print()
+
+
+
+---
+
+✅ 4. Networking and APIs
+
+To interact with web services or network devices.
+
+Topics:
+
+Making HTTP requests
+
+Downloading files
+
+Automating web APIs
+
+Working with sockets (basic level)
+
+
+Packages:
+
+requests – HTTP requests (must-learn)
+
+http.server – create a simple local server
+
+urllib – built-in alternative to requests
+
+socket – for basic socket programming (optional)
+
+
+
+---
+
+✅ 5. Automation and Task Scheduling
+
+For daily jobs, repetitive tasks, browser automation.
+
+Topics:
+
+Scheduling tasks
+
+Automating web interaction
+
+Automating spreadsheets or PDFs
+
+
+Packages:
+
+schedule – lightweight job scheduling
+
+time, datetime – timing and delays
+
+pyautogui – GUI automation
+
+selenium – browser automation
+
+pandas – data manipulation (for reports, CSVs, Excel)
+
+openpyxl or xlsxwriter – Excel automation
+
+PyPDF2 or pdfplumber – PDF reading/editing
+
+
+
+---
+
+✅ 6. System Monitoring & DevOps Scripting
+
+Monitor system metrics, write deployment scripts.
+
+Topics:
+
+Process monitoring
+
+Disk/CPU/memory info
+
+Log collection
+
+Writing deployment/setup scripts
+
+
+Packages:
+
+psutil – process and system monitoring
+
+platform – system information
+
+getpass – secure password input
+
+dotenv – load environment vars from .env
+
+fabric or paramiko – remote shell commands via SSH
+
+
+
+---
+
+✅ 7. Concurrent Scripting
+
+For writing fast, efficient scripts.
+
+Topics:
+
+Threading vs Multiprocessing
+
+Async programming (basic level)
+
+
+Packages:
+
+threading – multithreading
+
+multiprocessing – process-based parallelism
+
+concurrent.futures – high-level interface
+
+asyncio – async event loop (advanced use)
+
+
+
+---
+
+✅ 8. Testing and Debugging Scripts
+
+Write reliable and maintainable scripts.
+
+Topics:
+
+Unit testing
+
+Debugging techniques
+
+Assertions
+
+
+Packages:
+
+unittest – built-in testing framework
+
+pytest – modern and flexible test framework
+
+pdb – Python debugger
+
+logging – replace print() in production scripts
+
+
+
+---
+
+✅ 9. Packaging and Distributing Scripts
+
+Make your scripts reusable or installable.
+
+Topics:
+
+Creating CLI tools
+
+Packaging with setup.py
+
+Creating .pyz or standalone binaries
+
+
+Packages:
+
+argparse, click, or typer – CLI apps
+
+setuptools – for packaging
+
+pyinstaller or shiv – for creating executables
+
+
+
+---
+
+✅ 10. Useful External Tools for Script Development
+
+pipx – run Python apps in isolated environments
+
+virtualenv or venv – create isolated environments
+
+black, flake8, isort – code formatting and linting
+
+
+
+---
+
+📚 Suggested Practice Projects
+
+File renamer script
+
+Backup automation script
+
+PDF/Excel report generator
+
+REST API data fetcher & processor
+
+CLI tool to manage TODOs or notes
+
+Web scraper for a site
+
+GitHub automation (create issues, pull data)
