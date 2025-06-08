@@ -243,8 +243,11 @@ Gradle
  
 Cargo
  - cargo new project_name													# create new rust project with cargo build tool
- - cargo build
+ - cargo build															# compile without running
+ - cargo build --release													# produce optimized build
  - cargo run																# run the project
+ - cargo check 																# check project for errors
+ - cargo clean															# removes '/target' folder
  
 npm
  - npm install -g typescript												# globally install tsc
