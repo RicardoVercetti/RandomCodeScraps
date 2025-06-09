@@ -1,0 +1,12 @@
+[package]
+name = "exercise"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+
+[profile.release]
+opt-level = "z"
+strip = true   # optional; Rust 1.73+
+lto = true     # link time optimization
