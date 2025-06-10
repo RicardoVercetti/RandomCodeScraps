@@ -125,7 +125,7 @@ INSERT INTO department_module_permissions (user_id, module_id, permission_id, is
 -- JOIN permissions p ON dmp.permission_id = p.permission_id
 -- ORDER BY u.username, m.module_name, p.permission_name;
 
-SELECT * from 
+-- SELECT * from 
 
 
 SELECT 
