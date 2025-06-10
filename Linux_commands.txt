@@ -156,6 +156,7 @@ git commands
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
   - git cherry-pick abc1234 def5678 ghi91011
   - git checkout -b new-branch												# creates and checkout if it doesn't exist(-b "branch", -c "create")(alternatively `git switch -c new-branch`)
+  - git checkout --orphan new-branch-name									# create a branch that is not originated from any other branch(no history)
   - git branch                                                              # all branches that exist locally
   - git branch -m main														                          # rename branch to main
   - git branch -r                                                           # all branches at remote repo
