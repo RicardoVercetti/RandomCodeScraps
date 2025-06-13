@@ -137,6 +137,7 @@ git commands
   - git log <branch-name>                                                   # list commits of a certain branch
   - git log --pretty=full													# author and commiter
   - git commit --amend --reset-author										# resets the author of last commit
+  - git status --untracked-files=all										# all the trackable files inside untracked directory
   - git show                                                                # Last commits changes (full details)
   - git show <commit-hash>                                                  # specific commit changes (full details)
   - git show --name-only <commit-hash>                                      # just names of files with changes
@@ -212,6 +213,7 @@ git commands
   - git update-index --assume-unchanged file/location						# pause tracking changes, ignore anymore changes without altering the remote file
   - git ls-files -v															# lists all tracked files along with their status.
   - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
+  - git ls-files --others --exclude-standard								# shows all files not currently tracked by Git and not ignored via .gitignore
   - git ls-remote --heads origin											# list remote upstreams
   - git add -N .															# For untracked files, you can first add them to the staging area temporarily:
   - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
