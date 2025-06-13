@@ -1,4 +1,4 @@
-Linux commands
+Linux Commands & Shortcuts
 
 systemctl
   [System state management]
@@ -43,6 +43,7 @@ General
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show																# or `ip address`
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
+ - update-desktop-database ~/.local/share/applications						# refresh your app database
  [file handling]
  - ls -l filename															# basic file information
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
@@ -51,6 +52,7 @@ General
  - file filename															# file type
  - find folder/to/work -type f -exec git update-index --no-assume-unchanged {} \;			# f → all files, execute the command after -exec, {} → placeholder for found files, \; → end for command
  - find ~ -name '*text*' 2>/dev/null                                       # 2> means redirect stderr, /dev/null is a 'black hole' that discards anything sent to it
+ - find ~dir -type f														# find all in the dir. f → folders, d → directories
  - wc -l filename.txt														# number of lines in a text file
  - wc -l < filename.txt														# number of lines without the filename
  [package managers]
@@ -60,12 +62,20 @@ General
  - sudo apt remove <package_name>											# just uninstall
  - uname -m                                                                 # System's architecture
  - apt-cache policy <package-name>                                          # available versions of package
+ - apt autoremove
+ - apt list																	# installed and available in repos
  - apt list --installed														# list all installed
+ - apt list --upgradable
  - apt show <package_name>													# Check available version in APT before installing
  - apt-cache show ripgrep													# the apt show equivalent
+ - apt update
+ - sudo apt full-upgrade													# upgrade for kernal level packages
+ - apt upgrade -y															# -y → 'Yes' for all
  - flatpak list
  - flatpak uninstall --unused
  - flatpak uninstall com.jetbrains.PyCharm-Community						# uninstall with ID
+ - snap list
+ - snap remove app-name
  [tree]
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
