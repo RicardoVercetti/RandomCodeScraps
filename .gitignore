@@ -25,3 +25,22 @@ Rust/play_ground/
 
 # ignore js node modules
 **/node_modules/
+
+# Ignore IntelliJ IDE configs
+.idea/
+*.iml
+
+# Ignore Gradle build outputs and dirs
+build/
+out/
+.gradle/
+
+# Optional: ignore OS/Editor-specific files
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+
+# Optional: ignore logs and temporary files
+# *.log		// already included above
+*.tmp
