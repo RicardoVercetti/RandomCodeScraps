@@ -52,7 +52,7 @@ create TABLE role_lvl (
 
 -- Insert base permissions
 INSERT INTO permissions (permission_name) VALUES 
-('read'), ('create/update/delete'), ('import'), ('export'), ('maker'), ('checker');
+('Read'), ('Create/Update/Delete'), ('Import'), ('Export'), ('Maker'), ('Checker');
 
 -- Insert modules
 INSERT INTO modules (module_name) VALUES 
