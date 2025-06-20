@@ -172,6 +172,7 @@ git commands
   - git branch -m main														                          # rename branch to main
   - git branch -r                                                           # all branches at remote repo
   - git branch -a                                                           # at both remote and local
+  - git branch -vv															# brances with remote links
   - git branch --format="%(refname:short)"                                  # Compact View
   - git branch --show-current
   - git branch --unset-upstream												# remove the upstream link
@@ -193,6 +194,7 @@ git commands
   - git config --get user.name
   - git config --get user.email
   - git remote -v															                              # show remote repo links
+  - git remote add secondary-origin <SECOND_REPO_URL>
   - git remote set-url origin git@github.com:RicardoVercetti/Des3FromScratch.git						# change to ssh URL, HTTP looks t
   - git remote prune origin																				# removes stale remote-tracking branches from your local repository
   - ssh -T git@github.com													                          # check ssh connection w/ github
