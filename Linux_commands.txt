@@ -19,7 +19,9 @@ systemctl
   - systemctl disable <service>                                       # Disable the service from starting at boot.
   - systemctl is-active <service>                                     # Check if the service is active (running).
   - systemctl is-enabled <service>                                    # Check if the service is enabled at boot.
-
+  - systemctl list-units --type=service --state=running				  # all running services
+  - systemctl --user list-units --type=service --state=running		  # user service
+  - sudo systemctl list-unit-files | grep -i tomcat					  # find from files
 
 
 chmod
@@ -39,6 +41,8 @@ General
  - command -v rg															# check if command exists
  - which <cli-command-name>                                                 # find the location in the executable
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
+ - ps -p <PID> -f															# details on the one running in PID
+ - ps -p <PID> -o cmd														# mode details on process
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show																# or `ip address`
