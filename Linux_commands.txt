@@ -27,6 +27,17 @@ systemctl
 chmod
 
 
+admins
+ - groups															# all 
+
+
+locations
+ - cat /etc/linuxmint/info
+ - cat /etc/os-release
+ - cat /etc/issue
+
+
+
 ssh
  - ssh username@your-ubuntu-ip										# connect to a remote linux system
  - sudo systemctl status ssh										# ssh service have to be running for connecting
@@ -46,6 +57,7 @@ General
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show																# or `ip address`
+ - inxi -S																	# system info
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  [file handling]
@@ -291,4 +303,16 @@ kafka
  - bin/zookeeper-server-start.sh config/zookeeper.properties				# start zoo keeper
  - bin/kafka-server-start.sh config/server.properties						# start kafka broker
 
+docker
+ - docker ps																# running containers (-a → all incl stopped)
+ - docker pull <img-name>													# pull from docker hub
+ - docker rmi <image>														# remove an image
+ - docker run <id>															# run a container(-d → detached mode)
+ - docker stop <container-id>     											# Stop the container
+ - docker system prune														# Remove stopped containers, unused images, and networks( -a → Remove all unused images (not just dangling ones)
 
+
+
+docker-associated
+ - sudo usermod -aG docker $USER											# add user to docker group(usermod → A command to modify user accounts in Linux)
+ - newgrp docker															# refresh group permissions in the current shell session
