@@ -50,7 +50,7 @@ ssh
 General
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
- - which <cli-command-name>                                                 # find the location in the executable
+ - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - ps -p <PID> -f															# details on the one running in PID
  - ps -p <PID> -o cmd														# mode details on process
@@ -58,6 +58,7 @@ General
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show																# or `ip address`
  - inxi -S																	# system info
+ - less																		# some-command | less → gives walkable console outs
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  [file handling]
@@ -304,10 +305,13 @@ kafka
  - bin/kafka-server-start.sh config/server.properties						# start kafka broker
 
 docker
+ - docker exec -it <container> bash											# Open a shell inside a running container(exit → to close)
  - docker ps																# running containers (-a → all incl stopped)
  - docker pull <img-name>													# pull from docker hub
+ - docker rm <container>													# Remove a stopped container
  - docker rmi <image>														# remove an image
  - docker run <id>															# run a container(-d → detached mode)
+ - docker start <container>													# Restart a stopped container
  - docker stop <container-id>     											# Stop the container
  - docker system prune														# Remove stopped containers, unused images, and networks( -a → Remove all unused images (not just dangling ones)
 
