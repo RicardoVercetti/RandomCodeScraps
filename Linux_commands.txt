@@ -150,6 +150,7 @@ Java
 
 
 git commands
+  - git add -N .															# For untracked files, you can first add them to the staging area temporarily
   - git add -p <filename>													# lets you review each "hunk" in the file and choose what to stage(y - to stage the hunk, n to skip, s to split the hunk, q to quit)
   - git log <branch-name>                                                   # list commits of a certain branch
   - git log --pretty=full													# author and commiter
@@ -168,7 +169,6 @@ git commands
   - git diff > changes.diff													                        # Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
   - git diff stash@{0}														# See the full diff of a stash
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
-  - git stash save "message"
   - git stash push -m "message"
   - git stash -u															# -u is short for --include-untracked
   - git stash -a															# -a is short for --all, which includes untracked and ignored files
@@ -234,7 +234,6 @@ git commands
   - git ls-files -v | grep '^[[:lower:]]'									# find all tracked files with lower 'h' - assume unchanged
   - git ls-files --others --exclude-standard								# shows all files not currently tracked by Git and not ignored via .gitignore
   - git ls-remote --heads origin											# list remote upstreams
-  - git add -N .															# For untracked files, you can first add them to the staging area temporarily:
   - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
   - git submodule status													# check if project has any submodules
   - git submodule foreach --recursive 'echo $path'							# print path of each submodule
