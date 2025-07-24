@@ -54,6 +54,7 @@ General
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - ps -p <PID> -f															# details on the one running in PID
  - ps -p <PID> -o cmd														# mode details on process
+ - pwd																		# current working directory
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ip addr show																# or `ip address`
@@ -154,6 +155,7 @@ git commands
   - git add -p <filename>													# lets you review each "hunk" in the file and choose what to stage(y - to stage the hunk, n to skip, s to split the hunk, q to quit)
   - git log <branch-name>                                                   # list commits of a certain branch
   - git log --pretty=full													# author and commiter
+  - git log --oneline --graph --all --decorate								# --all → Shows commits from all branches, not just the current one(Without this, you’d only see commits reachable from HEAD), --decorate → Adds branch and tag names
   - git commit --amend --reset-author										# resets the author of last commit
   - git status --untracked-files=all										# all the trackable files inside untracked directory
   - git show                                                                # Last commits changes (full details)
@@ -168,6 +170,7 @@ git commands
   - git diff --cached                                                       # changes stagged for commit
   - git diff > changes.diff													                        # Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
   - git diff stash@{0}														# See the full diff of a stash
+  - git diff <root-branch>..<feat-branch>									# file changes in feat that are not in root
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
   - git stash push -m "message"
   - git stash -u															# -u is short for --include-untracked
@@ -193,6 +196,7 @@ git commands
   - git branch --format="%(refname:short)"                                  # Compact View
   - git branch --show-current
   - git branch --unset-upstream												# remove the upstream link
+  - git branch --merged <target-branch>										# branches that are merged to target through merge or rebase
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
   - git rm <file-path> 														# remove tracked files
