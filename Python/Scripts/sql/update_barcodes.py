@@ -1,0 +1,40 @@
+from utils.barcode_generator import BarcodeGenerator
+
+all_barcodes = """
+2cf4b42b792ecdac82b01826aefd7b4f
+c086f2072d6762a28765f34ca04c1d3c
+01fde8268bef13dc0044c865a8767040
+af37ac09ba2c695046c4ba3fdbca4eb0
+cc7608ffbcdbfc307bed74b7546a2294
+cb4bb0b46b800f65fab13a8864ee75e5
+c984e6c5f8cacc85bdfbb0c0ce06931c
+03d2483233a1525a6bab95f5405c7bcb
+ebd2ca01048c6d7d685920c82095f771
+027f63c5413b0e43b293b5c677af6502
+cab470dda805fb599f4328a07c20b9a6
+ba2041995462aaeb12033882ceaf2946
+db41083038c8db468d7ebaa39c3897c1
+bcc79d2185a262fe25b49b9723af4b22
+00bb5135e0d65ce35a34643dcbddc5be
+feed9cc548a823878ec8ccd891829363
+4608f39508d39ba23bc4f5783e48292b
+90f0e6cf497fa194153004892dccb04a
+57a445a8ad99510eaa5da726b538a02f
+1692702581bc72ec31137a22676bac8a
+c6736a89927097f4730cb04e6dbc1615
+0bf9cd96373846b5d9be6ddf9c36ffc2
+a89476cffa5b73dbdb834fed1bb54878
+ba05a9c16356fd722f0792845d5fed6b
+64525f961c72b345b68c2d1d4887db76
+0704aae160673f913a856074abf632c7
+80e9f096fd4881668314c8ccdb8eebfa"""
+
+def fmt_str(s1: str, s2: str) -> str:
+    return f"UPDATE public.apt_cards SET barcode_no='{s2}' WHERE barcode_no='{s1}';".strip()
+
+
+barcode_list = all_barcodes.strip().splitlines()
+b_generator = BarcodeGenerator()
+for i in barcode_list:
+    print(fmt_str(i, b_generator.generate_ean13_barcode()))
+
