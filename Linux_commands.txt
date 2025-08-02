@@ -62,6 +62,7 @@ General
  - less																		# some-command | less → gives walkable console outs
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - update-desktop-database ~/.local/share/applications						# refresh your app database
+ - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
  - ls -l filename															# basic file information
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
@@ -153,6 +154,7 @@ Java
 git commands
   - git add -N .															# For untracked files, you can first add them to the staging area temporarily
   - git add -p <filename>													# lets you review each "hunk" in the file and choose what to stage(y - to stage the hunk, n to skip, s to split the hunk, q to quit)
+  - git am <file-name>														# ammend the patch file(usually .patch or .eml) (includes all metadata)
   - git log <branch-name>                                                   # list commits of a certain branch
   - git log --pretty=full													# author and commiter
   - git log --oneline --graph --all --decorate								# --all → Shows commits from all branches, not just the current one(Without this, you’d only see commits reachable from HEAD), --decorate → Adds branch and tag names
@@ -224,6 +226,8 @@ git commands
   - git fetch origin <branch-name>											                    # fetch only one branch changes
   - git fetch --all
   - git fetch --prune														# prune/remove missing branches comparing remote while fetching
+  - git format-patch -1 <commit-hash>										# -1 (short for --max-count=1) tells Git to create a patch for only one commit
+  - git format-patch -3 HEAD												# patch file for top 3 commits
   - git push -u origin main													                        # -u(--set-upstream)
   - git push -f																# force push
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
