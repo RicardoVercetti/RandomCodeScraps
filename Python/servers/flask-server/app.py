@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
-import json
 from coloured_json import pretty_print_json_colored
 from datetime import datetime
+from core.ppid_generator import generate_ppid
+from core.ppi_response_codes import PpimsResponseCodes
 
 app = Flask(__name__)
 # app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+mobile_numbers: list[str] = []
 
 
 # Check PPID
@@ -34,10 +36,16 @@ def customer_registration_status():
     print("Received JSON:")
     pretty_print_json_colored(req_json)
 
+    # get "Mobile_Number" from json
+    mob_no = req_json["data"]["checkRegStatusDetails"]["mobile_Number"]
+    is_present: bool = True if mob_no in mobile_numbers else False
+
+    print("Is-Present: ", is_present)
+
     response = {
         "Data": {
-            "Resp_Code": "500",
-            "Unique_Id": "NA",
+            "Resp_Code":  PpimsResponseCodes.SUCCESS.value if is_present else PpimsResponseCodes.ERROR.value,
+            "Unique_Id": generate_ppid() if is_present else "NA",
             "KYC_Flag": "NA",
             "KYC_Updated_Channel": "NA",
             "KYC_Updated_On": "NA",
@@ -83,11 +91,19 @@ def add_customer():
     print("Received JSON:")
     pretty_print_json_colored(req_json)
 
+    mob_no = req_json["Data"]["Add_Customer"]["Mobile_Number"]
+    is_present: bool = True if mob_no in mobile_numbers else False
+    custom_response_code = PpimsResponseCodes.ERROR
+    if not is_present:
+        mobile_numbers.append(mob_no)
+        custom_response_code = PpimsResponseCodes.SUCCESS
+
+
     # Build mock response similar to the swagger example
     response = {
         "Data": {
-            "Resp_Code": "000",
-            "Unique_Id": "515427983121234",
+            "Resp_Code": custom_response_code.value,
+            "Unique_Id": generate_ppid(),
             "KYC_Flag": "P",
             "KYC_Updated_Channel": "PGO",
             "KYC_Updated_On": "01-01-2018 11:00:00"
