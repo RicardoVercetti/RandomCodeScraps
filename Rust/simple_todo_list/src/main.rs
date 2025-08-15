@@ -4,6 +4,10 @@
 // 3. saves tasks to a file
 // 4. loads tasks from the file on startup
 
+// Task
+// 5. Each task should have status
+// 6. Menu option to mark a status as done
+
 
 // Things to learn
 // structs
@@ -16,21 +20,39 @@ use std::fs::OpenOptions;
 use std::fs::read_to_string;
 use std::io::Write;
 use std::io;
+use std::fmt;
+
+enum TaskStatus {
+    Pending,
+    Done,
+}
+
+impl fmt::Display for TaskStatus {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            TaskStatus::Pending => write!(f, "PENDING"),
+            TaskStatus::Done => write!(f, "DONE"),
+        }
+    }
+}
+
 
 //#[derive(Debug)]
 struct Task {
     description: String,
+    status: TaskStatus,
 }
 
 impl Task {
-    fn new(desc: String) -> Self {
+    fn new(desc: String, status: TaskStatus) -> Self {
         Task {
-            description: desc
+            description: desc,
+            status: status,
         }
     }
     
     fn display_data(&self) {
-        println!("Task desc : {}", self.description);
+        println!("Task|Status : {}|{}", self.description, self.status);
     }
 }
 
@@ -38,7 +60,7 @@ fn load_tasks() -> Vec<Task> {
     let mut tasks = Vec::new();
     if let Ok(contents) = read_to_string("tasks.txt") {
         for line in contents.lines() {
-            tasks.push(Task::new(line.to_string()));
+            tasks.push(Task::new(line.to_string(), TaskStatus::Pending));
         }
     }
     tasks
@@ -58,8 +80,18 @@ fn save_tasks(tasks: &Vec<Task>) {
             }
 }
 
+fn set_task_status(task: String, status: TaskStatus, tasks: &mut Vec<Task>) {
+    // iter through it and set the status
+    if let Some(task) = tasks.iter().find(|t| t.description == task) {
+        println!("Found: {}|{}", task.description, task.status);
+    }
+        
+}
+
 fn main() {
     println!("Heyy, this runs :) ");
+    
+    set_task_status("Timer".to_string(), TaskStatus::Pending, &mut load_tasks());
     
     loop {
         
@@ -84,7 +116,7 @@ fn main() {
                 io::stdin().read_line(&mut input).unwrap();
                 
                 let mut tasks = load_tasks();
-                tasks.push(Task::new(input.trim().to_string()));
+                tasks.push(Task::new(input.trim().to_string(), TaskStatus::Pending));
                 save_tasks(&tasks);
                 println!("Task added!");
                 
