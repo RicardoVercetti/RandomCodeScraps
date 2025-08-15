@@ -36,6 +36,14 @@ impl fmt::Display for TaskStatus {
     }
 }
 
+fn get_d_enum(en: &str) -> TaskStatus {
+    match en {
+        "PENDING" => TaskStatus::Pending,
+        "DONE" => TaskStatus::Done,
+        _ => TaskStatus::Pending,
+    }
+}
+
 
 //#[derive(Debug)]
 struct Task {
@@ -60,7 +68,9 @@ fn load_tasks() -> Vec<Task> {
     let mut tasks = Vec::new();
     if let Ok(contents) = read_to_string("tasks.txt") {
         for line in contents.lines() {
-            tasks.push(Task::new(line.to_string(), TaskStatus::Pending));
+            let (desc, status) = line.split_once(",")
+                    .expect("Invalid input from the saved file");
+            tasks.push(Task::new(desc.to_string(), get_d_enum(status.trim())));
         }
     }
     tasks
@@ -75,23 +85,35 @@ fn save_tasks(tasks: &Vec<Task>) {
             .expect("Could not open file");
             
             for task in tasks {
-                writeln!(file, "{}",task.description)
+                writeln!(file, "{}, {}",task.description, task.status)
                     .expect("Could not write to file");
             }
 }
 
-fn set_task_status(task: String, status: TaskStatus, tasks: &mut Vec<Task>) {
-    // iter through it and set the status
-    if let Some(task) = tasks.iter().find(|t| t.description == task) {
-        println!("Found: {}|{}", task.description, task.status);
+
+fn toggle_status(task_ref: &mut Task) {
+    match task_ref.status {
+        TaskStatus::Pending => {
+            task_ref.status = TaskStatus::Done;
+        },
+        TaskStatus::Done => {
+            task_ref.status = TaskStatus::Pending;
+        },
     }
-        
 }
+
+//fn set_task_status(task: String, status: TaskStatus, tasks: &mut Vec<Task>) {
+    // iter through it and set the status
+//    if let Some(task) = tasks.iter().find(|t| t.description == task) {
+//        println!("Found: {}|{}", task.description, task.status);
+//    }
+        
+//}
 
 fn main() {
     println!("Heyy, this runs :) ");
     
-    set_task_status("Timer".to_string(), TaskStatus::Pending, &mut load_tasks());
+    //set_task_status("Timer".to_string(), TaskStatus::Pending, &mut load_tasks());
     
     loop {
         
@@ -102,7 +124,7 @@ fn main() {
         //    task.display_data();
         //}
         
-        println!("H: 1 for adding tasks, 2 for viewing tasks, q for quit.");
+        println!("H: 1 for adding tasks, 2 for viewing tasks, 3 for change status, q for quit.");
         
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
@@ -115,6 +137,7 @@ fn main() {
                 println!("Enter the task description : ");
                 io::stdin().read_line(&mut input).unwrap();
                 
+                
                 let mut tasks = load_tasks();
                 tasks.push(Task::new(input.trim().to_string(), TaskStatus::Pending));
                 save_tasks(&tasks);
@@ -124,10 +147,39 @@ fn main() {
             "2" => { // List tasks
                 println!("--------------------");
                 for (i, task) in load_tasks().iter().enumerate() {
-                    println!("{}: {}", i+1, task.description);
+                    println!("{}: {} | {}", i+1, task.description, task.status);
                 }
                 println!("--------------------");
                 //println!("-- thats all there is --");
+            },
+            "3" => {    // change status
+                println!("Enter id to change status: ");
+                let mut id = String::new();
+                io::stdin().read_line(&mut id).unwrap();
+                let id: i32 = match id.trim().parse() {
+                    Ok(n) => n,
+                    Err(_) => {
+                        println!("please enter a valid number!");
+                        continue;
+                    }
+                };
+                
+                let mut tasks = load_tasks();
+                
+                // toggle status
+                for (i, task) in tasks.iter_mut().enumerate() {
+                    if (i+1) == id.try_into().unwrap() {
+                        toggle_status(task);
+                        println!("Status change successful");
+                    }
+                }
+                
+                for task in &tasks {
+                    println!("{}|{}", task.description, task.status);
+                }
+                
+                save_tasks(&tasks);
+                
             },
             "q" => {
                 println!("Goodbye...!");
