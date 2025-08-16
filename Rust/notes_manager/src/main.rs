@@ -15,7 +15,7 @@
 // More practice with ownership & borrowing
 
 use std::fs::{OpenOptions, read_to_string};
-use std::io::{self,Write};
+use std::io::{self, Write};
 
 #[derive(Debug)]
 struct Note {
@@ -38,8 +38,7 @@ fn save_notes(notes: &Vec<Note>) {
                     .expect("Could not open file");
                     
     for note in notes {
-        writeln!(file, "{}", note.title).unwrap();
-        writeln!(file, "{}", note.content).unwrap();
+        writeln!(file, "{}|{}", note.title, note.content).unwrap();
     }
     println!("File saved successfully");
 }
@@ -47,9 +46,16 @@ fn save_notes(notes: &Vec<Note>) {
 fn load_notes() -> Vec<Note> {
   let mut notes = Vec::new();
   if let Ok(contents) = read_to_string("notes.txt") {
-      let mut lines = contents.lines();
-      while let (Some(title), Some(content)) = (lines.next(), lines.next()) {
-          notes.push(Note::new(title.to_string(), content.to_string()));
+      //let lines = contents.lines();
+      for line in contents.lines() {
+          match line.split("|").collect::<Vec<&str>>().as_slice() {
+              [first, second] => {
+                  notes.push(Note::new(first.to_string(), second.to_string()));
+              },
+              _ => {
+                  println!("Cant split: {}", line);
+              }
+          }
       }
   }
   notes
@@ -87,7 +93,7 @@ fn main() {
                     println!("{}. {} - {}", i+1, note.title, note.content);
                 }
             },
-            "3" => {
+            "3" => {    // search notes
                  let mut key = String::new();
                  println!("Enter a key word to search:");
                  io::stdin().read_line(&mut key).unwrap();
@@ -115,11 +121,11 @@ fn main() {
                     }
                 };
                 
-                //println!("Id entered : {}", id);
                 let id_usize: usize = id.try_into().unwrap();
                 if id_usize <= notes.len() {
                     let removed = notes.remove(id_usize-1);
                     println!("Removed : {}", removed.title);
+                    save_notes(&notes);
                 } else {
                     println!("Invalid ID: {}", id_usize);
                 }
