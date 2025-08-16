@@ -4,9 +4,13 @@
 // 3. Lets you search notes by keyword
 // 4. Saves to files and loads on startup
 
-// Task
+// Task - 2
 // 5. Add menu option to delete a note by its index
 // 6. modify save notes to have title & content in one line seperated by '|'
+
+// Task - 3
+// 7. load_notes() should use Reult<Vec<Note>>, std::io::Error>
+// 8. save_notes() should use Result<(), std::io::Error>
 
 // Things to learn
 // Enums to represents menu options
@@ -29,40 +33,45 @@ impl Note {
     }
 }
 
-fn save_notes(notes: &Vec<Note>) {
+fn save_notes(notes: &Vec<Note>) -> Result<(), std::io::Error> {
     let mut file = OpenOptions::new()
                     .write(true)
                     .create(true)
                     .truncate(true)
-                    .open("notes.txt")
-                    .expect("Could not open file");
+                    .open("notes.txt")?;
                     
     for note in notes {
-        writeln!(file, "{}|{}", note.title, note.content).unwrap();
+        writeln!(file, "{}|{}", note.title, note.content)?;
     }
     println!("File saved successfully");
+    Ok(())
 }
 
-fn load_notes() -> Vec<Note> {
+fn load_notes() -> Result<Vec<Note>, std::io::Error> {
   let mut notes = Vec::new();
-  if let Ok(contents) = read_to_string("notes.txt") {
-      //let lines = contents.lines();
-      for line in contents.lines() {
-          match line.split("|").collect::<Vec<&str>>().as_slice() {
-              [first, second] => {
-                  notes.push(Note::new(first.to_string(), second.to_string()));
-              },
-              _ => {
-                  println!("Cant split: {}", line);
-              }
+  let contents = read_to_string("notes.txt")?;
+  for line in contents.lines() {
+      match line.split("|").collect::<Vec<&str>>().as_slice() {
+          [first, second] => {
+              notes.push(Note::new(first.to_string(), second.to_string()));
+          },
+          _ => {
+              println!("Cant split: {}", line);
           }
       }
   }
-  notes
+  Ok(notes)
 }
 
 fn main() {
-    let mut notes = load_notes();
+    let mut notes = match load_notes() {
+        Ok(data) => data,
+        Err(e) => {
+            println!("Failed to load notes cuz: {}", e);
+            println!("Initializing as empty(any already stored notes will be overridden!)");
+            Vec::new()
+        } 
+    };
     
     loop {
         println!("-- Welcome to Notes manager --\n");
@@ -85,8 +94,10 @@ fn main() {
                 
                 let note = Note::new(title.trim().to_string(), content.trim().to_string());
                 notes.push(note);
-                save_notes(&notes);
-                println!("Note added");
+                match save_notes(&notes) {
+                    Ok(()) => println!("Note added"),
+                    Err(e) => println!("Failed to save cuz of: {}", e),
+                };
             },
             "2" => {    // List notes
                 for (i, note) in notes.iter().enumerate() {
@@ -125,7 +136,10 @@ fn main() {
                 if id_usize <= notes.len() {
                     let removed = notes.remove(id_usize-1);
                     println!("Removed : {}", removed.title);
-                    save_notes(&notes);
+                    match save_notes(&notes) {
+                        Ok(()) => println!("saved successfully"),
+                        Err(e) => println!("Failed to save due to: {}", e),
+                    }
                 } else {
                     println!("Invalid ID: {}", id_usize);
                 }
