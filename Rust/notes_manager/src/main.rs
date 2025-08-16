@@ -4,6 +4,10 @@
 // 3. Lets you search notes by keyword
 // 4. Saves to files and loads on startup
 
+// Task
+// 5. Add menu option to delete a note by its index
+// 6. modify save notes to have title & content in one line seperated by '|'
+
 // Things to learn
 // Enums to represents menu options
 // Structs with multiple fields (title + content)
@@ -56,7 +60,7 @@ fn main() {
     
     loop {
         println!("-- Welcome to Notes manager --\n");
-        println!("1: Add note, 2: List notes, 3: Search notes, q: Quit");
+        println!("1: Add note, 2: List notes, 3: Search notes, 4: Delete notes, q: Quit");
         
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
@@ -97,6 +101,29 @@ fn main() {
                         println!("{} - {}", note.title, note.content);
                     }
                  
+            },
+            "4" => {    // delete notes
+                let mut id = String::new();
+                println!("Enter the ID:");
+                io::stdin().read_line(&mut id).unwrap();
+                
+                let id: i32 = match id.trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Invalid number");
+                        continue;
+                    }
+                };
+                
+                //println!("Id entered : {}", id);
+                let id_usize: usize = id.try_into().unwrap();
+                if id_usize <= notes.len() {
+                    let removed = notes.remove(id_usize-1);
+                    println!("Removed : {}", removed.title);
+                } else {
+                    println!("Invalid ID: {}", id_usize);
+                }
+                
             },
             "q" => {
                 println!("Goodbye!");
