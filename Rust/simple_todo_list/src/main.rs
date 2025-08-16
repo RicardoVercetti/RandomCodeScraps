@@ -59,6 +59,7 @@ impl Task {
         }
     }
     
+    #[allow(dead_code)]
     fn display_data(&self) {
         println!("Task|Status : {}|{}", self.description, self.status);
     }
@@ -111,19 +112,10 @@ fn toggle_status(task_ref: &mut Task) {
 //}
 
 fn main() {
-    println!("Heyy, this runs :) ");
     
-    //set_task_status("Timer".to_string(), TaskStatus::Pending, &mut load_tasks());
-    
+    println!("--- To-Do List ---\n");
+        
     loop {
-        
-        println!("\n--- To-Do List ---");
-        
-        ////println!("-- Available tasks --");
-        //for task in load_tasks() {
-        //    task.display_data();
-        //}
-        
         println!("H: 1 for adding tasks, 2 for viewing tasks, 3 for change status, q for quit.");
         
         let mut choice = String::new();
