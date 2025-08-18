@@ -70,7 +70,7 @@ fn main() {
     
     'mainloop: loop {
         println!("--- Library Manager ---");
-        println!("1: Add book, 2: Edit book, 3: List Book, 4: Borrow Book, 5: Return book, q: Quit");
+        println!("1: Add book, 2: Edit book, 3: List Book, \n4: Borrow Book, 5: Return book, 6: Search Book, q: Quit");
         
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
@@ -218,6 +218,25 @@ fn main() {
                     }
                 }
                 println!("Wait! how'd you enter this part of the code?!!!");
+            },
+            "6" => { // case insensitive search
+                let mut text = String::new();
+                println!("Enter the text to search: ");
+                io::stdin().read_line(&mut text).unwrap();
+                
+                let text = text.trim().to_lowercase();
+                println!("Search results:");
+                let filtered_books: Vec<&Book> = books.iter().filter(|&book| 
+                book.title.to_lowercase().contains(&text) ||
+                book.author.to_lowercase().contains(&text)).collect();
+                
+                for book in &filtered_books {
+                    println!("Book: {}, Author: {}, Year: {}", book.title, book.author, book.year);
+                }
+                
+                if filtered_books.is_empty() {
+                    println!("No results found!");
+                }
             },
             "q" => {
                 println!("Goodbye...");
