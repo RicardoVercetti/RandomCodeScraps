@@ -5,20 +5,27 @@
 // 3. Borrow a book(mark it as borrowed) 
 // 4. Return a book
 
+// Tasks
+// 5. Search books by title or author
+// 6. Add a new field year: u32 to the Book
+// 7. Add a Edit Book option and also include year in there
+
 use std::io;
 
 #[derive(Debug)]
 struct Book {
     title: String,
     author: String,
+    year: u32,
     is_borrowed: bool,
 }
 
 impl Book {
-    fn new(title: String, author: String) -> Self {
+    fn new(title: String, author: String, year: u32) -> Self {
         Book {
             title,
             author,
+            year,
             is_borrowed: false,
         }
     }
@@ -39,6 +46,12 @@ impl Book {
         } else {
             false
         }
+    }
+    
+    fn edit_book(&mut self, title: String, author: String, year: u32) {
+        self.title = title;
+        self.author = author;
+        self.year = year;
     }
 }
 
@@ -67,13 +80,24 @@ fn main() {
                 io::stdin().read_line(&mut author).unwrap();
                 let author = author.trim();
                 
-                books.push(Book::new(title.to_string(), author.to_string()));
+                let mut year = String::new();
+                println!("Enter the Year: ");
+                io::stdin().read_line(&mut year).unwrap();
+                let year: u32 = match year.trim().parse() {
+                    Ok(yr) => yr,
+                    Err(_) => {
+                        println!("Year have to be completely numerical!");
+                        continue 'mainloop;
+                    },
+                };
+                
+                books.push(Book::new(title.to_string(), author.to_string(), year));
                 println!("Book added successfully");
             },
             "2" => {
                 // list books
                 for (i, book) in books.iter().enumerate() {
-                    println!("{}. {} - {} [{}]", i+1, book.title, book.author, 
+                    println!("{}. {}({}) - {} [{}]", i+1, book.title, book.year, book.author,
                         if book.is_borrowed { "Borrowed" }  else { "Available" });
                 }
                 
