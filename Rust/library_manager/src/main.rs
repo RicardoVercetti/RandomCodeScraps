@@ -11,16 +11,18 @@
 // 7. Add a Edit Book option and also include year in there
 
 mod book;
+mod library;
 
 use book::Book;
+use library::Library;
+
 
 use std::io;
 
 
-
 fn main() {
     
-    let mut books: Vec<Book> = Vec::new();
+    let mut library = Library::new();
     
     'mainloop: loop {
         println!("--- Library Manager ---");
@@ -60,70 +62,68 @@ fn main() {
                     },
                 };
                 
-                books.push(Book::new(title.to_string(), author.to_string(), year));
+                library.add_book(Book::new(title.to_string(), author.to_string(), year));
                 println!("Book added successfully");
             },
             "2" => {
+            todo!("edit is not supported anymore!");
               // Edit book
-              let mut id = String::new();
-              println!("Enter the ID to edit:");
-              io::stdin().read_line(&mut id).unwrap();
+            //  let mut id = String::new();
+            //  println!("Enter the ID to edit:");
+            //  io::stdin().read_line(&mut id).unwrap();
               
-              let id: usize = match id.trim().parse() {
-                  Ok(val) => val,
-                  Err(_) => {
-                      println!("Enter a valid ID");
-                      continue 'mainloop;
-                  }
-              };
+            //  let id: usize = match id.trim().parse() {
+            //      Ok(val) => val,
+            //      Err(_) => {
+            //          println!("Enter a valid ID");
+            //          continue 'mainloop;
+            //      }
+            //  };
               
-              if id > books.len() {
-                  println!("Such ID doesn't exist : {}", id);
-                  continue 'mainloop;
-              }
+            //  if id > library.no_of_books() {
+            //      println!("Such ID doesn't exist : {}", id);
+            //      continue 'mainloop;
+            //  }
               
               // take title, author, year
-              let mut title = String::new();
-              let mut author = String::new();
-              let mut year = String::new();
+            //  let mut title = String::new();
+            //  let mut author = String::new();
+            //  let mut year = String::new();
               
-              println!("Enter the new title: ");
-              io::stdin().read_line(&mut title).unwrap();
-              let title = title.trim();
+            //  println!("Enter the new title: ");
+            //  io::stdin().read_line(&mut title).unwrap();
+            //  let title = title.trim();
               
-              println!("Enter the new author name: ");
-              io::stdin().read_line(&mut author).unwrap();
-              let author = author.trim();
+            //  println!("Enter the new author name: ");
+            //  io::stdin().read_line(&mut author).unwrap();
+            //  let author = author.trim();
               
-              println!("Enter the year: ");
-              io::stdin().read_line(&mut year).unwrap();
-              let year: u32 = match year.trim().parse() {
-                  Ok(val) => val,
-                  Err(e) => {
-                      println!("Error: {}", e);
-                      println!("Can't update with invalid year as input!");
-                      continue 'mainloop;
-                  }
-              };
+            //  println!("Enter the year: ");
+            //  io::stdin().read_line(&mut year).unwrap();
+            //  let year: u32 = match year.trim().parse() {
+            //      Ok(val) => val,
+            //      Err(e) => {
+            //          println!("Error: {}", e);
+            //          println!("Can't update with invalid year as input!");
+            //          continue 'mainloop;
+            //      }
+            //  };
               
-              for (i, book) in books.iter_mut().enumerate() {
-                  if id == i+1 {
-                      book.edit_book(title.to_string(), author.to_string(), year);
-                      println!("Updated successfully...");
-                      continue 'mainloop;
-                  }
-              }
-              println!("No book found! Updation failed!");
+            //  for (i, book) in books.iter_mut().enumerate() {
+            //      if id == i+1 {
+            //          book.edit_book(title.to_string(), author.to_string(), year);
+            //          println!("Updated successfully...");
+              //        continue 'mainloop;
+            //      }
+              //}
+              //println!("No book found! Updation failed!");
                              
             },
             "3" => {
                 // list books
-                for (i, book) in books.iter().enumerate() {
-                    println!("{}. {}({}) - {} [{}]", i+1, book.title, book.year, book.author,
-                        if book.is_borrowed { "Borrowed" }  else { "Available" });
-                }
+                library.show_all_books();
                 
-                if books.len() == 0 {
+                if library.no_of_books() == 0 {
                     println!("No books to show");
                 }
             },
@@ -135,7 +135,7 @@ fn main() {
                 let id = id.trim().parse::<usize>().unwrap();
                 
                 
-                for (i, book) in books.iter_mut().enumerate() {
+                for (i, book) in library.get_iter_mut_ref().iter_mut().enumerate() {
                     if i+1 == id {
                         //println!("The compared val: {}", i+1);
                         if book.borrow() {
@@ -156,12 +156,12 @@ fn main() {
                 io::stdin().read_line(&mut id).unwrap();
                 let id = id.trim().parse::<usize>().unwrap();
                 
-                if id > books.len() {
+                if id > library.no_of_books() {
                     println!("Invalid book ID: {}", id);
                     continue 'mainloop;
                 }
                 
-                for (i, book) in books.iter_mut().enumerate() {
+                for (i, book) in library.get_iter_mut_ref().iter_mut().enumerate() {
                     if i+1 == id {
                         if book.return_book() {
                             println!("You've successfully returned the book: {}", book.title);
@@ -180,7 +180,7 @@ fn main() {
                 
                 let text = text.trim().to_lowercase();
                 println!("Search results:");
-                let filtered_books: Vec<&Book> = books.iter().filter(|&book| 
+                let filtered_books: Vec<&Book> = library.get_iter_mut_ref().iter().filter(|&book| 
                 book.title.to_lowercase().contains(&text) ||
                 book.author.to_lowercase().contains(&text)).collect();
                 
