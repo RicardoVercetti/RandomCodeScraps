@@ -34,5 +34,18 @@ impl Library {
     pub fn get_iter_mut_ref(&mut self) -> &mut Vec<Book> {
         &mut self.books
     }
+    
+    pub fn find_by_author(&self, author: &str) {
+        let filtered: Vec<&Book> = self.books.iter().filter(|book| book.author.contains(author)).collect();
+        for (i, book) in filtered.iter().enumerate() {
+            println!("{}. {}({}) - {} [{}]", i+1, book.title, book.year, book.author,
+                        if book.is_borrowed { "Borrowed" }  else { "Available" });
+        }
+        
+        if filtered.is_empty() {
+            println!("No books found for the author: {}", author);
+        }
+    }
+    
 }
 

@@ -26,7 +26,7 @@ fn main() {
     
     'mainloop: loop {
         println!("--- Library Manager ---");
-        println!("1: Add book, 2: Edit book, 3: List Book, \n4: Borrow Book, 5: Return book, 6: Search Book, q: Quit");
+        println!("1: Add book, 2: Edit book, 3: List Book, \n4: Borrow Book, 5: Return book, 6: Search Book, 7: search by author, q: Quit");
         
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
@@ -191,6 +191,15 @@ fn main() {
                 if filtered_books.is_empty() {
                     println!("No results found!");
                 }
+            },
+            "7" => {
+              let mut auth = String::new();
+              println!("Enter the Author name to search by author: ");
+              
+              io::stdin().read_line(&mut auth).unwrap();
+              
+              let auth = auth.trim();
+              library.find_by_author(auth); 
             },
             "q" => {
                 println!("Goodbye...");
