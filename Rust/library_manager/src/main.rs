@@ -10,59 +10,13 @@
 // 6. Add a new field year: u32 to the Book
 // 7. Add a Edit Book option and also include year in there
 
+mod book;
+
+use book::Book;
+
 use std::io;
 
-#[derive(Debug)]
-struct Book {
-    title: String,
-    author: String,
-    year: u32,
-    is_borrowed: bool,
-}
 
-impl Book {
-    fn new(title: String, author: String, year: u32) -> Self {
-        Book {
-            title,
-            author,
-            year,
-            is_borrowed: false,
-        }
-    }
-    
-    fn borrow(&mut self) -> bool {
-        if self.is_borrowed {
-            false
-        } else {
-            self.is_borrowed = true;
-            true
-        }
-    }
-    
-    fn return_book(&mut self) -> bool {
-        if self.is_borrowed {
-            self.is_borrowed = false;
-            true
-        } else {
-            false
-        }
-    }
-    
-    fn edit_book(&mut self, title: String, author: String, year: u32) {
-        // if an empty string is passed, it means keep the old data
-        if title.len() > 0 {
-            self.title = title;
-        }
-        
-        if author.len() > 0 {
-            self.author = author;
-        }
-        
-        if year == 0 {    // zero can't be a valid year
-            self.year = year;
-        }
-    }
-}
 
 fn main() {
     
