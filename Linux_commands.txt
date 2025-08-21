@@ -312,7 +312,10 @@ kafka
  - bin/kafka-server-start.sh config/server.properties						# start kafka broker
 
 docker
+ - docker build -t <app-nick-name> .										# make a docker image from Dockerfile
  - docker exec -it <container> bash											# Open a shell inside a running container(exit → to close)
+ - docker images															# all available images
+ - docker logs <container_id_or_name>
  - docker ps																# running containers (-a → all incl stopped)
  - docker pull <img-name>													# pull from docker hub
  - docker rm <container>													# Remove a stopped container
