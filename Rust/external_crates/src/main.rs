@@ -11,11 +11,12 @@ use rand::Rng;        // bringing trait into scope
 use chrono::Local;
 
 fn main() {
-    println!("Hello, world!");
+    println!("-- Randomized greeting --");
+    let li = ["Hello", "Hi", "Welcome", "Yo"];
     let mut rng = rand::thread_rng();
-    let n: i32 = rng.gen_range(1..=10);
-    println!("Generated random number : {}", n);
+    let n = rng.gen_range(0..li.len());
+    println!("{}", li[n]);
     
     let now = Local::now();
-    println!("Current time : {}", now);
+    println!("Current time is {}", now);
 }
