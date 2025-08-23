@@ -12,6 +12,24 @@ fn safe_divide(a: f64, b: f64) -> Result<f64, String> {
     }
 }
 
+#[allow(dead_code)]
+fn get_input(s: &str) -> Result<f64, String> {
+    loop {
+        let mut var = String::new();
+        println!("Enter {}", s);
+        io::stdin().read_line(&mut var).unwrap();
+        let var: f64 = match var.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please enter a valid floating point decimal...");
+                continue;
+            }
+        };
+        return Ok(var);
+    }
+    
+}
+
 fn main() {
     println!("-- safe divide --");
     println!("Press q to quit anytime");
