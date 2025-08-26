@@ -4,17 +4,17 @@ struct Highlight<'a> {
     text2: &'a str,
 }
 
-fn longest_word<'a>(words: &'a [&'a str]) -> &'a str {
-    let mut a = 0;
-    let mut b: &'a str = &"";
-    for word in words {
-        if word.len() > a {
-            a = word.len();
-            b = &word;
+fn longest_word<'a>(words: &'a[&str]) -> &'a str {
+    let mut max_word = 0;
+    let mut d_word: &str = &"";
+    for &word in words {
+        if word.len() > max_word {
+            max_word = word.len();
+            d_word = &word;
         }
     }
 
-    b
+    d_word
 }
 
 fn main() {
