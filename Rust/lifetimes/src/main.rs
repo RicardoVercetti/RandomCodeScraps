@@ -1,25 +1,23 @@
-struct Highlight<'a> {
-    text: &'a str,
-}
 
-fn largest<'a>(a: &'a str, b: &'a str) -> &'a str {
-    if a.len() > b.len() {
-        a
-    } else {
-        b
+fn longest_word<'a>(words: &'a [&'a str]) -> &'a str {
+    let mut a = 0;
+    let mut b: &'a str = &"";
+    for word in words {
+        if word.len() > a {
+            a = word.len();
+            b = &word;
+        }
     }
+
+    b
 }
 
 fn main() {
-    //println!("Heellowww derrr...");
 
-    //let a = "Hall";
-    //let b = "Ashton";
 
-    //println!("The largest : {}", largest(&a, &b));
+    let sentence = String::from("Rust is fearless and fast");
+    let words: Vec<&str> = sentence.split_whitespace().collect();
 
-    let novel = String::from("Rust makes memory safe.");
-    let h = Highlight { text: &novel };
 
-    println!("{}", h.text);
+    println!("Longest word : {}", longest_word(&words));
 }
