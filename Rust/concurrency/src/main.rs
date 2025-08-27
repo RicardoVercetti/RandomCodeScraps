@@ -8,6 +8,7 @@
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
+#[allow(unused_imports)]
 use std::sync::{Arc, Mutex};
 
 #[allow(dead_code)]
@@ -32,25 +33,31 @@ fn channel_communication() {
 }
 
 fn main() {
-    let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
 
-    for n in 0..5 {
-        let counter = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            println!("{} thread started!", n);
-            let mut num = counter.lock().unwrap();
-            *num += 1;
+    let handle1 = thread::spawn(|| {
+        let nums = (1..=5).collect::<Vec<i32>>();
+        for num in nums {
+            println!("Num : {}", num);
             thread::sleep(Duration::from_millis(500));
-        });
-        println!("pushing thread {}", n);
-        handles.push(handle);
-    }
-    println!("pushed all threads to handles...");
+        }
+    });
+
+    handles.push(handle1);
+
+    let handle2 = thread::spawn(|| {
+        let alphs = ["a", "b", "c", "d", "e"];
+        for alph in alphs {
+            println!("alph : {}", alph);
+            thread::sleep(Duration::from_millis(500));
+        }
+    });
+
+    handles.push(handle2);
 
     for handle in handles {
         handle.join().unwrap();
     }
 
-    println!("Result: {}", *counter.lock().unwrap());
+    println!("Finished all...");
 }
