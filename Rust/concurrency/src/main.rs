@@ -9,17 +9,24 @@ use std::thread;
 use std::time::Duration;
 
 fn main() {
-    let handle = thread::spawn(|| {
-        for i in 1..5 {
-            println!("Hi from spawned thread: {}", i);
-            thread::sleep(Duration::from_millis(500));
-        }
-    });
+    let mut handles = vec![];
+    
+    for i in 1..=2 {
+        let handle = thread::spawn(move || {
+            for l in 1..=5 {
+                println!("Counting {} from thread {}", l, i);
+                thread::sleep(Duration::from_millis(500));
+            }
+        });
+        handles.push(handle);
+    }
 
     for i in 1..3 {
         println!("Hi from main thread: {}", i);
         thread::sleep(Duration::from_millis(500));
     }
 
-    handle.join().unwrap(); // wait for spawned thread to finish
+    for handle in handles {
+        handle.join().unwrap();
+    }
 }
