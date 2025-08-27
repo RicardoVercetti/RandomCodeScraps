@@ -5,28 +5,52 @@
 // 4. Use thread::sleep to simulate work.
 // 5. Bonus: Use a channel to send both numbers and letters back to the main thread, and print them there.
 
+use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
+use std::sync::{Arc, Mutex};
+
+#[allow(dead_code)]
+fn channel_communication() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let vals = vec!["one", "two", "three"];
+        for val in vals {
+            println!("Pushing...");
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_millis(500));
+        }
+    });
+
+    println!("Main thread's out...");
+    for received in rx {    // blocks until all tx references from all threads are released
+        println!("Got: {}", received);
+    }
+
+    println!("The main thread is done doing stuff...");
+}
 
 fn main() {
+    let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
-    for i in 1..=2 {
+
+    for n in 0..5 {
+        let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
-            for l in 1..=5 {
-                println!("Counting {} from thread {}", l, i);
-                thread::sleep(Duration::from_millis(500));
-            }
+            println!("{} thread started!", n);
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+            thread::sleep(Duration::from_millis(500));
         });
+        println!("pushing thread {}", n);
         handles.push(handle);
     }
-
-    for i in 1..3 {
-        println!("Hi from main thread: {}", i);
-        thread::sleep(Duration::from_millis(500));
-    }
+    println!("pushed all threads to handles...");
 
     for handle in handles {
         handle.join().unwrap();
     }
+
+    println!("Result: {}", *counter.lock().unwrap());
 }
