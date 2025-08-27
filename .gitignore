@@ -44,3 +44,6 @@ Thumbs.db
 # Optional: ignore logs and temporary files
 # *.log		// already included above
 *.tmp
+
+# ignore java build code
+**/bin/
