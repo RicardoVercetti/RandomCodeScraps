@@ -7,5 +7,5 @@ edition = "2024"
 
 [features]
 default = []
-feat-add = []
-feat-sub = []
+feature-add = []
+feature-sub = []
