@@ -189,6 +189,7 @@ git commands
   - git cherry-pick <start-commit>^..<end-commit>                           # Cherry-Pick Multiple Commits
   - git cherry-pick abc1234 def5678 ghi91011
   - git checkout -b new-branch												# creates and checkout if it doesn't exist(-b "branch", -c "create")(alternatively `git switch -c new-branch`)
+  - git checkout -b branch-name tag-name									# create a new branch with the tag's commit at head.(Commit hash can also be used)
   - git checkout --orphan new-branch-name									# create a branch that is not originated from any other branch(no history)
   - git branch                                                              # all branches that exist locally
   - git branch -m main														                          # rename branch to main
@@ -231,6 +232,8 @@ git commands
   - git push -u origin main													                        # -u(--set-upstream)
   - git push -f																# force push
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
+  - git push origin v1.2.0													# push one tag(By default, git push doesn’t push tags)
+  - git push origin --tags													# push all local tags
   - git rev-list --left-right --count origin/main...main					# Compare Local and Remote Directly
   - git log main..origin/main --oneline										# if remote has new commits comparing local
   - git log origin/main..main --oneline 			# local has no new compaing remote 
@@ -245,6 +248,10 @@ git commands
   - git submodule update --init --recursive									# If you forgot to use --recurse-submodules, you can still get the submodules later with this
   - git submodule status													# check if project has any submodules
   - git submodule foreach --recursive 'echo $path'							# print path of each submodule
+  - git tag																	# list all tags
+  - git tag v1.2.0															# adds a lightweight tag to HEAD
+  - git tag v1.2.0 abc1234													# tag a specific commit
+  - git tag -a v1.2.0 -m "Release v1.2.0"									# annotated tag
 
 
 
