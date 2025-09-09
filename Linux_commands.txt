@@ -93,6 +93,7 @@ General
  - flatpak list
  - flatpak uninstall --unused
  - flatpak uninstall com.jetbrains.PyCharm-Community						# uninstall with ID
+ - readlink -f /snap/bin/firefox											# readlink shows the target of a symlink, -f means “follow the chain of symlinks until you get the real, absolute path.”
  - snap list
  - snap remove app-name
  [tree]
