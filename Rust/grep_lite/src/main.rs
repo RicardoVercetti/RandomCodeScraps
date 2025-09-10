@@ -1,37 +1,38 @@
 // Grep lite - no chatgpt allowed, just google in the old school way
-// take an input for
-// 1 - word to search
-// 2 - file location in which to search
+// take an input for word2search & file from CLI
 // search the text line by line
 // when a match is found, print line with the line number
 
-use std::io;
+//use std::io;
 use std::fs;
 use colored::Colorize;
+use std::env;
+
+fn extract_params(v: Vec<String>) -> (String, String) {
+    let one = v.get(1).expect("arg 1 is absent");
+    let two = v.get(2).expect("arg 2 is absent");
+    
+    (one.to_string(), two.to_string())    
+}
 
 fn main() {
-    println!("Word to search:");
-    let mut word = String::new();
-    io::stdin().read_line(&mut word).unwrap();
-    let word = word.trim();
+    let args: Vec<String> = env::args().collect();
     
-    println!("Enter the file location:");
-    let mut file_name = String::new();
-    io::stdin().read_line(&mut file_name).unwrap();
-    let file_name = file_name.trim();
+    let (query, file_path) = extract_params(args);
     
-    println!("Word is: {}", word);
-    println!("File name: {}", file_name);
+    println!("Search for {query}");
+    println!("In file {file_path}");
+    
     
     // check if file exists,
-    let contents = fs::read_to_string(file_name)
+    let contents = fs::read_to_string(file_path)
                         .expect("Cant open file, does the file exist?");
         
     
     // if does, start looping through line by line
     for (i, line) in contents.split("\n").enumerate() {
         //println!("{} - '{}'", i, hex::encode(item));
-        if line.contains(word) {
+        if line.contains(&query) {
             println!("//{} {}", i, line.red());
         }
     }
