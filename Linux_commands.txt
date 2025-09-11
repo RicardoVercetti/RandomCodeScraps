@@ -301,8 +301,10 @@ Cargo
  - cargo build --release													# produce optimized build
  - cargo check 																# check project for errors
  - cargo clean															# removes '/target' folder
+ - cargo info <package-name>
  - cargo new project_name													# create new rust project with cargo build tool
  - cargo run																# run the project
+ - cargo search <package-name>
  
  
 npm
