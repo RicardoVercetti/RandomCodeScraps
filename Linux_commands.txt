@@ -297,12 +297,13 @@ Gradle
  - ./gradlew tasks															# list tasks available
  
 Cargo
- - cargo new project_name													# create new rust project with cargo build tool
  - cargo build															# compile without running
  - cargo build --release													# produce optimized build
- - cargo run																# run the project
  - cargo check 																# check project for errors
  - cargo clean															# removes '/target' folder
+ - cargo new project_name													# create new rust project with cargo build tool
+ - cargo run																# run the project
+ 
  
 npm
  - npm install -g typescript												# globally install tsc
