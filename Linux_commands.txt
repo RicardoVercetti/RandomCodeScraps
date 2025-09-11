@@ -269,6 +269,12 @@ MVN
  - mvn clean
  - mvn validate
 
+sdkman!
+ - sdk list
+ - sdk install <candidate>													# candidate can be maven, gradle, java, etc.,
+ - sdk use <candidate> <version>											# switch between versions
+ - sdk version
+
 Firewall
  - sudo ufw status
  - sudo ufw allow 8089/tcp
