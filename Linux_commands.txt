@@ -293,6 +293,7 @@ Gradle
  - gradle --stop  															# Stop any running Gradle daemons
  - gradle clean
  - rm -rf ~/.gradle/caches/													# remove cache files
+ - gradle init --type basic													# for a root multi module project
  - ./gradlew tasks															# list tasks available
  
 Cargo
