@@ -6,40 +6,35 @@
 // 4. rename one by one with pattern and numbers incrementally(eg: vacation-001.jpg, vacation-002.jpg, etc.,)
 
 
-// No LLMS, only docs and google!
+// Some(LLMs)
 
-use std::io::{ stdin, Write };
+
 use std::fs;
 
-fn main() {
-    println!("-- Welcome to file renamer --");
+fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> {
+    let entries = fs::read_dir(path)?;
+    let mut files = Vec::new();
     
-    // lets go with user input for now
-    println!("Enter dir location: ");
-    let mut dir = String::new();
-    stdin().read_line(&mut dir).unwrap();
-    let dir = dir.trim();
-    
-    println!("Enter pattern: ");
-    let mut pat = String::new();
-    stdin().read_line(&mut pat).unwrap();
-    let pat = pat.trim();
-    
-    //println!("Dir: '{}'", dir);
-    //println!("Pat: '{}'", pat);
-    
-    // files.
-    
-    //let mut file = File::create("foo.txt").unwrap();
-    //file.write_all(b"Hello eta-verse!");
-    
-    let paths = fs::read_dir("./").unwrap();
-    
-    for path in paths {
-        //println!("Name: {}", path.unwrap().path().display());
-        println!("Metadata : {:?}", path.unwrap().metadata().unwrap())
+    for entry in entries {
+        let entry = entry?;
+        let path = entry.path();
+        
+        
+        if path.is_file() {
+            files.push(entry);
+        }
     }
     
+    Ok(files)
+}
+
+fn main() {
     
+    let files = get_files_in_folder(".").unwrap();
+    
+    
+    for file in files {
+        println!("{:?}", file.path());
+    }
     //println!("Finished writing file");
 }
