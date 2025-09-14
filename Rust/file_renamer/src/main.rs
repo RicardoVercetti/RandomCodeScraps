@@ -10,6 +10,7 @@
 
 
 use std::fs;
+use std::path::PathBuf;
 
 fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> {
     let entries = fs::read_dir(path)?;
@@ -30,11 +31,27 @@ fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> 
 
 fn main() {
     
-    let files = get_files_in_folder(".").unwrap();
+    let files = get_files_in_folder("./fldr/").unwrap();
     
     
-    for file in files {
-        println!("{:?}", file.path());
+    // renaming of the files
+    for (i, file) in files.iter().enumerate() {
+        if let Some(ext) = file.path().extension() {
+            if let Some(parent) = file.path().parent() {
+                let new_name = format!(
+                    "renamed_{}.{}",
+                    i+1,
+                    ext.to_string_lossy()
+                );
+                
+                let new_path: PathBuf = parent.join(new_name);
+                
+                match fs::rename(&file.path(), &new_path) {
+                    Ok(_) => println!("Renamed successfully for: {:?}", &file.path()),
+                    Err(_) => println!("Failed to rename file: {:?}", &file.path()),
+                }
+            }
+        }
     }
-    //println!("Finished writing file");
+    println!("Finished renaming file...");
 }
