@@ -25,6 +25,9 @@ systemctl
 
 
 chmod
+ - ls -l filename													# list the permissions. First charecter → File type; - = regular file
+																	# d = directory l = symbolic link; next 3s → Owner, Group, Others
+ - chmod u+x filename												# u → user(owner), g → group, o → others, default → a all, same as no prefix
 
 
 admins
