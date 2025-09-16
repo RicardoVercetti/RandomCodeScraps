@@ -63,7 +63,9 @@ General
  - ip addr show																# or `ip address`
  - inxi -S																	# system info
  - less																		# some-command | less → gives walkable console outs
+ - lsusb																	# hardwares in USB bus
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
+ - grep -ir <text> <dir>															# i → case insensitive search, r → recursive
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
@@ -85,6 +87,7 @@ General
  - uname -m                                                                 # System's architecture
  - apt-cache policy <package-name>                                          # available versions of package
  - apt autoremove
+ - apt install ./package.deb												# use with sudo, shold preceed filename with './'
  - apt list																	# installed and available in repos
  - apt list --installed														# list all installed
  - apt list --upgradable
