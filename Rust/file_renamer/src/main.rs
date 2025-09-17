@@ -55,7 +55,7 @@ fn main() {
         return;
     }
     
-    if file_name_pattern.chars().any(|a| !a.is_alphanumeric()) {
+    if file_name_pattern.chars().any(|a| !(a.is_alphanumeric() || a == '_')) {
         println!("file name should be alphanumeric");
         return;
     }
