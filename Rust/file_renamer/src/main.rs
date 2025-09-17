@@ -31,11 +31,15 @@ fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> 
 
 fn main() {
     
-    // get folder location input in cli
-    // check if it exists & actually a folder
-    // get pattern, not special charecters
-    
     let args_vec: Vec<String> = env::args().collect();
+    
+    if args_vec.contains(&"hlp".to_string()) {
+        println!("cmd: file_renamer arg1 arg2");
+        println!("arg1 -> folder path; eg: curr_fold/ins_folder");
+        println!("arg2 -> file pattern; eg: new_name");
+        println!("The above will get all the files inside curr_fold/ins_fold and rename one by one as in new_name_1.ext, new_name_2.ext, etc.,");
+        return;
+    }
     
     //println!("All args : {:?}", args_vec);
     let folder_loc = args_vec.get(1).expect("Folder location must be passed in!");
