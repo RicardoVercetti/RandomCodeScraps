@@ -10,7 +10,7 @@
 
 use std::env;
 use std::fs;
-use std::path::PathBuf;
+use std::path::{ PathBuf, Path };
 
 fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> {
     let entries = fs::read_dir(path)?;
@@ -44,7 +44,19 @@ fn main() {
     println!("Folder loc: {}", folder_loc);
     println!("File name: {}", file_name_pattern);
     
-    let files = get_files_in_folder("./fldr/").unwrap();
+    let folder = Path::new(folder_loc);
+    
+    if !folder.exists() || !folder.is_dir() {
+        println!("The folder {} doesn't exist", folder_loc);
+        return;
+    }
+    
+    if file_name_pattern.chars().any(|a| !a.is_alphanumeric()) {
+        println!("file name should be alphanumeric");
+        return;
+    }
+    
+    let files = get_files_in_folder(folder).unwrap();
     
     
     // renaming of the files
@@ -52,7 +64,8 @@ fn main() {
         if let Some(ext) = file.path().extension() {
             if let Some(parent) = file.path().parent() {
                 let new_name = format!(
-                    "renamed_{}.{}",
+                    "{}_{}.{}",
+                    file_name_pattern,
                     i+1,
                     ext.to_string_lossy()
                 );
