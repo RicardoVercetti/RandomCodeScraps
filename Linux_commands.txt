@@ -349,6 +349,12 @@ docker
  - docker stop <container-id>     											# Stop the container
  - docker system prune														# Remove stopped containers, unused images, and networks( -a → Remove all unused images (not just dangling ones)
 
+postgres
+ - createdb -U postgres -h localhost -p 5431 <db_name>												# create a new empty database
+ - pg_dump -U your_username -h localhost -p 5432 your_database > backup.sql							# backup into sql file
+ - psql -h localhost -p 5432 -U your_username -d your_database										# connect to the database
+ - psql -U postgres -h localhost -p 5431 -d <db_name> -f backup.sql									# restore the sql(db_name should already exist) 
+
 
 
 docker-associated
