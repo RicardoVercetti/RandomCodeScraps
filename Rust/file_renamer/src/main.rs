@@ -77,8 +77,8 @@ fn main() {
                 let new_path: PathBuf = parent.join(new_name);
                 
                 match fs::rename(&file.path(), &new_path) {
-                    Ok(_) => println!("Renamed successfully for: {:?}", &file.path()),
-                    Err(_) => println!("Failed to rename file: {:?}", &file.path()),
+                    Ok(_) => println!("Renamed {:?}", &file.path()),
+                    Err(_) => println!("Failed to rename {:?}", &file.path()),
                 }
             }
         }
