@@ -8,7 +8,7 @@
 
 // Some(LLMs)
 
-
+use std::env;
 use std::fs;
 use std::path::PathBuf;
 
@@ -30,6 +30,19 @@ fn get_files_in_folder(path: &str) -> Result<Vec<fs::DirEntry>, std::io::Error> 
 }
 
 fn main() {
+    
+    // get folder location input in cli
+    // check if it exists & actually a folder
+    // get pattern, not special charecters
+    
+    let args_vec: Vec<String> = env::args().collect();
+    
+    println!("All args : {:?}", args_vec);
+    let folder_loc = args_vec.get(1).expect("Folder location must be passed in!");
+    let file_name_pattern = args_vec.get(2).expect("Pattern must be passed!");
+    
+    println!("Folder loc: {}", folder_loc);
+    println!("File name: {}", file_name_pattern);
     
     let files = get_files_in_folder("./fldr/").unwrap();
     
