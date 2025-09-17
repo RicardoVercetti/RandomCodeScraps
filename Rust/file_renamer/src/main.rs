@@ -37,12 +37,12 @@ fn main() {
     
     let args_vec: Vec<String> = env::args().collect();
     
-    println!("All args : {:?}", args_vec);
+    //println!("All args : {:?}", args_vec);
     let folder_loc = args_vec.get(1).expect("Folder location must be passed in!");
     let file_name_pattern = args_vec.get(2).expect("Pattern must be passed!");
     
-    println!("Folder loc: {}", folder_loc);
-    println!("File name: {}", file_name_pattern);
+    //println!("Folder loc: {}", folder_loc);
+    //println!("File name: {}", file_name_pattern);
     
     let folder = Path::new(folder_loc);
     
@@ -56,7 +56,7 @@ fn main() {
         return;
     }
     
-    let files = get_files_in_folder(folder).unwrap();
+    let files = get_files_in_folder(folder_loc).unwrap();
     
     
     // renaming of the files
@@ -79,5 +79,5 @@ fn main() {
             }
         }
     }
-    println!("Finished renaming file...");
+    println!("Done!");
 }
