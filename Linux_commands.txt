@@ -344,7 +344,7 @@ docker
  - docker pull <img-name>													# pull from docker hub
  - docker rm <container>													# Remove a stopped container
  - docker rmi <image>														# remove an image
- - docker run <id>															# run a container(-d → detached mode)
+ - docker run <id>															# run a container(-d → detached mode)(docker run -p 5001:5001 <image_name>)
  - docker start <container>													# Restart a stopped container
  - docker stop <container-id>     											# Stop the container
  - docker system prune														# Remove stopped containers, unused images, and networks( -a → Remove all unused images (not just dangling ones)
