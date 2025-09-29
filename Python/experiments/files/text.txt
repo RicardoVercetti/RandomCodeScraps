@@ -1,0 +1,5 @@
+a simple text file made with nano from termux
+
+
+
+some more line
