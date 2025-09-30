@@ -360,3 +360,11 @@ postgres
 docker-associated
  - sudo usermod -aG docker $USER											# add user to docker group(usermod → A command to modify user accounts in Linux)
  - newgrp docker															# refresh group permissions in the current shell session
+ 
+
+arch-linux
+[display]
+ - brightnessctl set +10%  # increase brightness
+ - brightnessctl set 10%-  # decrease brightness
+[hyprland]
+ - hyprctl reload
