@@ -363,6 +363,16 @@ docker-associated
  
 
 arch-linux
+[packages]
+ - pacman -Ss <package-name>												# search for packages
+ - pacman -Qs <package-name>												# search installed packages
+ - pacman -Sy													# update package database
+ - pacman -Syu													# both package database and installed packages
+ - pacman -S <package-name>											# install the package
+ - pacman -S <package-name>=<version> 										# install a specific version
+ - pacman -R <package-name>											# remove packages
+ - pacman -Rns <package-name>											# Remove with unused dependencies
+
 [display]
  - brightnessctl set +10%  # increase brightness
  - brightnessctl set 10%-  # decrease brightness
