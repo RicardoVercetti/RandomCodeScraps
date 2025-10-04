@@ -277,6 +277,7 @@ MVN
 
 sdkman!
  - sdk list
+ - sdk list java | grep -E '\installed'											# list installed versions
  - sdk install <candidate>													# candidate can be maven, gradle, java, etc.,
  - sdk use <candidate> <version>											# switch between versions
  - sdk version
