@@ -22,6 +22,11 @@ systemctl
   - systemctl list-units --type=service --state=running				  # all running services
   - systemctl --user list-units --type=service --state=running		  # user service
   - sudo systemctl list-unit-files | grep -i tomcat					  # find from files
+  [analyze]
+  - systemd-analyze											# Show overall boot performance summary
+  - systemd-analyze blame										# Show detailed per-service startup times
+  - systemd-analyze critical-chain									# Visualize startup sequence (timeline view)
+  - systemd-analyze plot > boot.svg
 
 
 chmod
