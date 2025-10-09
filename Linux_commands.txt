@@ -58,6 +58,7 @@ ssh
 General
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
+ - compgen -c									# list all executable commands in path
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - ps -p <PID> -f															# details on the one running in PID
