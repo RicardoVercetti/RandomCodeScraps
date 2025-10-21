@@ -127,12 +127,19 @@ General
  - who																		# Who are the users logged in
  - last																		# sign in history
  - w																		# who's logged in, what they're doing, and system load
-
+ [swap file & zram]
+ - fallocate -l 8G /swapfile                                                # allocate the swap memory
+ - chmod 600 /swapfile                                                      # give permission to system
+ - mkswap /swapfile                                                         # make swap file
+ - swapon /swapfile                                                         # turn on swap
+ - echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab         # add it to file system table(fstab) to mount on boot
+ - swapon --show                                                            # see changes
+ - free -h
 
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
- - exec bash                                                                # restart shell(sometimes the shell tries to execute a binary thats long gone due to stale session
+ - exec bash                                                                # restart shell(sometimes the shell tries to execute a binary thats long gone due to stale session)
  - ssh -T git@gitlab.com
  - ssh -vT git@gitlab.com
 
