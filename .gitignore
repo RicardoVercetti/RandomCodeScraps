@@ -34,6 +34,7 @@ Rust/play_ground/
 build/
 out/
 .gradle/
+**/dist
 
 # Optional: ignore OS/Editor-specific files
 .DS_Store
