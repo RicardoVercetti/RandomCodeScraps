@@ -108,6 +108,13 @@ General
  - readlink -f /snap/bin/firefox											# readlink shows the target of a symlink, -f means “follow the chain of symlinks until you get the real, absolute path.”
  - snap list
  - snap remove app-name
+ - dnf check-update
+ - dnf downgrade <package>
+ - dnf upgrade									# dnf update is same as upgrade
+ - dnf install <package>
+ - dnf reinstall <package>
+ - dnf remove <package>
+ - 
  [tree]
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
@@ -362,6 +369,8 @@ docker
  - docker start <container>													# Restart a stopped container
  - docker stop <container-id>     											# Stop the container
  - docker system prune														# Remove stopped containers, unused images, and networks( -a → Remove all unused images (not just dangling ones)
+ - docker run -d --name pg17 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin123 -e POSTGRES_DB=mydb -p 5432:5432 postgres:17		# spin up the postgres container
+
 
 postgres
  - createdb -U postgres -h localhost -p 5431 <db_name>												# create a new empty database
