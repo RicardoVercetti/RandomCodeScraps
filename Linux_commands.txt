@@ -407,3 +407,16 @@ arch-linux
  - brightnessctl set 10%-  # decrease brightness
 [hyprland]
  - hyprctl reload
+ 
+ 
+LLC(low level code)
+ - gcc <filename> -o <outfilename>				# compile the c code
+ - gcc -g hello.c -o hello_debug				# compile with debug symbols
+ - objdump -d <binfile>						# assembly code of binary
+ - xxd <filename>						# print the hex dump of the binary
+ 
+
+Variables
+ - $$ 								# current process
+ - $TERM							# describes the type of terminal interface your shell is using
+ - $TERM_PROGRAM						# terminal program name
