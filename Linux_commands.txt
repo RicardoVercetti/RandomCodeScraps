@@ -61,8 +61,6 @@ General
  - compgen -c									# list all executable commands in path
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
- - ps -p <PID> -f															# details on the one running in PID
- - ps -p <PID> -o cmd														# mode details on process
  - pwd																		# current working directory
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
@@ -126,8 +124,11 @@ General
  - du -h filename														   # disk usage of file
  - df -h																	                                  # check disk usage
  - baobab																	                                  # gnome disk usage analyzer
- [running processes]
- - ps aux																	# Show all running processes.a | Show processes for all users, not just yours.
+ [processes]
+ - ps -e												# snapshot view of all running processes(-e → show all processes.-f → show full details)
+ - ps -p <PID> -f															# details on the one running in PID
+ - ps -p <PID> -o cmd														# mode details on process
+ - pstree <ID>									# process tree( -s → parent process)
 																			# u | Show the user who owns the process along with extra details. x | Include processes not attached to a terminal (like background apps, daemons, or GUI apps like IntelliJ)
  - top																		# Live process Monitor(Press P to sort by CPU|Press M to sort by memory|Press k then type a PID to kill a process|Press q to quit)																
  [users]
