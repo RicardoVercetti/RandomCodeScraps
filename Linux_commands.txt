@@ -207,7 +207,10 @@ git commands
   - git diff stash@{0}														# See the full diff of a stash
   - git diff <root-branch>..<feat-branch>									# file changes in feat that are not in root
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
+  - git shortlog -s -n                                                      # number of commit by each author(-s → summarized, -n → numbered)
   - git stash push -m "message"
+  - git stash push -m "message" --keep-index                                # stash tracked & unstaged changes
+  - git stash push --staged                                                 # stash only the indexed(staged) changes
   - git stash -u															# -u is short for --include-untracked
   - git stash -a															# -a is short for --all, which includes untracked and ignored files
   - git stash list
@@ -267,6 +270,7 @@ git commands
   - git push --force-with-lease												# This checks if the remote branch has new commits before forcing the push. It prevents accidental overwrites if someone else has pushed changes
   - git push origin v1.2.0													# push one tag(By default, git push doesn’t push tags)
   - git push origin --tags													# push all local tags
+  - git rev-list --count HEAD                       # count the number of commits(can also use branch name)
   - git rev-list --left-right --count origin/main...main					# Compare Local and Remote Directly
   - git log main..origin/main --oneline										# if remote has new commits comparing local
   - git log origin/main..main --oneline 			# local has no new compaing remote 
