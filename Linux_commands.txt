@@ -394,7 +394,8 @@ docker-associated
 arch-linux
 [packages]
  - pacman -Ss <package-name>												# search for packages
- - pacman -Qs <package-name>												# search installed packages
+ - pacman -Qi <package-name>                        # search for the package with the specific name
+ - pacman -Qs <package-name>												# search installed packages(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
  - pacman -Sy													# update package database
  - pacman -Syu													# both package database and installed packages
  - pacman -S <package-name>											# install the package
