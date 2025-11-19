@@ -18,6 +18,7 @@ systemctl
   - systemctl enable <service>                                        # Enable the service to start at boot.
   - systemctl disable <service>                                       # Disable the service from starting at boot.
   - systemctl is-active <service>                                     # Check if the service is active (running).
+  - systemctl list-jobs                                               # list all systemctl services that are not in the process of starting up
   - systemctl is-enabled <service>                                    # Check if the service is enabled at boot.
   - systemctl list-units --type=service --state=running				  # all running services
   - systemctl --user list-units --type=service --state=running		  # user service
