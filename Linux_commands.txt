@@ -290,6 +290,8 @@ git commands
   - git tag v1.2.0															# adds a lightweight tag to HEAD
   - git tag v1.2.0 abc1234													# tag a specific commit
   - git tag -a v1.2.0 -m "Release v1.2.0"									# annotated tag
+  - git worktree add path/to/folder branch-name                            # branch name itself is optional, can also use '-b new-branch'
+  - git worktree remove path/to/folder
 
 
 
