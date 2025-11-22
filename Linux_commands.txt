@@ -118,7 +118,9 @@ General
  - dnf remove <package>
  - dnf repolist all								# list all the remote repos
  - dnf repolist enabled								# or diabled to see only that list
-
+ [fonts]
+ - fc-list									# list all fonts
+ - fc-cache									# refresh registered fonts(custom fonts are pasted in ~/.local/share/font/)
  [tree]
  - tree																		                                  # show directory stucts in cli
  - tree -L <depth>															# show until that deep of the file structure
