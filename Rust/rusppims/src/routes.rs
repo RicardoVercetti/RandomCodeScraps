@@ -1,7 +1,14 @@
 use axum::{
+    extract::State,
     Json,
 };
-use serde::{Deserialize, Serialize};
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use serde::{
+    Deserialize, 
+    Serialize
+};
+use crate::store::CustomerInfo;
 
 // simple pings
 
@@ -21,9 +28,16 @@ pub async fn ping_get() -> String {
     "Rusppims here, howdy partner!".to_string()
 }
 
-pub async fn ping_post(Json(payload): Json<PingPostData>) -> Json<PingPostResponse> {
+pub async fn ping_post(
+    State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
+    Json(payload): Json<PingPostData>
+) -> Json<PingPostResponse> {
     println!("req: {:?}", payload);
     // you can do something with the data ya know!
+
+    let data: tokio::sync::RwLockReadGuard<'_, Vec<CustomerInfo>> = state.read().await;
+
+    println!("all customer info: {:#?}", data);
 
     Json(PingPostResponse {
         message: "Requst received successfully".to_string(),

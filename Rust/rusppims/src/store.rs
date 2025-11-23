@@ -10,7 +10,7 @@ use tokio::{
 
 
 #[derive(Serialize, Deserialize, Debug)]
-struct CustomerInfo {
+pub struct CustomerInfo {
     unique_id: String, // this is the ppid
     maiden_name: String,
     mobile_number: String,
@@ -35,7 +35,7 @@ struct CustomerInfo {
 // TODO: define write to file here
 
 // TODO: load file/create file
-async fn load_or_create_file() -> Result<String, Error> {
+pub async fn load_or_create_file() -> Result<String, Error> {
     let filename = "customers.json";
     if metadata(filename).await.is_ok() {
         let content: Result<String, Error> = read_to_string(filename).await;
@@ -46,12 +46,12 @@ async fn load_or_create_file() -> Result<String, Error> {
     println!("customers.json is not found, initiating one...");
     let mut file = File::create(filename).await?;
     file.write_all(b"[]").await?;
-    
+
     return Ok("[]".to_string());
 }
 
 // deserialize customer info from the customer.json string
-fn deserialize_json_string(str: &str) -> Result<Vec<CustomerInfo>, serde_json::Error> {
+pub fn deserialize_from_json_string(str: &str) -> Result<Vec<CustomerInfo>, serde_json::Error> {
     let customers_info: Vec<CustomerInfo> = serde_json::from_str(&str)?;
     Ok(customers_info)
 }
@@ -106,7 +106,7 @@ mod tests {
     ]
     "#;
 
-        let data = deserialize_json_string(json).unwrap();
+        let data = deserialize_from_json_string(json).unwrap();
         println!("{:#?}", data);
     }
 }
