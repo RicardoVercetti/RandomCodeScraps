@@ -1,5 +1,6 @@
 mod server;
 mod routes;
+mod store;
 
 use server::start_server;
 
