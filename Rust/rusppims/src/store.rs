@@ -59,8 +59,8 @@ fn deserialize_json_string(str: &str) -> Result<Vec<CustomerInfo>, serde_json::E
 #[cfg(test)]
 mod tests {
     use super::*;
-    use tokio::fs;
     use std::path::Path;
+    use tokio::fs;
 
     #[tokio::test]
     async fn test_load_or_create_file() {
@@ -80,5 +80,33 @@ mod tests {
 
         // Cleanup after test
         fs::remove_file("customers.json").await.unwrap();
+    }
+
+    #[tokio::test]
+    async fn test_deserialize_json_string() {
+        let json = r#"
+    [
+        {
+            "unique_id": "123",
+            "maiden_name": "Doe",
+            "mobile_number": "555111222",
+            "date_of_birth": "1990-01-01",
+            "account_number": "111222",
+            "account_status": "ACTIVE",
+            "card_number": "4444555566667777",
+            "card_exp_date": "12/30",
+            "card_status": "ACTIVE",
+            "kyc_flag": "Y",
+            "kyc_updated_channel": "ONLINE",
+            "kyc_updated_on": "2024-01-02",
+            "ovid_value": "something",
+            "ovid_type": "type",
+            "cif_id": "99887"
+        }
+    ]
+    "#;
+
+        let data = deserialize_json_string(json).unwrap();
+        println!("{:#?}", data);
     }
 }
