@@ -3,12 +3,25 @@
 this is just a toy project to rebuild the PPIMS dummy server that I built in python for the DCMS project.
 Using this I wanna learn handling http requests, basic serialization and deserialization, file handling, etc in rust.
 
-## Items
+#### Items
 
-- basic get & post server
-- define default endpoints
-- store customer data in file
-- load data on startup
-- have ppims headers
-- have mobile number for customer dedupe check
-- have the KYC restrictions enabled
+- [x] basic get & post server
+- [x] define default endpoints
+- [] requst json pretty printer
+- [x] deserialize with custom field names
+- [] error logs in server side console
+- [] store customer data in file
+- [] load data on startup
+- [] have ppims headers
+- [] have mobile number for customer dedupe check
+- [] have the KYC restrictions enabled
+- [] no std logs or err logs, full async
+
+#### Things to learn in the process
+
+- Building a basic http server
+- have endponts to respond in json
+- file handling
+- async in rust
+- error handling
+- code separation
