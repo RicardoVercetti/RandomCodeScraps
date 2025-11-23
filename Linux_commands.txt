@@ -184,7 +184,12 @@ Java
  - source ~/.bashrc															                            # to refresh current session shell script
 
 
-
+Cloc
+ - cloc path/to/dir													                  # count number of lines of code, comment, md, etc
+ - cloc path/to/file													                # count in one file
+ - cloc path/to/dir --json > report.json								      # export into json, can also use --csv
+ - cloc --include-ext=js path/to/dir									        # for a specific extension, can also include multiple with '--include-ext=java,xml'
+ - cloc path/to/dir --exclude-dir=node_modules,dist
 
 
 git commands
