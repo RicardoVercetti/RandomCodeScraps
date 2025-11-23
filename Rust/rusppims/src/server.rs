@@ -1,12 +1,13 @@
 
 use axum::{
-    routing::{get},
+    routing::{get, post},
     Router,
 };
 
 use crate::routes::{
     ping_get,
-    ping_post
+    ping_post,
+    add_customer_handler
 };
 
 use tokio::net::TcpListener;
@@ -14,10 +15,18 @@ use tokio::net::TcpListener;
 
 pub async fn start_server() {
     // build our application with a single route
-    let app: Router = Router::new().route(
+    let app: Router = Router::new()
+    .route(
         "/",
         get(ping_get).post(ping_post),
-    );
+    )
+    .route("/axis/non-dmz/api/PPIM/v1/add-customer", post(add_customer_handler))
+    // .route("/axis/non-dmz/api/PPIM/v1/check-customer-kyc", method_router)                // check customer kyc
+    // .route("/axis/non-dmz/api/PPIM/v1/check-customer-limit", method_router)              // check customer limit
+    // .route("/axis/non-dmz/api/PPIM/v1/customer-registration-status", method_router)      // check customer registration status
+    // .route("/axis/non-dmz/api/PPIM/v1/update-customer", method_router)                   // update customer
+    // .route("/axis/non-dmz/api/PPIM/v1/update-customer-limit", method_router)             // update customer limit
+    ;
 
     // run our app with hyper, listening globally on port 3000
     let port: &str = "0.0.0.0:3000";
