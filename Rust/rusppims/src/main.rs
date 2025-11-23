@@ -1,5 +1,5 @@
-mod server;
 mod routes;
+mod server;
 mod store;
 
 use server::start_server;
@@ -8,4 +8,3 @@ use server::start_server;
 async fn main() {
     start_server().await;
 }
-

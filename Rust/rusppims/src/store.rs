@@ -1,13 +1,9 @@
-use serde::{
-    Deserialize, 
-    Serialize
-};
+use serde::{Deserialize, Serialize};
 use std::io::Error;
 use tokio::{
     fs::{File, metadata, read_to_string},
     io::AsyncWriteExt,
 };
-
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CustomerInfo {
