@@ -7,13 +7,13 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 
 - [x] basic get & post server
 - [x] define default endpoints
-- [] requst json pretty printer
+- [x] requst json pretty printer
 - [x] deserialize with custom field names
 - [] error logs in server side console
-- [] store customer data in file
-- [] load data on startup
+- [x] store customer data in file
+- [x] load data on startup
 - [] have ppims headers
-- [] have mobile number for customer dedupe check
+- [x] have mobile number for customer dedupe check
 - [] have the KYC restrictions enabled
 - [] no std logs or err logs, full async
 
