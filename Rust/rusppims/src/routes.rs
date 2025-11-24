@@ -149,12 +149,73 @@ pub struct AddCustomerRequst {
     risk: Risk,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct AddCustomerResponse {
+    #[serde(rename="Data")]
+    data: AddCustomerResponseData,
+
+    #[serde(rename="Risk")]
+    risk: AddCustomerResponseRisk,
+
+    #[serde(rename="Links")]
+    links: AddCustomerResponseLinks,
+
+    #[serde(rename="Meta")]
+    meta: AddCustomerResponseMeta
+}
+
+impl AddCustomerResponse {
+    fn new(resp: &str, id: &str, flag: &str, chan: &str, up: &str) -> Self {
+        AddCustomerResponse { data: AddCustomerResponseData {
+            response_code: resp.to_string(),
+            unique_id: id.to_string(),
+            kyc_flag: flag.to_string(),
+            kyc_updated_channel: chan.to_string(),
+            kyc_updated_on: up.to_string()
+        },
+             risk: AddCustomerResponseRisk{},
+             links: AddCustomerResponseLinks{},
+              meta: AddCustomerResponseMeta{}
+            }
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct AddCustomerResponseData {
+
+    #[serde(rename="Resp_Code")]
+    response_code: String,
+
+    #[serde(rename="Unique_Id")]
+    unique_id: String,
+
+    #[serde(rename="KYC_Flag")]
+    kyc_flag: String,
+
+    #[serde(rename="KYC_Updated_Channel")]
+    kyc_updated_channel: String,
+
+    #[serde(rename="KYC_Updated_On")]
+    kyc_updated_on: String
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct AddCustomerResponseRisk {}
+
+#[derive(Serialize, Deserialize)]
+pub struct AddCustomerResponseLinks {}
+
+#[derive(Serialize, Deserialize)]
+pub struct AddCustomerResponseMeta {}
+
+
 pub async fn add_customer_handler(
     State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
     Json(payload): Json<AddCustomerRequst>,
-) -> String {
+) -> Json<AddCustomerResponse> {
     // request should be successfully received
     println!("req: {:#?}", payload);
+    let in_data = &payload.data.add_customer;
 
     // get customer data and check id
     let customer_data = state.read().await;
@@ -171,7 +232,8 @@ pub async fn add_customer_handler(
         println!("generated ppid: {}", ppid);
 
         // map the AddCustomer to CustomerInfo
-        let customer_info_map = CustomerInfo::new(&payload.data.add_customer, &ppid);
+        
+        let customer_info_map = CustomerInfo::new(in_data, &ppid);
         let mut customers = state.write().await;
 
         // add to vec
@@ -183,11 +245,11 @@ pub async fn add_customer_handler(
             Err(e) => println!("error occured while saving the file: {}", e),
             _ => {}
         }
-        return "Customer added successfully".to_string();
+        return Json(AddCustomerResponse::new("000", &ppid, &in_data.kyc_flag, &in_data.kyc_updated_channel, &in_data.kyc_updated_on));
     }
 
     // TODO: response body
     // TODO: use different response code for failed responses
     // TODO: after this use the response code in the response body
-    "Customer already exists".to_string()
+    Json(AddCustomerResponse::new("400", &in_data.unique_id, &in_data.kyc_flag, &in_data.kyc_updated_channel, &in_data.kyc_updated_on))
 }
