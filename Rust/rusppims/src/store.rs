@@ -67,7 +67,7 @@ pub async fn save_to_file(customers: &Vec<CustomerInfo>) -> Result<(), Box<dyn s
     let json: String = serde_json::to_string_pretty(customers)?;
 
     // Save to file asynchronously
-    let mut file = File::create("customers.json").await?;   // wipes the file on creation
+    let mut file = File::create("customers.json").await?; // wipes the file on creation
     file.write_all(json.as_bytes()).await?;
 
     Ok(())

@@ -1,14 +1,10 @@
-use std::sync::Arc;
-
+use crate::routes::{add_customer_handler, ping_get, ping_post};
+use crate::store::{CustomerInfo, deserialize_from_json_string, load_or_create_file};
 use axum::{
     Router,
     routing::{get, post},
 };
-
-use crate::routes::{add_customer_handler, ping_get, ping_post};
-
-use crate::store::{CustomerInfo, deserialize_from_json_string, load_or_create_file};
-
+use std::sync::Arc;
 use tokio::{net::TcpListener, sync::RwLock};
 
 pub async fn start_server() {

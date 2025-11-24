@@ -149,23 +149,26 @@ pub struct AddCustomerRequst {
     risk: Risk,
 }
 
-pub async fn add_customer_handler(State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>, Json(payload): Json<AddCustomerRequst>) -> String {
+pub async fn add_customer_handler(
+    State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
+    Json(payload): Json<AddCustomerRequst>,
+) -> String {
     // request should be successfully received
     println!("req: {:#?}", payload);
 
     // get customer data and check id
     let customer_data = state.read().await;
 
-
     // dedupe check for if customer exists with the same mobile number
-    let is_customer_exist = is_customer_exits_by_mobile_number(&payload.data.add_customer.mobile_number, &customer_data);
+    let is_customer_exist = is_customer_exits_by_mobile_number(
+        &payload.data.add_customer.mobile_number,
+        &customer_data,
+    );
     drop(customer_data);
     if !is_customer_exist {
-
         // must generate PPID and save the same
         let ppid = generate_ppid();
         println!("generated ppid: {}", ppid);
-
 
         // map the AddCustomer to CustomerInfo
         let customer_info_map = CustomerInfo::new(&payload.data.add_customer, &ppid);
@@ -177,20 +180,14 @@ pub async fn add_customer_handler(State(state): State<Arc<RwLock<Vec<CustomerInf
         // async save to file
         let res = save_to_file(&customers).await;
         match res {
-        Err(e) => println!("error occured while saving the file: {}", e),
-        _ => {},
+            Err(e) => println!("error occured while saving the file: {}", e),
+            _ => {}
         }
-        return "Customer added successfully".to_string()
-
+        return "Customer added successfully".to_string();
     }
-
-    
-    
 
     // TODO: response body
     // TODO: use different response code for failed responses
     // TODO: after this use the response code in the response body
     "Customer already exists".to_string()
-    
 }
-
