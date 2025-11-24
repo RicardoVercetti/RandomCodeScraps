@@ -5,23 +5,47 @@ use tokio::{
     io::AsyncWriteExt,
 };
 
+use crate::routes::AddCustomer;
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CustomerInfo {
-    unique_id: String, // this is the ppid
-    maiden_name: String,
-    mobile_number: String,
-    date_of_birth: String,
-    account_number: String,
-    account_status: String,
-    card_number: String,
-    card_exp_date: String,
-    card_status: String,
-    kyc_flag: String,
-    kyc_updated_channel: String,
-    kyc_updated_on: String,
-    ovid_value: String,
-    ovid_type: String,
-    cif_id: String,
+    pub unique_id: String, // this is the ppid
+    pub maiden_name: String,
+    pub mobile_number: String,
+    pub date_of_birth: String,
+    pub account_number: String,
+    pub account_status: String,
+    pub card_number: String,
+    pub card_exp_date: String,
+    pub card_status: String,
+    pub kyc_flag: String,
+    pub kyc_updated_channel: String,
+    pub kyc_updated_on: String,
+    pub ovid_value: String,
+    pub ovid_type: String,
+    pub cif_id: String,
+}
+
+impl CustomerInfo {
+    pub fn new(add_customer: &AddCustomer) -> CustomerInfo {
+        CustomerInfo {
+            unique_id: add_customer.unique_id.clone(),
+            maiden_name: add_customer.maiden_name.clone(),
+            mobile_number: add_customer.mobile_number.clone(),
+            date_of_birth: add_customer.date_of_birth.clone(),
+            account_number: add_customer.account_number.clone(),
+            account_status: add_customer.account_status.clone(),
+            card_number: add_customer.card_number.clone(),
+            card_exp_date: add_customer.card_exp_date.clone(),
+            card_status: add_customer.card_status.clone(),
+            kyc_flag: add_customer.kyc_flag.clone(),
+            kyc_updated_channel: add_customer.kyc_updated_channel.clone(),
+            kyc_updated_on: add_customer.kyc_updated_on.clone(),
+            ovid_value: add_customer.ovid_value.clone(),
+            ovid_type: add_customer.ovid_type.clone(),
+            cif_id: add_customer.cif_id.clone(),
+        }
+    }
 }
 
 // TODO: define add customer here
@@ -29,8 +53,18 @@ pub struct CustomerInfo {
 // TODO: define get cusomer info here
 
 // TODO: define write to file here
+pub async fn save_to_file(customers: &Vec<CustomerInfo>) -> Result<(), Box<dyn std::error::Error>> {
+    // Convert your vector to pretty json
+    let json: String = serde_json::to_string_pretty(customers)?;
 
-// TODO: load file/create file
+    // Save to file asynchronously
+    let mut file = File::create("customers.json").await?;   // wipes the file on creation
+    file.write_all(json.as_bytes()).await?;
+
+    Ok(())
+}
+
+// load/create file
 pub async fn load_or_create_file() -> Result<String, Error> {
     let filename = "customers.json";
     if metadata(filename).await.is_ok() {

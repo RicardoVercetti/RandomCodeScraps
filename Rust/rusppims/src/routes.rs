@@ -1,4 +1,4 @@
-use crate::store::CustomerInfo;
+use crate::store::{CustomerInfo, save_to_file};
 use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -39,90 +39,90 @@ pub async fn ping_post(
 
 // add customer
 #[derive(Serialize, Deserialize, Debug)]
-struct AddCustomer {
+pub struct AddCustomer {
     #[serde(rename = "Ref_Id")]
-    ref_id: String,
+    pub ref_id: String,
 
     #[serde(rename = "Unique_Id")]
-    unique_id: String,
+    pub unique_id: String,
 
     #[serde(rename = "Customer_Id")]
-    customer_id: String,
+    pub customer_id: String,
 
     #[serde(rename = "Customer_Name")]
-    customer_name: String,
+    pub customer_name: String,
 
     #[serde(rename = "Maiden_Name")]
-    maiden_name: String,
+    pub maiden_name: String,
 
     #[serde(rename = "Mobile_Number")]
-    mobile_number: String,
+    pub mobile_number: String,
 
     #[serde(rename = "Date_Of_Birth")]
-    date_of_birth: String,
+    pub date_of_birth: String,
 
     #[serde(rename = "Email_Id")]
-    email_id: String,
+    pub email_id: String,
 
     #[serde(rename = "Address_Line1")]
-    address_line1: String,
+    pub address_line1: String,
 
     #[serde(rename = "Address_Line2")]
-    address_line2: String,
+    pub address_line2: String,
 
     #[serde(rename = "City")]
-    city: String,
+    pub city: String,
 
     #[serde(rename = "State")]
-    state: String,
+    pub state: String,
 
     #[serde(rename = "Pincode")]
-    pincode: String,
+    pub pincode: String,
 
     #[serde(rename = "Account_Number")]
-    account_number: String,
+    pub account_number: String,
 
     #[serde(rename = "Account_Status")]
-    account_status: String,
+    pub account_status: String,
 
     #[serde(rename = "Card_Number")]
-    card_number: String,
+    pub card_number: String,
 
     #[serde(rename = "Card_Exp_date")]
-    card_exp_date: String,
+    pub card_exp_date: String,
 
     #[serde(rename = "Card_Status")]
-    card_status: String,
+    pub card_status: String,
 
     #[serde(rename = "KYC_Flag")]
-    kyc_flag: String,
+    pub kyc_flag: String,
 
     #[serde(rename = "KYC_Updated_Channel")]
-    kyc_updated_channel: String,
+    pub kyc_updated_channel: String,
 
     #[serde(rename = "KYC_Updated_On")]
-    kyc_updated_on: String,
+    pub kyc_updated_on: String,
 
     #[serde(rename = "System_Id")]
-    system_id: String,
+    pub system_id: String,
 
     #[serde(rename = "Ovid_Value")]
-    ovid_value: String,
+    pub ovid_value: String,
 
     #[serde(rename = "Ovid_Type")]
-    ovid_type: String,
+    pub ovid_type: String,
 
     #[serde(rename = "Cif_Id")]
-    cif_id: String,
+    pub cif_id: String,
 
     #[serde(rename = "Customer_Type")]
-    customer_type: String,
+    pub customer_type: String,
 
     #[serde(rename = "Ppi_Type")]
-    ppi_type: String,
+    pub ppi_type: String,
 
     #[serde(rename = "NRI_Flag")]
-    nri_flag: String,
+    pub nri_flag: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -149,17 +149,31 @@ pub struct AddCustomerRequst {
     risk: Risk,
 }
 
-pub async fn add_customer_handler(Json(payload): Json<AddCustomerRequst>) -> String {
+pub async fn add_customer_handler(State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>, Json(payload): Json<AddCustomerRequst>) -> String {
     // request should be successfully received
-    println!("req: {:?}", payload);
+    println!("req: {:#?}", payload);
 
-    // TODO: pretty print request response
-
-    // TODO: accept optional params in the requst body, show error response only for non-null values
-
-    // TODO: file storage
+    // get customer data and check id
 
     // TODO: dedupe check for if customer exists with the same mobile number
 
-    "Simple success response from Rusppims".to_string()
+    // map the AddCustomer to CustomerInfo
+    let customer_info_map = CustomerInfo::new(&payload.data.add_customer);
+    let mut customers = state.write().await;
+
+
+    // add to vec
+    customers.push(customer_info_map);
+
+    // async save to file
+    let res = save_to_file(&customers).await;
+    match res {
+        Err(e) => println!("error occured while saving the file: {}", e),
+        _ => {},
+    }
+
+    // TODO: response body
+    
+    "Customer added successfully".to_string()
 }
+
