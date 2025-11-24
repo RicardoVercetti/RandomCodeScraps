@@ -1,4 +1,4 @@
-use crate::store::{CustomerInfo, save_to_file};
+use crate::store::{CustomerInfo, generate_ppid, is_customer_exits_by_mobile_number, save_to_file};
 use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -154,26 +154,43 @@ pub async fn add_customer_handler(State(state): State<Arc<RwLock<Vec<CustomerInf
     println!("req: {:#?}", payload);
 
     // get customer data and check id
-
-    // TODO: dedupe check for if customer exists with the same mobile number
-
-    // map the AddCustomer to CustomerInfo
-    let customer_info_map = CustomerInfo::new(&payload.data.add_customer);
-    let mut customers = state.write().await;
+    let customer_data = state.read().await;
 
 
-    // add to vec
-    customers.push(customer_info_map);
+    // dedupe check for if customer exists with the same mobile number
+    let is_customer_exist = is_customer_exits_by_mobile_number(&payload.data.add_customer.mobile_number, &customer_data);
+    drop(customer_data);
+    if !is_customer_exist {
 
-    // async save to file
-    let res = save_to_file(&customers).await;
-    match res {
+        // must generate PPID and save the same
+        let ppid = generate_ppid();
+        println!("generated ppid: {}", ppid);
+
+
+        // map the AddCustomer to CustomerInfo
+        let customer_info_map = CustomerInfo::new(&payload.data.add_customer, &ppid);
+        let mut customers = state.write().await;
+
+        // add to vec
+        customers.push(customer_info_map);
+
+        // async save to file
+        let res = save_to_file(&customers).await;
+        match res {
         Err(e) => println!("error occured while saving the file: {}", e),
         _ => {},
+        }
+        return "Customer added successfully".to_string()
+
     }
 
-    // TODO: response body
     
-    "Customer added successfully".to_string()
+    
+
+    // TODO: response body
+    // TODO: use different response code for failed responses
+    // TODO: after this use the response code in the response body
+    "Customer already exists".to_string()
+    
 }
 

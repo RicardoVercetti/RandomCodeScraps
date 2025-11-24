@@ -1,3 +1,4 @@
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 use std::io::Error;
 use tokio::{
@@ -10,6 +11,7 @@ use crate::routes::AddCustomer;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CustomerInfo {
     pub unique_id: String, // this is the ppid
+    pub customer_name: String,
     pub maiden_name: String,
     pub mobile_number: String,
     pub date_of_birth: String,
@@ -27,9 +29,10 @@ pub struct CustomerInfo {
 }
 
 impl CustomerInfo {
-    pub fn new(add_customer: &AddCustomer) -> CustomerInfo {
+    pub fn new(add_customer: &AddCustomer, ppid: &String) -> CustomerInfo {
         CustomerInfo {
-            unique_id: add_customer.unique_id.clone(),
+            unique_id: ppid.clone(),
+            customer_name: add_customer.customer_name.clone(),
             maiden_name: add_customer.maiden_name.clone(),
             mobile_number: add_customer.mobile_number.clone(),
             date_of_birth: add_customer.date_of_birth.clone(),
@@ -48,11 +51,17 @@ impl CustomerInfo {
     }
 }
 
-// TODO: define add customer here
+// get cusomer info
+pub fn is_customer_exits_by_mobile_number(mob: &str, customer_infos: &Vec<CustomerInfo>) -> bool {
+    for customer in customer_infos {
+        if mob == customer.mobile_number {
+            return true;
+        }
+    }
+    false
+}
 
-// TODO: define get cusomer info here
-
-// TODO: define write to file here
+// write to file
 pub async fn save_to_file(customers: &Vec<CustomerInfo>) -> Result<(), Box<dyn std::error::Error>> {
     // Convert your vector to pretty json
     let json: String = serde_json::to_string_pretty(customers)?;
@@ -84,6 +93,13 @@ pub async fn load_or_create_file() -> Result<String, Error> {
 pub fn deserialize_from_json_string(str: &str) -> Result<Vec<CustomerInfo>, serde_json::Error> {
     let customers_info: Vec<CustomerInfo> = serde_json::from_str(&str)?;
     Ok(customers_info)
+}
+
+// generate 15 digit ppid
+pub fn generate_ppid() -> String {
+    let val: i64 = rand::thread_rng().gen_range(0..=999_999_999_999_999);
+    let padded_string = format!("{:0>15}", val);
+    padded_string
 }
 
 #[cfg(test)]
