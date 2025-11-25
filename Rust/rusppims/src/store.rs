@@ -5,6 +5,7 @@ use tokio::{
     fs::{File, metadata, read_to_string},
     io::AsyncWriteExt,
 };
+use crate::route_lib::update_customer::UpdateCustomer;
 
 use crate::routes::AddCustomer;
 
@@ -48,6 +49,24 @@ impl CustomerInfo {
             ovid_type: add_customer.ovid_type.clone(),
             cif_id: add_customer.cif_id.clone(),
         }
+    }
+
+    pub fn update_customer(&mut self, update_customer: &UpdateCustomer) {
+        self.unique_id = update_customer.unique_id.clone();
+        self.mobile_number = update_customer.mobile_number.clone();
+        self.customer_name = update_customer.customer_name.clone();
+        self.date_of_birth = update_customer.date_of_birth.clone();
+        // self.email_id = update_customer.email_id.clone();
+        self.account_number = update_customer.account_number.clone();
+        self.account_status = update_customer.account_status.clone();
+        self.card_number = Some(update_customer.card_number.clone());
+        self.card_status = Some(update_customer.card_status.clone());
+        self.kyc_flag = update_customer.kyc_flag.clone();
+        self.kyc_updated_on = Some(update_customer.kyc_update_on.clone());
+        self.maiden_name = Some(update_customer.maiden_name.clone());
+        self.ovid_type = Some(update_customer.ovid_type.clone());
+        self.ovid_value = Some(update_customer.ovid_value.clone());
+        self.cif_id = Some(update_customer.cif_id.clone());
     }
 }
 
