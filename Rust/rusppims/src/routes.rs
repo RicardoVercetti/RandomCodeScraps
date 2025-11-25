@@ -44,7 +44,7 @@ pub struct AddCustomer {
     pub ref_id: String,
 
     #[serde(rename = "Unique_Id")]
-    pub unique_id: String,
+    pub unique_id: Option<String>,
 
     #[serde(rename = "Customer_Id")]
     pub customer_id: String,
@@ -53,7 +53,7 @@ pub struct AddCustomer {
     pub customer_name: String,
 
     #[serde(rename = "Maiden_Name")]
-    pub maiden_name: String,
+    pub maiden_name: Option<String>,
 
     #[serde(rename = "Mobile_Number")]
     pub mobile_number: String,
@@ -62,22 +62,22 @@ pub struct AddCustomer {
     pub date_of_birth: String,
 
     #[serde(rename = "Email_Id")]
-    pub email_id: String,
+    pub email_id: Option<String>,
 
     #[serde(rename = "Address_Line1")]
-    pub address_line1: String,
+    pub address_line1: Option<String>,
 
     #[serde(rename = "Address_Line2")]
-    pub address_line2: String,
+    pub address_line2: Option<String>,
 
     #[serde(rename = "City")]
-    pub city: String,
+    pub city: Option<String>,
 
     #[serde(rename = "State")]
-    pub state: String,
+    pub state: Option<String>,
 
     #[serde(rename = "Pincode")]
-    pub pincode: String,
+    pub pincode: Option<String>,
 
     #[serde(rename = "Account_Number")]
     pub account_number: String,
@@ -86,13 +86,13 @@ pub struct AddCustomer {
     pub account_status: String,
 
     #[serde(rename = "Card_Number")]
-    pub card_number: String,
+    pub card_number: Option<String>,
 
     #[serde(rename = "Card_Exp_date")]
-    pub card_exp_date: String,
+    pub card_exp_date: Option<String>,
 
     #[serde(rename = "Card_Status")]
-    pub card_status: String,
+    pub card_status: Option<String>,
 
     #[serde(rename = "KYC_Flag")]
     pub kyc_flag: String,
@@ -101,28 +101,28 @@ pub struct AddCustomer {
     pub kyc_updated_channel: String,
 
     #[serde(rename = "KYC_Updated_On")]
-    pub kyc_updated_on: String,
+    pub kyc_updated_on: Option<String>,
 
     #[serde(rename = "System_Id")]
     pub system_id: String,
 
     #[serde(rename = "Ovid_Value")]
-    pub ovid_value: String,
+    pub ovid_value: Option<String>,
 
     #[serde(rename = "Ovid_Type")]
-    pub ovid_type: String,
+    pub ovid_type: Option<String>,
 
     #[serde(rename = "Cif_Id")]
-    pub cif_id: String,
+    pub cif_id: Option<String>,
 
     #[serde(rename = "Customer_Type")]
     pub customer_type: String,
 
     #[serde(rename = "Ppi_Type")]
-    pub ppi_type: String,
+    pub ppi_type: Option<String>,
 
     #[serde(rename = "NRI_Flag")]
-    pub nri_flag: String,
+    pub nri_flag: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -149,7 +149,7 @@ pub struct AddCustomerRequst {
     risk: Risk,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponse {
     #[serde(rename="Data")]
     data: AddCustomerResponseData,
@@ -180,7 +180,7 @@ impl AddCustomerResponse {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseData {
 
     #[serde(rename="Resp_Code")]
@@ -199,13 +199,13 @@ pub struct AddCustomerResponseData {
     kyc_updated_on: String
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseRisk {}
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseLinks {}
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseMeta {}
 
 
@@ -240,16 +240,37 @@ pub async fn add_customer_handler(
         customers.push(customer_info_map);
 
         // async save to file
-        let res = save_to_file(&customers).await;
-        match res {
+        let save_res = save_to_file(&customers).await;
+        match save_res {
             Err(e) => println!("error occured while saving the file: {}", e),
             _ => {}
         }
-        return Json(AddCustomerResponse::new("000", &ppid, &in_data.kyc_flag, &in_data.kyc_updated_channel, &in_data.kyc_updated_on));
+
+        let res = AddCustomerResponse::new(
+            "000", 
+            &ppid, 
+            &in_data.kyc_flag, 
+            &in_data.kyc_updated_channel,
+            option_alt(&in_data.kyc_updated_on));
+        println!("res: {:#?}", res);
+        return Json(res);
     }
 
-    // TODO: response body
     // TODO: use different response code for failed responses
     // TODO: after this use the response code in the response body
-    Json(AddCustomerResponse::new("400", &in_data.unique_id, &in_data.kyc_flag, &in_data.kyc_updated_channel, &in_data.kyc_updated_on))
+    let res = AddCustomerResponse::new(
+        "400", 
+        option_alt(&in_data.unique_id), 
+        &in_data.kyc_flag, 
+        &in_data.kyc_updated_channel, 
+        option_alt(&in_data.kyc_updated_on));
+    println!("res: {:#?}", res);
+    Json(res)
+}
+
+fn option_alt(opt: &Option<String>) -> &str {
+    match opt {
+        Some(str) => str,
+        None => "N/A"
+    }
 }

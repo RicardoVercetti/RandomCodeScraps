@@ -12,20 +12,20 @@ use crate::routes::AddCustomer;
 pub struct CustomerInfo {
     pub unique_id: String, // this is the ppid
     pub customer_name: String,
-    pub maiden_name: String,
+    pub maiden_name: Option<String>,
     pub mobile_number: String,
     pub date_of_birth: String,
     pub account_number: String,
     pub account_status: String,
-    pub card_number: String,
-    pub card_exp_date: String,
-    pub card_status: String,
+    pub card_number: Option<String>,
+    pub card_exp_date: Option<String>,
+    pub card_status: Option<String>,
     pub kyc_flag: String,
     pub kyc_updated_channel: String,
-    pub kyc_updated_on: String,
-    pub ovid_value: String,
-    pub ovid_type: String,
-    pub cif_id: String,
+    pub kyc_updated_on: Option<String>,
+    pub ovid_value: Option<String>,
+    pub ovid_type: Option<String>,
+    pub cif_id: Option<String>,
 }
 
 impl CustomerInfo {
