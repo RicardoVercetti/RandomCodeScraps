@@ -1,6 +1,15 @@
+### *[25/11/25; Tue]*
+- Optional in serde json
+- more code modularization in rust
+- more deref in rust
+
 ### *[24/11/25; Mon]*
 - Servers like Tomcat Vs Language provided http servers
 - Reverse proxy & forward proxy
+- Arc & RwLock
+- deserialization to pretty json
+- generate random number with rand
+- pad data with format!
 
 ### *[23/11/25; Sun]*
 - Rusppims create customer request

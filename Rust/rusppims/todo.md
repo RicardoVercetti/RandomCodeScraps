@@ -16,6 +16,7 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 - [x] have mobile number for customer dedupe check
 - [] have the KYC restrictions enabled
 - [] no std logs or err logs, full async
+- [] optional json params
 
 #### Things to learn in the process
 
