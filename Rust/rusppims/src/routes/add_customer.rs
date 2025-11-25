@@ -4,39 +4,6 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
-// simple pings
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct PingPostData {
-    username: String,
-    password: String,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct PingPostResponse {
-    message: String,
-}
-
-pub async fn ping_get() -> String {
-    "Rusppims here, howdy partner!".to_string()
-}
-
-pub async fn ping_post(
-    State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
-    Json(payload): Json<PingPostData>,
-) -> Json<PingPostResponse> {
-    println!("req: {:?}", payload);
-    // you can do something with the data ya know!
-
-    let data: tokio::sync::RwLockReadGuard<'_, Vec<CustomerInfo>> = state.read().await;
-
-    println!("all customer info: {:#?}", data);
-
-    Json(PingPostResponse {
-        message: "Requst received successfully".to_string(),
-    })
-}
-
 // add customer
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomer {
@@ -151,52 +118,52 @@ pub struct AddCustomerRequst {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponse {
-    #[serde(rename="Data")]
+    #[serde(rename = "Data")]
     data: AddCustomerResponseData,
 
-    #[serde(rename="Risk")]
+    #[serde(rename = "Risk")]
     risk: AddCustomerResponseRisk,
 
-    #[serde(rename="Links")]
+    #[serde(rename = "Links")]
     links: AddCustomerResponseLinks,
 
-    #[serde(rename="Meta")]
-    meta: AddCustomerResponseMeta
+    #[serde(rename = "Meta")]
+    meta: AddCustomerResponseMeta,
 }
 
 impl AddCustomerResponse {
     fn new(resp: &str, id: &str, flag: &str, chan: &str, up: &str) -> Self {
-        AddCustomerResponse { data: AddCustomerResponseData {
-            response_code: resp.to_string(),
-            unique_id: id.to_string(),
-            kyc_flag: flag.to_string(),
-            kyc_updated_channel: chan.to_string(),
-            kyc_updated_on: up.to_string()
-        },
-             risk: AddCustomerResponseRisk{},
-             links: AddCustomerResponseLinks{},
-              meta: AddCustomerResponseMeta{}
-            }
+        AddCustomerResponse {
+            data: AddCustomerResponseData {
+                response_code: resp.to_string(),
+                unique_id: id.to_string(),
+                kyc_flag: flag.to_string(),
+                kyc_updated_channel: chan.to_string(),
+                kyc_updated_on: up.to_string(),
+            },
+            risk: AddCustomerResponseRisk {},
+            links: AddCustomerResponseLinks {},
+            meta: AddCustomerResponseMeta {},
+        }
     }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseData {
-
-    #[serde(rename="Resp_Code")]
+    #[serde(rename = "Resp_Code")]
     response_code: String,
 
-    #[serde(rename="Unique_Id")]
+    #[serde(rename = "Unique_Id")]
     unique_id: String,
 
-    #[serde(rename="KYC_Flag")]
+    #[serde(rename = "KYC_Flag")]
     kyc_flag: String,
 
-    #[serde(rename="KYC_Updated_Channel")]
+    #[serde(rename = "KYC_Updated_Channel")]
     kyc_updated_channel: String,
 
-    #[serde(rename="KYC_Updated_On")]
-    kyc_updated_on: String
+    #[serde(rename = "KYC_Updated_On")]
+    kyc_updated_on: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -207,7 +174,6 @@ pub struct AddCustomerResponseLinks {}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AddCustomerResponseMeta {}
-
 
 pub async fn add_customer_handler(
     State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
@@ -232,7 +198,7 @@ pub async fn add_customer_handler(
         println!("generated ppid: {}", ppid);
 
         // map the AddCustomer to CustomerInfo
-        
+
         let customer_info_map = CustomerInfo::new(in_data, &ppid);
         let mut customers = state.write().await;
 
@@ -247,23 +213,23 @@ pub async fn add_customer_handler(
         }
 
         let res = AddCustomerResponse::new(
-            "000", 
-            &ppid, 
-            &in_data.kyc_flag, 
+            "000",
+            &ppid,
+            &in_data.kyc_flag,
             &in_data.kyc_updated_channel,
-            option_alt(&in_data.kyc_updated_on));
+            option_alt(&in_data.kyc_updated_on),
+        );
         println!("res: {:#?}", res);
         return Json(res);
     }
 
-    // TODO: use different response code for failed responses
-    // TODO: after this use the response code in the response body
     let res = AddCustomerResponse::new(
-        "400", 
-        option_alt(&in_data.unique_id), 
-        &in_data.kyc_flag, 
-        &in_data.kyc_updated_channel, 
-        option_alt(&in_data.kyc_updated_on));
+        "400",
+        option_alt(&in_data.unique_id),
+        &in_data.kyc_flag,
+        &in_data.kyc_updated_channel,
+        option_alt(&in_data.kyc_updated_on),
+    );
     println!("res: {:#?}", res);
     Json(res)
 }
@@ -271,6 +237,6 @@ pub async fn add_customer_handler(
 fn option_alt(opt: &Option<String>) -> &str {
     match opt {
         Some(str) => str,
-        None => "N/A"
+        None => "N/A",
     }
 }

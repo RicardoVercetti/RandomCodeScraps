@@ -1,3 +1,4 @@
+use crate::routes::update_customer::UpdateCustomer;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use std::io::Error;
@@ -5,9 +6,8 @@ use tokio::{
     fs::{File, metadata, read_to_string},
     io::AsyncWriteExt,
 };
-use crate::route_lib::update_customer::UpdateCustomer;
 
-use crate::routes::AddCustomer;
+use crate::routes::add_customer::AddCustomer;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CustomerInfo {
