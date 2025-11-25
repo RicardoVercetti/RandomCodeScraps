@@ -1,3 +1,7 @@
+### *[24/11/25; Mon]*
+- Servers like Tomcat Vs Language provided http servers
+- Reverse proxy & forward proxy
+
 ### *[23/11/25; Sun]*
 - Rusppims create customer request
 - reformat with mods
@@ -5,7 +9,7 @@
 - serde functionalities in rust
 - load,save, create a file in async
 - cloc commands
-- traits in rust
+- traits in rust intro
 
 
 ### *[22/11/25; Sat]*
