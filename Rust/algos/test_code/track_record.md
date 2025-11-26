@@ -1,3 +1,7 @@
+### *[26/11/25; Wed]*
+- git blame
+- neetcode: longest consecutive sequence
+
 ### *[25/11/25; Tue]*
 - Optional in serde json
 - more code modularization in rust
