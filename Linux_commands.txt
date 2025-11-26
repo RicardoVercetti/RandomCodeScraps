@@ -235,6 +235,9 @@ git commands
   - git checkout -b new-branch												# creates and checkout if it doesn't exist(-b "branch", -c "create")(alternatively `git switch -c new-branch`)
   - git checkout -b branch-name tag-name									# create a new branch with the tag's commit at head.(Commit hash can also be used)
   - git checkout --orphan new-branch-name									# create a branch that is not originated from any other branch(no history)
+  - git blame <filename.ext>                                                # print blame for a file
+  - git blame -L 20,50 <filename>                                           # blame on specific lines
+  - git blame <commit-hash>^ -- <filename>                                  # blame using previous version of file
   - git branch                                                              # all branches that exist locally
   - git branch -m main														                          # rename branch to main
   - git branch -r                                                           # all branches at remote repo
