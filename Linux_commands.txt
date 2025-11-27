@@ -173,6 +173,14 @@ Nano (A text editor in command line)
  - ctrl + _                                                                 # Go to a specific line
 
 
+NetCat
+- nc -v <ip> <port>                                                         # -v for verbose, stays connected for I/O
+- nc -zv <ip> <port>-<port>                                                 # -z for zero i/o mode, checks ports inbetween the range
+- nc -l -p <port>                                                           # simple tcp listener
+- nc <server-ip> <port>                                                     # connect to that listener
+- nc -l <port> > received.txt                                                 # On receiver
+- nc <receiver-ip> <port> < file.txt                                          # On sender
+
 
 Java
  - update-alternatives --list java                                          # List outs all the java versions installed. Change Affects Only Java Commands (Not JAVA_HOME). 
