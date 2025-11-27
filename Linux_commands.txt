@@ -54,6 +54,13 @@ ssh
  - sudo ufw allow ssh												# if ssh port 22 is not allowed for incoming connection, restart after that -> sudo systemctl restart ssh
  - exit																# to close connection
 
+Tmux
+- tmux                                              # create session(Ctrl + B then press D to exit without closing the running program or exit to close)
+- tmux attach                                       # attach to a nameless session
+- tmux attach -t <session-name>                     # attched to named session  
+- tmux new -s <session-name>                        # create a named session
+- tmux ls                                           # list all sessions
+
 
 
 General
