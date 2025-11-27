@@ -188,6 +188,9 @@ NetCat
 - nc -l <port> > received.txt                                                 # On receiver
 - nc <receiver-ip> <port> < file.txt                                          # On sender
 
+Nmap
+- nmap -Pn -p <s_port>-<e_port> <ip>                                        # scan there port to see whats open
+
 
 Java
  - update-alternatives --list java                                          # List outs all the java versions installed. Change Affects Only Java Commands (Not JAVA_HOME). 
