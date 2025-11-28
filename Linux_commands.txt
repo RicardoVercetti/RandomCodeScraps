@@ -282,8 +282,9 @@ git commands
   - git clone --branch <branch-name> --single-branch <repo-url>
   - git config --get user.name
   - git config --get user.email
+  - git remote                                                              # list remote repos
   - git remote -v															                              # show remote repo links
-  - git remote add secondary-origin <SECOND_REPO_URL>
+  - git remote add <remote_name> <remote_url>                               # add a remote URL
   - git remote set-url origin git@github.com:RicardoVercetti/Des3FromScratch.git						# change to ssh URL, HTTP looks t
   - git remote prune origin																				# removes stale remote-tracking branches from your local repository
   - ssh -T git@github.com													                          # check ssh connection w/ github
