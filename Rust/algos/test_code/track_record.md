@@ -2,6 +2,8 @@
 - ssh keys generation, addition
 - ssh config file for multiple keys
 - import ssh public key to a server linux machine
+- neetcode: product of array without self
+- bit into bitwise operations in rust
 
 ### *[26/11/25; Wed]*
 - git blame
