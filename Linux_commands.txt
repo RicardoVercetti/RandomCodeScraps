@@ -70,6 +70,7 @@ General
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
  - compgen -c									# list all executable commands in path
+ - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
  - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - pwd																		# current working directory
