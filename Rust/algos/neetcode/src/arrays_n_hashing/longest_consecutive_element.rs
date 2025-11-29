@@ -14,8 +14,10 @@
 // 3. have max_count, reset count when the above condition doesn't get satisfied in any loop
 // 4. finally return the max_count
 
+#[allow(unused_imports)]
 use std::vec;
 
+#[allow(dead_code)]
 fn remove_duplicates(li: Vec<i32>) -> Vec<i32> {
     let mut re = Vec::new();
     // loop for each, check if this element exists in the new list, if no, push it to the new list
@@ -28,6 +30,7 @@ fn remove_duplicates(li: Vec<i32>) -> Vec<i32> {
     re
 }
 
+#[allow(dead_code)]
 pub fn longest_consecutive(list: &mut Vec<i32>) -> i32 {
     let mut max_count = 0;
     let mut count = 0;
