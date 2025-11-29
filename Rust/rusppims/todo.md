@@ -9,16 +9,16 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 - [x] define default endpoints
 - [x] requst json pretty printer
 - [x] deserialize with custom field names
-- [] error logs in server side console
+- [ ] error logs in server side console
 - [x] store customer data in file
 - [x] load data on startup
-- [] have ppims headers
+- [ ] have ppims headers
 - [x] have mobile number for customer dedupe check
-- [] have the KYC restrictions enabled
-- [] no std logs or err logs, full async
-- [] optional json params
-- [] document the request response messages
-- [] complete all request reqponse messages
+- [ ] have the KYC restrictions enabled
+- [ ] no std logs or err logs, full async
+- [x] optional json params
+- [ ] document the request response messages
+- [ ] complete all request reqponse messages
 
 #### Things to learn in the process
 
