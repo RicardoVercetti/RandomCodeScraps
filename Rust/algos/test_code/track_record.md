@@ -1,3 +1,8 @@
+### *[29/11/25; Sat]*
+- ssh keys generation, addition
+- ssh config file for multiple keys
+- import ssh public key to a server linux machine
+
 ### *[26/11/25; Wed]*
 - git blame
 - neetcode: longest consecutive sequence
