@@ -48,11 +48,14 @@ locations
 
 
 ssh
- - ssh username@your-ubuntu-ip										# connect to a remote linux system
- - sudo systemctl status ssh										# ssh service have to be running for connecting
- - sudo systemctl start ssh											# start if not running
- - sudo ufw allow ssh												# if ssh port 22 is not allowed for incoming connection, restart after that -> sudo systemctl restart ssh
- - exit																# to close connection
+ - ssh-add ~/.ssh/id_ed25519                                                                              # add the key(private key, the public key is added to remote service) to the ssh agent
+ - ssh-add -l                                                                                             # list all the added keys to agent. use -L instead for full public key
+ - ssh-agent -s                                                                                           # for starting the ssh agent(must use inside eval as → eval "$(ssh-agent -s)")
+ - ssh-copy-id -i ~/.ssh/your_key.pub username@server_ip                                                  # copy the public key thorugh ssh itself if you know the system password
+ - ssh -i ~/.ssh/mykey user@server_ip                                                                     # use custom key
+ - ssh username@your-server-ip										                                                        # connect to a remote linux system(exit	to close a connection). SSH is a systemctl service.
+ - ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_personal                        # create an ssh key(private key → ~/.ssh/id_ed25519, public key → ~/.ssh/id_ed25519.pub). Here, the mail is just a label, can use anything.
+
 
 Tmux
 - tmux                                              # create session(Ctrl + B then press D to exit without closing the running program or exit to close)
