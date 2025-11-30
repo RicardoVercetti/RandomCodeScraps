@@ -1,3 +1,9 @@
+### *[30/11/25; Sun]*
+- bit more into bitwise in rust
+- neetcode valid palindrome in rust
+- neetcode integer two sum in rust
+- started 3sum in neetcode
+
 ### *[29/11/25; Sat]*
 - ssh keys generation, addition
 - ssh config file for multiple keys
