@@ -6,6 +6,7 @@
 
 #[allow(dead_code)]
 pub fn product_of_array_without_self<const N: usize>(nums: &[i32; N]) -> [i32; N] {
+    // TODO: this is a brute force solution, gotta rework on elegent solution
     let mut ret_nums: [i32; N] = [0; N];
     for (index, _) in nums.iter().enumerate() {
         let mut mult = 1;
