@@ -1,3 +1,8 @@
+### *[01/12/25; Mon]*
+- obsidian usage and wikilinks vs standard markdown links
+- git diff with git-delta
+- half baked 3sum from neetcode in rust
+
 ### *[30/11/25; Sun]*
 - bit more into bitwise in rust
 - neetcode valid palindrome in rust
