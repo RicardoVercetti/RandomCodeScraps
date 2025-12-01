@@ -286,6 +286,8 @@ git commands
   - git clone --branch <branch-name> --single-branch <repo-url>
   - git config --get user.name
   - git config --get user.email
+  - git config --global --unset <variable_name>                             # remove a global varible
+  - git config --global --list
   - git remote                                                              # list remote repos
   - git remote -v															                              # show remote repo links
   - git remote add <remote_name> <remote_url>                               # add a remote URL
