@@ -326,6 +326,13 @@ git commands
   - git worktree add path/to/folder branch-name                            # branch name itself is optional, can also use '-b new-branch'
   - git worktree remove path/to/folder
 
+Git-plugins
+ - git config --global core.pager delta                                 # gotta install git-delta first
+ - git config --global interactive.diffFilter delta
+ - git config --global delta.navigate true
+ - git config --global delta.side-by-side true                          # override the inline diff with side-by-side
+ - git config --global delta.light true                                 # optional for a lighter theme 
+
 
 
 
