@@ -233,6 +233,7 @@ git commands
   - git diff                                                                # All file changes
   - git diff <file-path>                                                    # specific file changes
   - git diff --cached                                                       # changes stagged for commit
+  - git diff --word-diff=color                                              # diff on word change level
   - git diff > changes.diff													                        # Redirects the output of git diff to a file named changes.diff - can later be reapplied to your repository to restore those changes.
   - git diff stash@{0}														# See the full diff of a stash
   - git diff <root-branch>..<feat-branch>									# file changes in feat that are not in root
