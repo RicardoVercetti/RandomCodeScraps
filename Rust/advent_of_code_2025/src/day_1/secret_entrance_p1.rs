@@ -1,7 +1,7 @@
 use std::{fs::File, io::Read};
 
 #[allow(dead_code)]
-fn get_file_contents() -> Vec<String> {
+pub fn get_file_contents() -> Vec<String> {
     let mut file = File::open("attachment_data.md").unwrap();
     let mut content = String::new();
     file.read_to_string(&mut content).unwrap();
