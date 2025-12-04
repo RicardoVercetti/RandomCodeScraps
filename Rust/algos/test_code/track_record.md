@@ -1,5 +1,8 @@
 ### *[04/12/25; Thu]*
 - ssh config file
+- pacman find unused dependencies
+- git find commits by name or author
+- Advent of code day 2 part 1
 
 ### *[03/12/25; Wed]*
 - Advent of code day 1 completed
