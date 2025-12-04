@@ -1,3 +1,12 @@
+### *[04/12/25; Thu]*
+- ssh config file
+
+### *[03/12/25; Wed]*
+- Advent of code day 1 completed
+
+### *[02/12/25; Tue]*
+
+
 ### *[01/12/25; Mon]*
 - obsidian usage and wikilinks vs standard markdown links
 - git diff with git-delta
