@@ -452,6 +452,8 @@ arch-linux
  - pacman -S <package-name>=<version> 										# install a specific version
  - pacman -R <package-name>											# remove packages
  - pacman -Rns <package-name>											# Remove with unused dependencies
+ - pacman -Rns $(pacman -Qtdq)											# remove all orphan packages
+ - pacman -Qtdq 												# Q - query, t - llist unrequired, d - list dependencis, q - quiet(just package names)	
 
 [display]
  - brightnessctl set +10%  # increase brightness
