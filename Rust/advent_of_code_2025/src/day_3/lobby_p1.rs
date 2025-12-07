@@ -65,6 +65,7 @@ fn nah_id_brute_force_it(inp: &String) -> i32 {
     max
 }
 
+#[allow(dead_code)]
 fn find_sum_of_max_banks(all_banks: Vec<String>) -> i32 {
     let mut max = 0;
     for bank in all_banks {
