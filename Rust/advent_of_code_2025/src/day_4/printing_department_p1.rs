@@ -13,7 +13,7 @@
 //          -  and (j+-x) does not go above or below colum length 
 
 #[allow(dead_code)]
-fn find_accessible_roll_count(accessibles: &Vec<Vec<char>>) -> i32 {
+pub fn find_accessible_roll_count(accessibles: &Vec<Vec<char>>) -> i32 {
     let mut x_count = 0;
     for x in accessibles {
         for y in x {
@@ -26,7 +26,7 @@ fn find_accessible_roll_count(accessibles: &Vec<Vec<char>>) -> i32 {
 }
 
 #[allow(dead_code)]
-fn replacer(full_vec: &Vec<Vec<char>>) -> Vec<Vec<char>> {
+pub fn replacer(full_vec: &Vec<Vec<char>>) -> Vec<Vec<char>> {
     // loop through each element, get x, y, and the char, if its @, go ahead and see if its accessible
     let mut return_vec: Vec<Vec<char>> = Vec::new();
 
