@@ -28,7 +28,7 @@ fn is_in_any_range(num: &i64, ranges: &Vec<(i64, i64)>) -> bool {
 }
 
 #[allow(dead_code)]
-fn separate_data(s: &str) -> (Vec<(i64, i64)>, Vec<i64>) {
+pub fn separate_data(s: &str) -> (Vec<(i64, i64)>, Vec<i64>) {
     // the ranges and the IDs are separated by a blank line
     let mut ranges: Vec<String> = Vec::new();
     let mut items: Vec<String> = Vec::new();
