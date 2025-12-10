@@ -37,6 +37,7 @@ pub fn find_all_fresh_in_ranges(ranges: &Vec<(i64, i64)>) -> BTreeSet<i64> {
 // 2. the lower bound is in between the range but the upper bound is not in between, its higher → swallow the lower bound and reset the higher bound of the current item
 // 3. the lower bound is higher than the upper bound of the item → eat 5 star and do nothing
 
+#[allow(dead_code)]
 pub fn filter_overlapping_ranges(all_ranges: &Vec<(i64, i64)>) -> Vec<(i64, i64)> {
     let l_all_ranges = all_ranges.clone();
     let full_length = l_all_ranges.len();
@@ -46,45 +47,58 @@ pub fn filter_overlapping_ranges(all_ranges: &Vec<(i64, i64)>) -> Vec<(i64, i64)
     let mut step = 0;
     
     while step < full_length {
-        println!("step: {}", step);
-        println!("is_none: {}", continual_range.is_none());
+        // println!("step: {}", step);
+        // println!("is_none: {}", continual_range.is_none());
         if continual_range.is_none() {
             continual_range = Some(l_all_ranges[step]);
         } else {
             // its some so this element have to be compared with the element in the continual range
-            let (this_lower, this_upper) = l_all_ranges[step];
-            let (cont_lower, cont_upper) = continual_range.unwrap();
+            let (next_lower, next_upper) = l_all_ranges[step];
+            let (this_lower, this_upper) = continual_range.unwrap();
 
-            if is_between(cont_lower, cont_upper, this_lower, this_upper) {
-                // swallow → dont add
-                println!("swallowing: {}/{}", this_lower, this_upper);
+            // println!("comparing this {this_lower}:{this_upper} with {next_lower}:{next_upper}");
 
-            } else if cont_lower <= this_lower && cont_upper >= this_lower && this_upper > cont_upper {
+            if  this_lower <= next_lower && this_upper >= next_upper {   // TL <= NL && TU >= NU
+                // swallow → dont add                                  3-5  10-14 
+                // println!("swallowing: {}/{}", next_lower, next_upper);
+
+            } else if this_lower <= next_lower && next_lower <= this_upper && next_upper > this_upper {  // TL <= NL && NL <= TR && NR > TR               // 10-14  12-18
                 // reformat the cont item's upper bound
 
-                println!("reformat for: {:?}", continual_range);
-                println!("this items: {}/{}", this_lower, this_upper);
+                // println!("reformat for: {:?}", continual_range);
+                // println!("this items: {}/{}", this_lower, this_upper);
 
-                continual_range = Some((cont_lower, this_upper));
+                continual_range = Some((this_lower, next_upper));
+                // println!("after reformat: {:?}", continual_range);
                 
-            } else if cont_upper < this_lower {
+            } else if this_upper < next_lower {             // TR < NL  10-14  16-20
                 // this is a new item, put the cont in list and add this in the cont
                 new_array.push(continual_range.unwrap());
-                continual_range = None;
-                println!("pushed to new array...");
+                continual_range = Some((next_lower, next_upper));
+                // println!("pushed to new array: {:?}", new_array);
             } else {
-                println!("Unexpected condition...");
+                unimplemented!("this condition should not execute");
             }
         }
 
         step += 1;
     }
 
+    if continual_range.is_some() {
+        new_array.push(continual_range.unwrap());
+    }
+
     new_array
 }
 
-fn is_between(item_lower: i64, item_upper: i64, next_lower: i64, next_upper: i64) -> bool {
-    item_lower <= next_lower  && next_lower < next_upper && item_upper >= next_upper
+#[allow(dead_code)]
+pub fn count_fresh_ingredients(all_ranges: &Vec<(i64, i64)>) -> i64 {
+    let mut count: i64 = 0;
+    for (left, right) in all_ranges {
+        let diff = *right - *left + 1;
+        count += diff;
+    }
+    count
 }
 
 mod tests {
@@ -112,10 +126,20 @@ mod tests {
         assert_eq!(all_fresh.len(), 14);
     }
 
+    // #[test]
+    // fn test_acutal_data() {         // warn: this runs forever
+    //     let sample_data = get_file_contents("attachment_data_d5.md");
+    //     let all_fresh = find_all_fresh_in_ranges(&separate_data(&sample_data).0);
+    //     assert_eq!(all_fresh.len(), 243);
+    // }
+
     #[test]
-    fn test_acutal_data() {
+    fn test_actual_data_faster() {
         let sample_data = get_file_contents("attachment_data_d5.md");
-        let all_fresh = find_all_fresh_in_ranges(&separate_data(&sample_data).0);
-        assert_eq!(all_fresh.len(), 243);
+        let (mut ranges, _) = separate_data(&sample_data);
+        ranges.sort_by_key(|f| f.0);
+        let filtered = filter_overlapping_ranges(&ranges);
+        let count = count_fresh_ingredients(&filtered);
+        assert_eq!(count, 333892124923577);
     }
 }
