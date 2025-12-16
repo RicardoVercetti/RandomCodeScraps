@@ -374,6 +374,8 @@ Gradle
  - ./gradlew bootRun														# run the project
  - ./gradlew build --refresh-dependencies									# force gradle to redownload dependencies
  - gradle --stop  															# Stop any running Gradle daemons
+ - gradlew test --info												# run with debug info of gradle process
+ - gradlew test --rerun-tasks											# ignored cache and reruns
  - gradle clean
  - rm -rf ~/.gradle/caches/													# remove cache files
  - gradle init --type basic													# for a root multi module project
@@ -446,6 +448,7 @@ arch-linux
  - pacman -Ss <package-name>												# search for packages
  - pacman -Qi <package-name>                        # search for the package with the specific name
  - pacman -Qs <package-name>												# search installed packages(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
+ - pacman -Qu													# list upgradable packages
  - pacman -Sy													# update package database
  - pacman -Syu													# both package database and installed packages
  - pacman -S <package-name>											# install the package
