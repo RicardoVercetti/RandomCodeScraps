@@ -4,4 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-chrono = "0.4"
+
+[profile.release]
+opt-level = 3          # Maximum LLVM optimizations
+lto = "fat"            # Best cross-crate optimizations
+codegen-units = 1      # Better optimization, slower compile
+panic = "abort"        # Removes unwinding overhead
+strip = "symbols"      # Remove debug symbols
+debug = false
