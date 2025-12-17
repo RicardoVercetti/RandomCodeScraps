@@ -86,6 +86,7 @@ General
  - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
  - ls -l filename															# basic file information
+ - ls lh								# list files with details
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
  - mv [options] <source_folder> <destination>                               # move folder
  - mv /path/to/folder /path/to/destination/
