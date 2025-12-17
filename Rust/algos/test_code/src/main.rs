@@ -1,4 +1,4 @@
-use std::time::{Instant, Duration};
+use std::{io::{self, Write}, time::{Duration, Instant}};
 
 fn main() {
     println!("Hello from the test code...");        // i5-10210U (8) @ 4.20 GHz [26_287_068, 26_955_637, 26_127_817, 26_586_694, 25_811_802, 26_270_351, 26_773_800, 26_777_096, 25_648_700, 25_715_188]
@@ -16,8 +16,9 @@ fn main() {
             count +=1;
             if last_tick.elapsed() >= Duration::from_secs(1) {
                 // print!("\r(i,j) = ({}, {})", i, j);
-                print!("\rcount: {}\n", count);
-                println!("\rarr: {:?}", counts);
+                print!("\rcount: {}   || arr: {:?}", count, counts);
+                io::stdout().flush().unwrap();
+
                 counts.push(count.clone());
                 count = 0;
                 last_tick = Instant::now();
