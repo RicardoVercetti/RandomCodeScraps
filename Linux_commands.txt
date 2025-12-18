@@ -72,7 +72,6 @@ General
  - compgen -c									# list all executable commands in path
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
- - sudo lsof -i :8080														                            # Find the Process Using Port 8080
  - pwd																		# current working directory
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
@@ -82,6 +81,7 @@ General
  - lsusb																	# hardwares in USB bus
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - grep -ir <text> <dir>															# i → case insensitive search, r → recursive
+ - tail -f <file.ext>										# -f → 	watches live, -n 100 → last 100 lines, -F → if file is deleted, auto reopen new
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
@@ -145,9 +145,12 @@ General
  - df -h																	                                  # check disk usage
  - baobab																	                                  # gnome disk usage analyzer
  [processes]
+ - lsof -i -P -n								# list all listening port processes
+ - lsof -i :8080											# Find the Process Using Port 8080
  - ps -e												# snapshot view of all running processes(-e → show all processes.-f → show full details)
  - ps -p <PID> -f															# details on the one running in PID
  - ps -p <PID> -o cmd														# mode details on process
+ - ps -fp <PID>												# even more details
  - pstree <ID>									# process tree( -s → parent process)
 																			# u | Show the user who owns the process along with extra details. x | Include processes not attached to a terminal (like background apps, daemons, or GUI apps like IntelliJ)
  - top																		# Live process Monitor(Press P to sort by CPU|Press M to sort by memory|Press k then type a PID to kill a process|Press q to quit)																
@@ -381,12 +384,19 @@ Gradle
  - rm -rf ~/.gradle/caches/													# remove cache files
  - gradle init --type basic													# for a root multi module project
  - ./gradlew tasks															# list tasks available
+
+Rustup
+ - rustup component list --installed									# things like clippy, fmt
+ - rustup show												# show toolchains & targets
+ - rustup targer list --installed
+ - rustup toolchain list										# list all toolchains
  
 Cargo
  - cargo build															# compile without running
  - cargo build --release													# produce optimized build
  - cargo check 																# check project for errors
  - cargo clean															# removes '/target' folder
+ - cargo clippy --fix														# auto fix as per linter suggestions(git state must be before running this)
  - cargo info <package-name>
  - cargo new project_name													# create new rust project with cargo build tool
  - cargo run																# run the project
