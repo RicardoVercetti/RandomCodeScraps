@@ -153,7 +153,7 @@ General
  - ps -fp <PID>												# even more details
  - pstree <ID>									# process tree( -s → parent process)
 																			# u | Show the user who owns the process along with extra details. x | Include processes not attached to a terminal (like background apps, daemons, or GUI apps like IntelliJ)
- - top																		# Live process Monitor(Press P to sort by CPU|Press M to sort by memory|Press k then type a PID to kill a process|Press q to quit)																
+ - top																		# Live process Monitor(Press P to sort by CPU|M - sort by memory, H - threads|Press k then type a PID to kill a process|Press q to quit)																
  [users]
  - who																		# Who are the users logged in
  - last																		# sign in history
@@ -398,6 +398,7 @@ Cargo
  - cargo clean															# removes '/target' folder
  - cargo clippy --fix														# auto fix as per linter suggestions(git state must be before running this)
  - cargo info <package-name>
+ - cargo install <package-name>											# installs a global binary
  - cargo new project_name													# create new rust project with cargo build tool
  - cargo run																# run the project
  - cargo search <package-name>
@@ -420,6 +421,12 @@ nvim
  - :wq                                                # save and quit
  - q                                                  # quit Lazy.nvim
  - h                                                  # home
+
+emacs
+ - C-x C-c											# exit
+ - C-y												# paste
+ - C-x u												# undo
+ - C-x C-s											# save buffer to file
 
 kafka
  - bin/zookeeper-server-start.sh config/zookeeper.properties				# start zoo keeper
