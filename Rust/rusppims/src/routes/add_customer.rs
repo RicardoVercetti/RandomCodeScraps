@@ -208,7 +208,7 @@ pub async fn add_customer_handler(
         // async save to file
         let save_res = save_to_file(&customers).await;
         match save_res {
-            Err(e) => println!("error occured while saving the file: {}", e),
+            Err(e) => println!("error occurred while saving the file: {}", e),
             _ => {}
         }
 

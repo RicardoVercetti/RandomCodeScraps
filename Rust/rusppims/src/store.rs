@@ -70,7 +70,7 @@ impl CustomerInfo {
     }
 }
 
-// get cusomer info
+// get customer info
 pub fn is_customer_exits_by_mobile_number(mob: &str, customer_infos: &Vec<CustomerInfo>) -> bool {
     for customer in customer_infos {
         if mob == customer.mobile_number {

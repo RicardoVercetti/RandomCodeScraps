@@ -33,6 +33,6 @@ pub async fn ping_post(
     println!("all customer info: {:#?}", data);
 
     Json(PingPostResponse {
-        message: "Requst received successfully".to_string(),
+        message: "Request received successfully".to_string(),
     })
 }

@@ -10,7 +10,7 @@ use std::sync::Arc;
 use tokio::{net::TcpListener, sync::RwLock};
 
 pub async fn start_server() {
-    // load the custome data on startup
+    // load the customer data on startup
     let json_str = load_or_create_file().await.unwrap();
     let customers: Vec<CustomerInfo> = deserialize_from_json_string(&json_str).unwrap();
 
