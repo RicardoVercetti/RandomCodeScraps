@@ -1,5 +1,5 @@
 use crate::store::{CustomerInfo, save_to_file};
-use crate::utils::find_n_get_mut_customer_info;
+use crate::utils::{self, find_n_get_mut_customer_info};
 use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -138,7 +138,7 @@ pub async fn update_customer_handler(
     Json(payload): Json<UpdateCustomerRequest>,
 ) -> Json<UpdateCustomerResponse> {
     // now start handling stuff
-    println!("req: {:#?}", payload);
+    utils::print_req_res(&payload, "req");
     let request_customer_data = &payload.data.update_customer;
 
     // find the customer from the list and see if you can update data for that customer
@@ -175,6 +175,6 @@ pub async fn update_customer_handler(
         }
     }
 
-    println!("res: {:#?}", res);
+    utils::print_req_res(&res, "res");
     Json(res)
 }

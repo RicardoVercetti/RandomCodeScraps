@@ -1,3 +1,6 @@
+use std::fmt::Debug;
+use serde::Serialize;
+
 use crate::store::CustomerInfo;
 
 // find & get mutable CustomerInfo
@@ -11,4 +14,14 @@ pub fn find_n_get_mut_customer_info<'a>(
         }
     }
     None
+}
+
+/// print the pretty json format if possible, else print with Debug
+pub fn print_req_res<U>(item: &U, ty: &str) where U: Serialize + Debug {
+    let json_ed = serde_json::to_string_pretty(item);
+
+    match json_ed {
+        Ok(s) => println!("{}: {}", ty, s),
+        _ => println!("{}: {:?}", ty, item)
+    }
 }

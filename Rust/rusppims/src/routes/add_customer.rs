@@ -1,4 +1,4 @@
-use crate::store::{CustomerInfo, generate_ppid, is_customer_exits_by_mobile_number, save_to_file};
+use crate::{store::{CustomerInfo, generate_ppid, is_customer_exits_by_mobile_number, save_to_file}, utils};
 use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -180,7 +180,7 @@ pub async fn add_customer_handler(
     Json(payload): Json<AddCustomerRequst>,
 ) -> Json<AddCustomerResponse> {
     // request should be successfully received
-    println!("req: {:#?}", payload);
+    utils::print_req_res(&payload, "req");
     let in_data = &payload.data.add_customer;
 
     // get customer data and check id
@@ -230,7 +230,7 @@ pub async fn add_customer_handler(
         &in_data.kyc_updated_channel,
         option_alt(&in_data.kyc_updated_on),
     );
-    println!("res: {:#?}", res);
+    utils::print_req_res(&res, "res");
     Json(res)
 }
 

@@ -1,4 +1,4 @@
-use crate::store::CustomerInfo;
+use crate::{store::CustomerInfo, utils};
 use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -25,7 +25,7 @@ pub async fn ping_post(
     State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
     Json(payload): Json<PingPostData>,
 ) -> Json<PingPostResponse> {
-    println!("req: {:?}", payload);
+    utils::print_req_res(&payload, "req");
     // you can do something with the data ya know!
 
     let data: tokio::sync::RwLockReadGuard<'_, Vec<CustomerInfo>> = state.read().await;
