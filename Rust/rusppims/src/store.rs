@@ -70,15 +70,7 @@ impl CustomerInfo {
     }
 }
 
-// get customer info
-pub fn is_customer_exits_by_mobile_number(mob: &str, customer_infos: &Vec<CustomerInfo>) -> bool {
-    for customer in customer_infos {
-        if mob == customer.mobile_number {
-            return true;
-        }
-    }
-    false
-}
+
 
 // write to file
 pub async fn save_to_file(customers: &Vec<CustomerInfo>) -> Result<(), Box<dyn std::error::Error>> {

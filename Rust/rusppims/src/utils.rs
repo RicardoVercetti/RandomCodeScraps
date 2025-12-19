@@ -16,6 +16,25 @@ pub fn find_n_get_mut_customer_info<'a>(
     None
 }
 
+pub fn find_by_mobile_number<'a>(mob: &str, customer_infos: &'a Vec<CustomerInfo>) -> Option<&'a CustomerInfo> {
+    for c in customer_infos {
+        if c.mobile_number == mob {
+            return Some(c);
+        }
+    }
+    None
+} 
+
+// get customer info
+pub fn is_customer_exits_by_mobile_number(mob: &str, customer_infos: &Vec<CustomerInfo>) -> bool {
+    for customer in customer_infos {
+        if mob == customer.mobile_number {
+            return true;
+        }
+    }
+    false
+}
+
 /// print the pretty json format if possible, else print with Debug
 pub fn print_req_res<U>(item: &U, ty: &str) where U: Serialize + Debug {
     let json_ed = serde_json::to_string_pretty(item);
