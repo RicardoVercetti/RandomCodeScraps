@@ -71,6 +71,7 @@ General
  - command -v rg															# check if command exists
  - compgen -c									# list all executable commands in path
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
+ - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
  - pwd																		# current working directory
  - sudo kill -9 <PID>
@@ -215,7 +216,7 @@ Cloc
  - cloc path/to/file													                # count in one file
  - cloc path/to/dir --json > report.json								      # export into json, can also use --csv
  - cloc --include-ext=js path/to/dir									        # for a specific extension, can also include multiple with '--include-ext=java,xml'
- - cloc path/to/dir --exclude-dir=node_modules,dist
+ - cloc path/to/dir --exclude-dir=node_modules,dist								# --ignored=ignored_files.txt → for the list of ignored files
 
 
 git commands
