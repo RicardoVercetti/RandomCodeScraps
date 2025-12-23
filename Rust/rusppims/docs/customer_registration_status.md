@@ -24,7 +24,7 @@
             "Password": "ENT123"
         },
         "Risk": {}
-    }
+}
 ```
 
 ### sample response

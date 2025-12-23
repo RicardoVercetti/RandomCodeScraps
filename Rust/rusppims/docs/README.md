@@ -1,5 +1,7 @@
 ## Rusppims
 
+### About
+The PPI dubbed to prepaid payment instrument is the RBI system to regulate limits in spendings on Indian government regulated financial processors. PPI has hold of customer information, account information, spending, and the maximum amount the customer can possibly spend on one month.
 
 ### Overview
 
@@ -8,7 +10,7 @@ Over 6 APIs are hosted for the purpose of maintaining the transaction guide line
 
 ### Usage
 
-The Customer have to be onboarded and then transactions can be made for the customer for a specific KYC.
+The Customer have to be on-boarded and then transactions can be made for the customer for a specific KYC.
 There are 3 different KYC options available - Min KYC, New Min KYC & full KYC.
 Full KYC has no limits while the min KYC has max spend of 10_000 per month.
 

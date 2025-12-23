@@ -7,7 +7,7 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 
 - [x] basic get & post server
 - [x] define default endpoints
-- [x] requst json pretty printer
+- [x] request json pretty printer
 - [x] deserialize with custom field names
 - [ ] error logs in server side console
 - [x] store customer data in file
@@ -18,12 +18,13 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 - [ ] no std logs or err logs, full async
 - [x] optional json params
 - [ ] document the request response messages
-- [ ] complete all request reqponse messages
+- [ ] complete all request response messages
+- [ ] pretty print json request - response
 
 #### Things to learn in the process
 
 - Building a basic http server
-- have endponts to respond in json
+- have endpoints to respond in json
 - file handling
 - async in rust
 - error handling
