@@ -23,7 +23,7 @@ pub fn find_by_mobile_number<'a>(mob: &str, customer_infos: &'a Vec<CustomerInfo
         }
     }
     None
-} 
+}
 
 // get customer info
 pub fn is_customer_exits_by_mobile_number(mob: &str, customer_infos: &Vec<CustomerInfo>) -> bool {
@@ -44,3 +44,19 @@ pub fn print_req_res<U>(item: &U, ty: &str) where U: Serialize + Debug {
         _ => println!("{}: {:?}", ty, item)
     }
 }
+
+pub fn find_by_unique_id<'a>(id: &String, all_customers: &'a Vec<CustomerInfo>) -> Option<&'a CustomerInfo> {
+    for customer in all_customers {
+        if customer.unique_id == *id {
+            return Some(&customer);
+        }
+    }
+    None
+}
+
+pub fn some_or_na<T: std::fmt::Display>(some_value: &Option<T>) -> String {
+    match some_value {
+        Some(value) => value.to_string(),
+        None => "NA".to_string(),
+    }
+} 

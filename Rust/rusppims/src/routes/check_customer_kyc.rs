@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
 
 use crate::{store::CustomerInfo};
-use crate::utils::print_req_res;
+use crate::utils::{ find_by_unique_id, print_req_res, some_or_na };
 
 pub async fn handle_check_customer_kyc(
     State(_state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
@@ -13,11 +13,40 @@ pub async fn handle_check_customer_kyc(
 
         print_req_res(&payload, "req");
 
+        let locked_customer_info = _state.read().await;
 
-        let res = CheckKycResponse::new(&"500".to_string(), &"NA".to_string(), &"NA".to_string(), &"NA".to_string(), &"NA".to_string(), &"NA".to_string());
+        let optional_customer: Option<&CustomerInfo> = find_by_unique_id(&payload.data.check_kyc.unique_id, &locked_customer_info);
 
-        print_req_res(&res, "res");
-        Json(res)
+        match optional_customer {
+            Some(cus) => {
+                let res = CheckKycResponse::new(
+                    &"200".to_string(), 
+                    &cus.kyc_flag.to_string(), 
+                    &cus.kyc_updated_channel.to_string(), 
+                    &some_or_na(&cus.kyc_updated_on), 
+                    &some_or_na(&cus.cif_id),
+                    &cus.unique_id
+                );
+
+                print_req_res(&res, "res");
+                Json(res)
+            },
+            None => {
+                println!("Customer not found for unique id: {}", &payload.data.check_kyc.unique_id);
+                let res = CheckKycResponse::new(
+                    &"500".to_string(), 
+                    &"NA".to_string(), 
+                    &"NA".to_string(), 
+                    &"NA".to_string(), 
+                    &"NA".to_string(), 
+                    &"NA".to_string()
+                );
+
+                print_req_res(&res, "res");
+                Json(res)
+
+            }
+        }
     }
 
 // DTOs
