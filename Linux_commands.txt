@@ -73,6 +73,7 @@ General
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
+ - nl									# number lines, used as `<command> | nl`
  - pwd																		# current working directory
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
@@ -83,6 +84,7 @@ General
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - grep -ir <text> <dir>															# i → case insensitive search, r → recursive
  - tail -f <file.ext>										# -f → 	watches live, -n 100 → last 100 lines, -F → if file is deleted, auto reopen new
+ - tr ':' '\n'											# replace ':' with new line, used in `<command> | tr <params>`
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
