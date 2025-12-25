@@ -4,7 +4,7 @@ use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
 
-use crate::{core::kyc::KycTypes, store::CustomerInfo, utils::{find_by_unique_id, print_req_res}};
+use crate::{core::{calc::calulate_cum_balance, kyc::KycTypes}, store::CustomerInfo, utils::{find_by_unique_id, print_req_res}};
 
 pub async fn handle_check_customer_limit(
     State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
@@ -12,7 +12,7 @@ pub async fn handle_check_customer_limit(
 ) -> Json<CheckCustomerLimitResponse> {
     print_req_res(&payload, "req");
 
-    
+
     // check if amount from request + Avail balance <= Max limit for the KYC
     // if 'yes', the response is '000' with allow_customer 'T'
     // else the response is gonna be '000' with allow_customer 'F'
@@ -35,7 +35,7 @@ pub async fn handle_check_customer_limit(
                             "000".to_string(),
                             cus.unique_id.to_string(),
                             "T".to_string(),
-                            "0.00".to_string(), // todo: propper cum balance
+                            calulate_cum_balance(&cus, &payload.data.check_limit.amount),
                             "0.00".to_string(), // avail limit
                             cus.cif_id.as_deref().unwrap_or("NA").to_string(),
                         );
@@ -45,7 +45,7 @@ pub async fn handle_check_customer_limit(
                             "000".to_string(),
                             cus.unique_id.to_string(),
                             "F".to_string(),
-                            "0.00".to_string(), // todo: propper cum balance
+                            format!("{:.02}", &cus.consumed),       // for failed, cum balance == consumed
                             "0.00".to_string(), // avail limit
                             cus.cif_id.as_deref().unwrap_or("NA").to_string(),
                         );
@@ -59,8 +59,8 @@ pub async fn handle_check_customer_limit(
                     let r = CheckCustomerLimitResponse::new(
                             "000".to_string(),
                             cus.unique_id.to_string(),
-                            "T".to_string(),
-                            "0.00".to_string(), // todo: propper cum balance
+                            "F".to_string(),
+                            "0.00".to_string(),
                             "0.00".to_string(), // avail limit
                             cus.cif_id.as_deref().unwrap_or("NA").to_string(),
                         );
@@ -86,7 +86,7 @@ pub async fn handle_check_customer_limit(
     Json(res)
 }
 
-fn check_the_limit(cus: &CustomerInfo, req: &CheckCustomerLimitRequest) -> Result<bool, String> {       // assume its debit for now
+fn check_the_limit(cus: &CustomerInfo, req: &CheckCustomerLimitRequest) -> Result<bool, String> {       // assume its debit for now, todo: handle for credit
     let amount_from_req: f32 = req.data.check_limit.amount
                 .parse::<f32>()
                 .map_err(|e| format!("Invalid amount: {}", e))?;
