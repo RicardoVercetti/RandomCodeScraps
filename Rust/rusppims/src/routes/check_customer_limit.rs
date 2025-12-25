@@ -4,18 +4,99 @@ use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
 
-use crate::{store::CustomerInfo, utils::print_req_res};
+use crate::{core::kyc::KycTypes, store::CustomerInfo, utils::{find_by_unique_id, print_req_res}};
 
 pub async fn handle_check_customer_limit(
-    State(_state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
+    State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
     Json(payload): Json<CheckCustomerLimitRequest>
 ) -> Json<CheckCustomerLimitResponse> {
     print_req_res(&payload, "req");
 
-    let res = CheckCustomerLimitResponse::new("500".to_string(), "NA".to_string(), "N".to_string());
+    
+    // check if amount from request + Avail balance <= Max limit for the KYC
+    // if 'yes', the response is '000' with allow_customer 'T'
+    // else the response is gonna be '000' with allow_customer 'F'
+    // if customer info not found, '500' with allow_customer 'F'
+
+    let customer_read = state.read().await;
+
+    let customer_info = find_by_unique_id(&payload.data.check_limit.unique_id, &customer_read);
+
+    let res: CheckCustomerLimitResponse = match customer_info {
+        Some(cus) => {
+
+            // if limit satisfies
+            let is_okay = check_the_limit(cus, &payload);
+            
+            match is_okay {
+                Ok(v) => {
+                    if v {
+                        let r = CheckCustomerLimitResponse::new(
+                            "000".to_string(),
+                            cus.unique_id.to_string(),
+                            "T".to_string(),
+                            "0.00".to_string(), // todo: propper cum balance
+                            "0.00".to_string(), // avail limit
+                            cus.cif_id.as_deref().unwrap_or("NA").to_string(),
+                        );
+                        r
+                    } else {
+                        let r = CheckCustomerLimitResponse::new(
+                            "000".to_string(),
+                            cus.unique_id.to_string(),
+                            "F".to_string(),
+                            "0.00".to_string(), // todo: propper cum balance
+                            "0.00".to_string(), // avail limit
+                            cus.cif_id.as_deref().unwrap_or("NA").to_string(),
+                        );
+                        println!("not enough balance");
+                        r
+                    }
+                },
+                Err(s) => {
+                    println!("Error occurred!");
+                    println!("{}", s);
+                    let r = CheckCustomerLimitResponse::new(
+                            "000".to_string(),
+                            cus.unique_id.to_string(),
+                            "T".to_string(),
+                            "0.00".to_string(), // todo: propper cum balance
+                            "0.00".to_string(), // avail limit
+                            cus.cif_id.as_deref().unwrap_or("NA").to_string(),
+                        );
+                    r
+                }
+            }
+            },
+        None => {
+            println!("customer not found!");
+            let res = CheckCustomerLimitResponse::new(
+                "500".to_string(),
+                "NA".to_string(),
+                "F".to_string(),
+                "NA".to_string(),
+                "NA".to_string(),
+                "NA".to_string()
+            );
+            res
+        },
+    };
 
     print_req_res(&res, "res");
     Json(res)
+}
+
+fn check_the_limit(cus: &CustomerInfo, req: &CheckCustomerLimitRequest) -> Result<bool, String> {       // assume its debit for now
+    let amount_from_req: f32 = req.data.check_limit.amount
+                .parse::<f32>()
+                .map_err(|e| format!("Invalid amount: {}", e))?;
+
+    let customer_kyc = KycTypes::from_code(&cus.kyc_flag)?;
+    if customer_kyc.is_under_limit(&cus.consumed, &amount_from_req) {
+        return Ok(true)
+    }
+
+    Ok(false)
 }
 
 // DTOs
@@ -92,15 +173,15 @@ pub struct CheckCustomerLimitResponseData {
 }
 
 impl CheckCustomerLimitResponse {
-    fn new(resp_code: String, unique_id: String, allow_cus: String) -> Self {
+    fn new(resp_code: String, unique_id: String, allow_cus: String, cum_bal: String, avail_limit: String, cif_id: String) -> Self {
         CheckCustomerLimitResponse{
             data: CheckCustomerLimitResponseData {
                 resp_code: resp_code,
                 unique_id: unique_id,
                 allow_customer: allow_cus,
-                cumulative_bal: "NA".to_string(),
-                avail_amount_limit: "NA".to_string(),
-                cif_id: "NA".to_string(),
+                cumulative_bal: cum_bal,
+                avail_amount_limit: avail_limit,
+                cif_id: cif_id,
                 old_unique_id: "NA".to_string()
             },
             risk: Risk {}, 

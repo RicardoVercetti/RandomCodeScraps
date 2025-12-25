@@ -27,6 +27,7 @@ pub struct CustomerInfo {
     pub ovid_value: Option<String>,
     pub ovid_type: Option<String>,
     pub cif_id: Option<String>,
+    pub consumed: f32,
 }
 
 impl CustomerInfo {
@@ -48,6 +49,7 @@ impl CustomerInfo {
             ovid_value: add_customer.ovid_value.clone(),
             ovid_type: add_customer.ovid_type.clone(),
             cif_id: add_customer.cif_id.clone(),
+            consumed: 0.00f32,
         }
     }
 
