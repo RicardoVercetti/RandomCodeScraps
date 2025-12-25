@@ -20,6 +20,20 @@ Using this I wanna learn handling http requests, basic serialization and deseria
 - [ ] document the request response messages
 - [ ] complete all request response messages
 - [ ] pretty print json request - response
+- [ ] frontend in react for PPIMS
+- [ ] async APIs for the react UI - sign-in with hardcoded credentials
+- [ ] UI Home page - Top customers, all Customers
+- [ ] UI transactions - sort from last received to backwards
+- [ ] UI transactions - list by transaction type(all, create customer, update limit, etc)
+- [ ] UI transactions - filter transactions by time frame
+- [ ] UI search by customer name, mobile number
+- [ ] UI list transaction at customer section
+- [ ] embedded SQLite database
+- [ ] use async querying?
+- [ ] multiple channel support for customer
+- [ ] fill other data in the customer registration status response
+- [ ] add check limit request response
+- [ ] add update limit request response
 
 #### Things to learn in the process
 
