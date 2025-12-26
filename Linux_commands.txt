@@ -83,10 +83,11 @@ General
  - lsusb																	# hardwares in USB bus
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - grep -ir <text> <dir>															# i → case insensitive search, r → recursive
+ - sort                                               # sort the output in alphabetical order, used as `<command> | sort`
  - tail -f <file.ext>										# -f → 	watches live, -n 100 → last 100 lines, -F → if file is deleted, auto reopen new
  - tr ':' '\n'											# replace ':' with new line, used in `<command> | tr <params>`
+ - uniq                                               # gives the unique lines, -c → count the duplicated, used as `<command> | uniq -c`
  - update-desktop-database ~/.local/share/applications						# refresh your app database
- - ufu status (sudo)														# uncomplicated firewall status
  [file handling]
  - ls -l filename															# basic file information
  - ls lh								# list files with details
