@@ -4,7 +4,7 @@ use axum::{Json, extract::State};
 use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
 
-use crate::{core::{calc::calulate_cum_balance, kyc::KycTypes}, store::CustomerInfo, utils::{find_by_unique_id, print_req_res}};
+use crate::{core::{calc::calculate_cum_balance, kyc::KycTypes}, store::CustomerInfo, utils::{find_by_unique_id, print_req_res}};
 
 pub async fn handle_check_customer_limit(
     State(state): State<Arc<RwLock<Vec<CustomerInfo>>>>,
@@ -35,7 +35,7 @@ pub async fn handle_check_customer_limit(
                             "000".to_string(),
                             cus.unique_id.to_string(),
                             "T".to_string(),
-                            calulate_cum_balance(&cus, &payload.data.check_limit.amount),
+                            calculate_cum_balance(&cus, &payload.data.check_limit.amount),
                             "0.00".to_string(), // avail limit
                             cus.cif_id.as_deref().unwrap_or("NA").to_string(),
                         );

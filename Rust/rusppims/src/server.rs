@@ -4,6 +4,7 @@ use crate::routes::check_customer_kyc::handle_check_customer_kyc;
 use crate::routes::check_customer_limit::handle_check_customer_limit;
 use crate::routes::ping::{ping_get, ping_post};
 use crate::routes::update_customer::update_customer_handler;
+use crate::routes::update_customer_limit::handle_update_customer_limit;
 use crate::store::{CustomerInfo, deserialize_from_json_string, load_or_create_file};
 use axum::{
     Router,
@@ -33,7 +34,7 @@ pub async fn start_server() {
             "/axis/non-dmz/api/PPIM/v1/update-customer",
             post(update_customer_handler),
         ) // update customer
-        // .route("/axis/non-dmz/api/PPIM/v1/update-customer-limit", method_router)             // update customer limit
+        .route("/axis/non-dmz/api/PPIM/v1/update-customer-limit", post(handle_update_customer_limit))             // update customer limit
         .with_state(shared_state.clone());
 
     // run our app with hyper, listening globally on port 3000
