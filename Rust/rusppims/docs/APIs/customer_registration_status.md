@@ -10,20 +10,20 @@
 
 ```json
 {
-        "Data": {
-            "Check_Reg_Status": {
-                "Ref_Id": "123456789871234",
-                "Mobile_Number": "919952324523",
-                "Name": "Chandrasekar C",
-                "Date_Of_Birth": "08-02-1994",
-                "Ovid_Type": "ADR",
-                "Ovid_Value": "123456789012",
-                "System_Id": "ENT"
-            },
-            "Username": "PPIM_ENT",
-            "Password": "ENT123"
-        },
-        "Risk": {}
+	"Data": {
+		"Check_Reg_Status": {
+			"Ref_Id": "123456789871234",
+			"Mobile_Number": "919952324523",
+			"Name": "Chandrasekar C",
+			"Date_Of_Birth": "08-02-1994",
+			"Ovid_Type": "ADR",
+			"Ovid_Value": "123456789012",
+			"System_Id": "ENT"
+		},
+		"Username": "PPIM_ENT",
+		"Password": "ENT123"
+	},
+	"Risk": {}
 }
 ```
 
