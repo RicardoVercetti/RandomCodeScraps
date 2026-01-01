@@ -352,6 +352,19 @@ sqlcmd
  - sqlcmd -S <server_name> -U <username> -P <password>
  - sqlcmd -S <server> -U <user> -P <pass> -d <database> -i <file.sql>   # For query with file
 
+sqlite
+ - .databases
+ - .headers on												# enable column names
+ - .mode column												# pad for readability
+ - .mode csv
+ - sqlite3 name.db											# open db, or create if it doesn't exist
+ - .quit														# close the CLI
+ - .schema													# all table schemas
+ - .schema <table_name>										# schema of one table
+ - sqlite3 mydb.sqlite .dump > backup.sql					# export to sql
+ - sqlite3 newdb.sqlite < backup.sql							# restore
+ - .tables
+
 MVN
  - mvn compile
  - mvn test
