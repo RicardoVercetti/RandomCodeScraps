@@ -1,3 +1,6 @@
+mod closures_on_consumers;
+
+#[allow(unused)]
 #[derive(Debug)]
 struct MyType {
     name: String,
