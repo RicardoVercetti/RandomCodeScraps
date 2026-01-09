@@ -64,7 +64,7 @@ fn pick_give_away<'a>(registered_customers: &'a Vec<People>, stock: &'a Vec<Shir
     println!("winner: {}", customer_chosen.name);
 
     // if the customer has a choice, we can get that color
-    match customer_chosen.color.as_ref() {
+    match customer_chosen.color.as_ref() {      // here, could have used the closure to capture and return the shirt color but cant cuz we're not returning owned value
         Some(color) => {
             println!("{} has chosen the color {:?}", customer_chosen.name, color);
             (customer_chosen, color)
