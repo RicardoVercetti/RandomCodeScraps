@@ -11,7 +11,19 @@
 - `%d` for digits(int)
 - `%f` for floating point numbers
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
-- the `%` modulo operator does not work on float or double, works only with 
+- the `%` modulo operator does not work on float or double, works only with int, long, short, long long
+
+### Bitwise operators
+
+| C Bitwise operators   | Description           |
+|-----------------------|-----------------------|
+| &                     | Bitwise AND           |
+| \|                    | Bitwise OR            |
+| ^                     | Bitwise ex-OR         |
+| <<                    | Bitwise left shift    |
+| >>                    | Bitwise right shift   |
+| ~                     | One's complement      |
+
 
 ### Datatypes unlocked
 
@@ -46,3 +58,10 @@
 | float     | for       | unsigned  | while     |
 | goto      | if        | volatile  |           |
 
+### Outstanding 
+
+- [ ] left-shift operation
+- [ ] right-shift operation
+- [ ] bitwise AND operation
+- [ ] bitwise exclusive OR operation
+- [ ] bitwise inclusive OR operation
