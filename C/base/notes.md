@@ -12,6 +12,9 @@
 - `%f` for floating point numbers
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
 - the `%` modulo operator does not work on float or double, works only with int, long, short, long long
+- strlen, strcpy, strcomp → from `#include <string.h>`
+- `fgets` takes `(char[], sizeof(char[]), stdin)` and adds `\n`, for a string, this must be `\0`.
+- when no params are passed in `printf("%d, %d");`, it automatically gets items from stack
 
 ### Bitwise operators
 
@@ -32,6 +35,7 @@
 - float → single precision floating point(4bytes)
 - char → just integer behind the scenes(1byte)
 - bool → any integer other than 0 is true(can use `stdbool.h` for constant `0` or `1`)
+- string → array of char is a string, end of string is null terminator `\0`.
 
 ### Datatype overview
 
