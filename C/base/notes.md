@@ -10,11 +10,16 @@
 - can also do `const double SALES_TAX = 0.1` for the same behavior
 - `%d` for digits(int)
 - `%f` for floating point numbers
+- `%p` for pointers
+- `%s` for strings
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
 - the `%` modulo operator does not work on float or double, works only with int, long, short, long long
 - strlen, strcpy, strcomp → from `#include <string.h>`
 - `fgets` takes `(char[], sizeof(char[]), stdin)` and adds `\n`, for a string, this must be `\0`.
 - when no params are passed in `printf("%d, %d");`, it automatically gets items from stack
+- doing a `fn("%p", &var)` might actually work on my machine, but the right way is `fn("%p", (void *)&var)`
+- everything that's passed to a function is stack allocated and auto destroyed when the function execution is over. Even a pointer becomes stack allocated.
+- auto allocation is stack, manual allocation using `malloc()` requires manually freeing the memory with `free()`
 
 ### Bitwise operators
 
