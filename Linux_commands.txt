@@ -60,7 +60,7 @@ ssh
 Tmux
 - tmux                                              # create session(Ctrl + B then press D to exit without closing the running program or exit to close)
 - tmux attach                                       # attach to a nameless session
-- tmux attach -t <session-name>                     # attched to named session  
+- tmux attach -t <session-name>                     # attached to named session  
 - tmux new -s <session-name>                        # create a named session
 - tmux ls                                           # list all sessions
 
@@ -73,6 +73,7 @@ General
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
+ - history 												# history of commands executed
  - nl									# number lines, used as `<command> | nl`
  - pwd																		# current working directory
  - sudo kill -9 <PID>
