@@ -12,6 +12,7 @@
 - `%f` for floating point numbers
 - `%p` for pointers
 - `%s` for strings
+- `%c` for char
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
 - the `%` modulo operator does not work on float or double, works only with int, long, short, long long
 - strlen, strcpy, strcomp → from `#include <string.h>`
@@ -20,6 +21,7 @@
 - doing a `fn("%p", &var)` might actually work on my machine, but the right way is `fn("%p", (void *)&var)`
 - everything that's passed to a function is stack allocated and auto destroyed when the function execution is over. Even a pointer becomes stack allocated.
 - auto allocation is stack, manual allocation using `malloc()` requires manually freeing the memory with `free()`
+- using `%s` for char is a bad idea, sometime may work, mostly doesn't. `%s` format specifier requires a `*char[]` and prints the string repr one by one until `\0` is found. 
 
 ### Bitwise operators
 
@@ -74,3 +76,5 @@
 - [ ] bitwise AND operation
 - [ ] bitwise exclusive OR operation
 - [ ] bitwise inclusive OR operation
+- [ ] unsigned int vs signed int
+- [ ] DSA
