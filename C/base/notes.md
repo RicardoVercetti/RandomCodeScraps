@@ -23,6 +23,14 @@
 - auto allocation is stack, manual allocation using `malloc()` requires manually freeing the memory with `free()`
 - using `%s` for char is a bad idea, sometime may work, mostly doesn't. `%s` format specifier requires a `*char[]` and prints the string repr one by one until `\0` is found. 
 
+### Building the code
+
+- `gcc -c file.c` compiles the c code into object files
+- This object file then can be linked together with `gcc file.o -o main`. This will give the the binary `./main`
+- must include the `.h` file int the `.c` file. And wherever the .c file's code have to be reused, include the `.h` file.
+- function declarations at the `.h` file are just a promise. When linker does its job, it does not check if the promise is kept 
+- `gcc file1.c file2.c -o main` to do both compiling and linking together.
+
 ### Bitwise operators
 
 | C Bitwise operators   | Description           |
