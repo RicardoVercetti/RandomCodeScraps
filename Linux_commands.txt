@@ -502,10 +502,13 @@ arch-linux
  
  
 LLC(low level code)
- - gcc <filename> -o <outfilename>				# compile the c code
- - gcc -g hello.c -o hello_debug				# compile with debug symbols
- - objdump -d <binfile>						# assembly code of binary
- - xxd <filename>						# print the hex dump of the binary
+ - gcc -c <file.c>										# create an object(.o) file from the .c file
+ - gcc <file1.o> <file2.o> -o <main>						# link the object files to create a single binary
+ - gcc <filename> -o <outfilename>						# compile and link the c code in one go
+ - gcc -g hello.c -o hello_debug							# compile with debug symbols
+ - gcc -o0 <filename> -o <outfilee>						# no optimization(default), others → -O1(basic), -O2(strong, safe), -O3(very aggressive, may increase size), -Os(smaller binary size), -Og(optimized but debuggable)
+ - objdump -d <binfile>									# assembly code of binary
+ - xxd <filename>										# print the hex dump of the binary
  
 
 Variables
