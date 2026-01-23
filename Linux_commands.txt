@@ -381,10 +381,11 @@ sdkman!
  - sdk version
 
 Firewall
- - sudo ufw status
- - sudo ufw allow 8089/tcp
- - sudo ufw status verbose													# Detailed status
- - sudo ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
+ - ufw enable														# enable the firewall
+ - ufw status
+ - ufw allow 8089/tcp
+ - ufw status verbose													# Detailed status
+ - ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
 
 
 storage analyzer
@@ -492,7 +493,7 @@ arch-linux
  - pacman -R <package-name>											# remove packages
  - pacman -Rns <package-name>											# Remove with unused dependencies
  - pacman -Rns $(pacman -Qtdq)											# remove all orphan packages
- - pacman -Qtdq 												# Q - query, t - llist unrequired, d - list dependencis, q - quiet(just package names)	
+ - pacman -Qtdq 												# Q - query, t - list unrequired, d - list dependencis, q - quiet(just package names)	
 
 [display]
  - brightnessctl set +10%  # increase brightness
