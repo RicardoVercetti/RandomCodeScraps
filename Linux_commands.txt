@@ -30,6 +30,15 @@ systemctl
   - systemd-analyze plot > boot.svg
 
 
+journalctl
+ - journalctl							# all logs from the oldest to newest
+ - journalctl -n 50						# last 50
+ - journalctl -f						# live logs like `tail -f`
+ - journalctl -u <service_name>					# log of specific service
+ - journalctl --since "today"					# log of only the day
+ - journalctl -p err						# error logs
+ - sudo journalctl						# view system level logs
+
 chmod
  - ls -l filename													# list the permissions. First charecter → File type; - = regular file
 																	# d = directory l = symbolic link; next 3s → Owner, Group, Others
