@@ -32,9 +32,11 @@ systemctl
 
 journalctl
  - journalctl							# all logs from the oldest to newest
+ - journalctl -b 0 						# 0 → current boot(optinal), 1 → previous boot
+ - journalctl --list-boots				# shows all boots including 0(from above)
  - journalctl -n 50						# last 50
  - journalctl -f						# live logs like `tail -f`
- - journalctl -u <service_name>					# log of specific service
+ - journalctl -u <service_name>					# -u filters by systemd service units, -k for kernel logs
  - journalctl --since "today"					# log of only the day
  - journalctl -p err						# error logs
  - sudo journalctl						# view system level logs
@@ -280,7 +282,7 @@ git commands
   - git blame -L 20,50 <filename>                                           # blame on specific lines
   - git blame <commit-hash>^ -- <filename>                                  # blame using previous version of file
   - git branch                                                              # all branches that exist locally
-  - git branch -m main														                          # rename branch to main
+  - git branch -m main														                          # rename master branch to main after init
   - git branch -r                                                           # all branches at remote repo
   - git branch -a                                                           # at both remote and local
   - git branch -vv															# brances with remote links
@@ -288,6 +290,7 @@ git commands
   - git branch --show-current
   - git branch --unset-upstream												# remove the upstream link
   - git branch --merged <target-branch>										# branches that are merged to target through merge or rebase
+  - git bundle create --progress <name.bundle> --all							# create a portable file of the whole git repo, --progress to log steps, --all for all refs(branches, tags, remote tracking branches)
   - git clone --branch <branch-name> --single-branch <repository-url>       # specifically clone one branch from a remote repo
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
   - git rm <file-path> 														# remove tracked files
