@@ -13,6 +13,7 @@
 - `%p` for pointers
 - `%s` for strings
 - `%c` for char
+- `%x` gives hex repr of an int, this does not work in a `char[]` though cuz its always a pointer.
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
 - the `%` modulo operator does not work on float or double, works only with int, long, short, long long
 - strlen, strcpy, strcomp → from `#include <string.h>`
