@@ -163,6 +163,7 @@ General
  [processes]
  - lsof -i -P -n								# list all listening port processes
  - lsof -i :8080											# Find the Process Using Port 8080
+ - ps aux									# list all running processes, a → all users, u → user-orented format(CPU, memory, owner, etc), x → include items not attached to termianl
  - ps -e												# snapshot view of all running processes(-e → show all processes.-f → show full details)
  - ps -p <PID> -f															# details on the one running in PID
  - ps -p <PID> -o cmd														# mode details on process
