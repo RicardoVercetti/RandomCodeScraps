@@ -20,7 +20,7 @@ int main() {
 
     // printf("value : %d, key: '%s'\n", it.value, it.key);
 
-    printf("size: %d\n", sizeof(char));
+    printf("size: %zu\n", sizeof(char));
     char c = '0';
 
     printf("value in bin: %b\n", 200);
