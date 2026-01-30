@@ -51,10 +51,12 @@ admins
  - groups															# all 
 
 
-locations
- - cat /etc/linuxmint/info
+internals
+ - cat /etc/linuxmint/info						# linuxmint is only for mint, for fedora, it has `/etc/fedora-release`
  - cat /etc/os-release
  - cat /etc/issue
+ - cat /sys/class/tty/tty0/active				# gives active tty
+ - ls /dev/tty*									# gives the list of virtual consoles
 
 
 
@@ -183,7 +185,9 @@ General
  - echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab         # add it to file system table(fstab) to mount on boot
  - swapon --show                                                            # see changes
  - free -h
-
+[terminals]
+ - tty											# gives which tty you're currently on
+ - echo "hello from vtty" > /dev/tty3			# writes output to tty3
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
