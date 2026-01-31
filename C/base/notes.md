@@ -14,9 +14,13 @@
 - `%s` for strings
 - `%c` for char
 - `%x` gives hex repr of an int, this does not work in a `char[]` though cuz its always a pointer.
+- `%u` for unsigned int
+- `%lu` for long unsigned
+- `%llu` for unsigned long long
+- `%hu` for unsigned short
 - float takes about 4 bytes of storage(can be checked with `sizeof(float)`)
 - the `%` modulo operator does not work on float or double, works only with int, long, short, long long
-- strlen, strcpy, strcomp → from `#include <string.h>`
+- strlen, strcpy, strcmp → from `#include <string.h>`
 - `fgets` takes `(char[], sizeof(char[]), stdin)` and adds `\n`, for a string, this must be `\0`.
 - when no params are passed in `printf("%d, %d");`, it automatically gets items from stack
 - doing a `fn("%p", &var)` might actually work on my machine, but the right way is `fn("%p", (void *)&var)`
