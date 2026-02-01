@@ -51,3 +51,4 @@ int main() {
 // 4. The memory allocated is 40 bytes starting from the location of *p, how can I free it? just `free(p)` is enough? for accessing, I had to do `*(p+n)`, dont I have to do this for freeing?
 //          → doing `free(p)` is all thats needed it seems like
 // 5. Allocating using char/int and giving multiple of its size is basically an array of these values. And when allocated, the programmer have to keep track of the length of this array. Is this how its supposed to be done for an array? 
+// 6. What's the difference between `malloc()` and `calloc()`?
