@@ -265,6 +265,7 @@ git commands
   - git apply changes.diff													                        # Apply the changes from the file changes.diff
   - git shortlog -s -n                                                      # number of commit by each author(-s → summarized, -n → numbered)
   - git stash push -m "message"
+  - git stash push -- file1.ext file2.ext
   - git stash push -m "message" --keep-index                                # stash tracked & unstaged changes
   - git stash push --staged                                                 # stash only the indexed(staged) changes
   - git stash -u															# -u is short for --include-untracked
@@ -313,6 +314,7 @@ git commands
   - git clone --branch <branch-name> --single-branch <repo-url>
   - git config --get user.name
   - git config --get user.email
+  - git config --global push.autoSetupRemote true				# set up the remote branch automatically if it doesnt exist
   - git config --global --unset <variable_name>                             # remove a global varible
   - git config --global --list
   - git remote                                                              # list remote repos
