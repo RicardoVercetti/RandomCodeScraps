@@ -493,8 +493,9 @@ docker
 postgres
  - createdb -U postgres -h localhost -p 5431 <db_name>												# create a new empty database
  - pg_dump -U your_username -h localhost -p 5432 your_database > backup.sql							# backup into sql file
- - psql -h localhost -p 5432 -U your_username -d your_database										# connect to the database
- - psql -U postgres -h localhost -p 5431 -d <db_name> -f backup.sql									# restore the sql(db_name should already exist) 
+ - psql -h localhost -p 5432 -U your_username -d your_database										# connect to the database(`\q` or `quit` → to quit)
+ - psql -U postgres -h localhost -p 5431 -d <db_name> -f backup.sql									# restore the sql(db_name should already exist)
+ - pg_restore -U postgres -h localhost -p 5432 -d <db_name> filename.sql							# restore a custom postgres dump
 
 
 
@@ -506,7 +507,10 @@ docker-associated
 arch-linux
 [packages]
  - pacman -Ss <package-name>												# search for packages
+ - pacman -Q													# list all packages(official repos + AUR)
+ - pacman -Qe													# explicitly installed
  - pacman -Qi <package-name>                        # search for the package with the specific name
+ - pacman -Qm													# only AUR packages
  - pacman -Qs <package-name>												# search installed packages(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
  - pacman -Qu													# list upgradable packages
  - pacman -Sy													# update package database
@@ -539,3 +543,4 @@ Variables
  - $$ 								# current process
  - $TERM							# describes the type of terminal interface your shell is using
  - $TERM_PROGRAM						# terminal program name
+ - <command_1> $(<command_2>)					# output of command_2 as input of command_1
