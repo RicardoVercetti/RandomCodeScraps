@@ -101,6 +101,7 @@ General
  - sort                                               # sort the output in alphabetical order, used as `<command> | sort`
  - tail -f <file.ext>										# -f → 	watches live, -n 100 → last 100 lines, -F → if file is deleted, auto reopen new
  - tr ':' '\n'											# replace ':' with new line, used in `<command> | tr <params>`
+ - type <command/binary/exec>									# handles aliases, shell builtins, functions & binaries
  - uniq                                               # gives the unique lines, -c → count the duplicated, used as `<command> | uniq -c`
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  [file handling]
@@ -511,6 +512,7 @@ arch-linux
  - pacman -Qe													# explicitly installed
  - pacman -Qi <package-name>                        # search for the package with the specific name
  - pacman -Qm													# only AUR packages
+ - pacman -Qo /usr/bin/executable										# tells which package owns the binary
  - pacman -Qs <package-name>												# search installed packages(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
  - pacman -Qu													# list upgradable packages
  - pacman -Sy													# update package database
