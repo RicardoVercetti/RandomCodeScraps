@@ -39,7 +39,7 @@ int main() {
     if (n == NULL) {
         printf("the N is NULL yoo...\n");
     } else {
-        printf("the N is not NULL: %d\n", n);
+        printf("the N is not NULL: %p\n", n);
     }
 
     // printf("n value: %d\n", *n);

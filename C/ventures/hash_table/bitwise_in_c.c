@@ -50,7 +50,7 @@ int main() {
     printf("c: %08b\n", c);
     printf("d: %08b\n", d);
     printf("signed result: %d\n", ~c);
-printf("unsigned result: %u\n", ~c);
+    printf("unsigned result: %u\n", ~c);
 
     return 0;
 }
