@@ -92,7 +92,6 @@ General
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
  - ss -tulnp								# t → TCP, u → UDP, l → listening, n → numeric(no DNS), p → process details
- - ip addr show																# or `ip address`
  - inxi -S																	# system info
  - less																		# some-command | less → gives walkable console outs
  - lsusb																	# hardwares in USB bus
@@ -214,16 +213,27 @@ Nano (A text editor in command line)
  - ctrl + _                                                                 # Go to a specific line
 
 
-NetCat
+Network
+ [NetCat]
 - nc -v <ip> <port>                                                         # -v for verbose, stays connected for I/O
 - nc -zv <ip> <port>-<port>                                                 # -z for zero i/o mode, checks ports inbetween the range
 - nc -l -p <port>                                                           # simple tcp listener
 - nc <server-ip> <port>                                                     # connect to that listener
 - nc -l <port> > received.txt                                                 # On receiver
 - nc <receiver-ip> <port> < file.txt                                          # On sender
-
-Nmap
+ [Nmap]
 - nmap -Pn -p <s_port>-<e_port> <ip>                                        # scan there port to see whats open
+ [traceroute]
+- traceroute <addr/IP>							# either domain.com or 8.8.8.8, each line is one hop, `* * *` = no reply(filterd or blocked)
+- traceroute -m 10 domain.com						# limit hops, traceroute shows routers that reply to TTL expiry, not whether traffic is proxied.
+- traceroute -n domain.com						# (fast) don't resolve hostnames
+- traceroute -T domain.com						# use TCP, use `-p 443` for ports 
+- traceroute -U domain.com						# UDP
+- traceroute -w 1 domain.com						# per hop wait time
+ [ip]
+- ip addr show								# or `ip address`
+- ip neigh								# recent neighbours, this comes from cache, not realtime
+- ip route								# routing table. keywords: (src →source kernel use to send packets),(proto → who added route),(scope→link(same local),global),(link→Directly reachable),(metric→Route priority(lower=prefered), 100=metric_value)
 
 
 Java
