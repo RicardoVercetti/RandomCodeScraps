@@ -198,6 +198,9 @@ General
  [boot]
  - last reboot									# gets all the reboots
  - sudo journalctl -b | grep -i fsck						# File System Consistency Check when abrupt boot/reboot happens
+ - shutdown -h now								# -h → halt/power off
+ - shutdown -h +10								# shuts down after a 10 mins delay(22:30 for after 10PM)
+ - poweroff									# does the same as `systemctl poweroff`
  [system]
  - dmidecode -t bios							# show bios info
 
@@ -245,6 +248,14 @@ Network
 - ip route								# routing table. keywords: (src →source kernel use to send packets),(proto → who added route),(scope→link(same local),global),(link→Directly reachable),(metric→Route priority(lower=prefered), 100=metric_value)
 - host <ip/addr>							# this one of the binary from `bind` package
 - nslookup <domain.com>							# test DNS resolution(`dig domain.com` should do the same)
+ [firewall]
+- ufw enable														# enable the firewall
+- ufw status
+- ufw status numbered							# list rules with numberes
+- ufw allow 8089/tcp
+- ufw status verbose													# Detailed status
+- ufw delete <number>							# delete rule by the number
+- ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
 
 
 Java
@@ -424,13 +435,6 @@ sdkman!
  - sdk install <candidate>													# candidate can be maven, gradle, java, etc.,
  - sdk use <candidate> <version>											# switch between versions
  - sdk version
-
-Firewall
- - ufw enable														# enable the firewall
- - ufw status
- - ufw allow 8089/tcp
- - ufw status verbose													# Detailed status
- - ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
 
 
 storage analyzer
