@@ -57,6 +57,7 @@ internals
  - cat /etc/issue
  - cat /sys/class/tty/tty0/active				# gives active tty
  - ls /dev/tty*									# gives the list of virtual consoles
+ - ls /sys/firmware/efi							# this exists only if the system booted in UEFI mode
 
 
 
@@ -163,6 +164,11 @@ General
  - du -h filename														   # disk usage of file
  - df -h																	                                  # check disk usage
  - baobab																	                                  # gnome disk usage analyzer
+ [disk]
+ - fdisk -l							# gives all disks like `lsblk`
+ - lsblk							# list block devices
+ - lsblk -f							# list as tree
+ - lsblk /dev/diskname						# info of specific disk
  [processes]
  - lsof -i -P -n								# list all listening port processes
  - lsof -i :8080											# Find the Process Using Port 8080
@@ -192,6 +198,8 @@ General
  [boot]
  - last reboot									# gets all the reboots
  - sudo journalctl -b | grep -i fsck						# File System Consistency Check when abrupt boot/reboot happens
+ [system]
+ - dmidecode -t bios							# show bios info
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
