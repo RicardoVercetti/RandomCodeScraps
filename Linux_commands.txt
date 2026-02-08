@@ -58,6 +58,13 @@ internals
  - cat /sys/class/tty/tty0/active				# gives active tty
  - ls /dev/tty*									# gives the list of virtual consoles
  - ls /sys/firmware/efi							# this exists only if the system booted in UEFI mode
+ - ls /sys/devices								# list of hardwares that kernel knows it has
+ - ls /sys/devices/pci0000:00					# PCI bus
+ - ls /sys/devices/platform						# motherboard devices
+ - ls /sys/devices/virtual						# loopback, bridges, pseudo devices
+ - ls /sys/devices/system						# CPU, firmware
+ - ls /sys/block									# list block devices(storage devices)
+ - ls /sys/devices/system/cpu					# each `cpuX` directory = one logical CPU known to kernel
 
 
 
@@ -203,6 +210,10 @@ General
  - poweroff									# does the same as `systemctl poweroff`
  [system]
  - dmidecode -t bios							# show bios info
+ - lspci										# list PCI devices(CPU, GPU, NIC, NVMe, USB controllers)
+ - lspci -k									# more details
+ - lscpu										# CPU topology(kernel-level)
+ - lsmod										# loaded kernel drivers which are actively managing hardware
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
