@@ -66,7 +66,9 @@ internals
  - ls /sys/devices/system						# CPU, firmware
  - ls /sys/block									# list block devices(storage devices)
  - ls /sys/devices/system/cpu					# each `cpuX` directory = one logical CPU known to kernel
-
+ - ls /sys/bus/pci/devices/0000:02:00.0			# currently bound PCI device related data
+ - ls /lib/modules								# kernels and their corresponding driver modules
+ - ls /lib/firmware								# firmware to be used for the above modules
 
 
 ssh
@@ -89,6 +91,7 @@ Tmux
 
 
 General
+ - alias																	# lists all aliases
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
  - compgen -c									# list all executable commands in path
@@ -106,6 +109,7 @@ General
  - lsusb																	# hardwares in USB bus
  - gnome-terminal &															# open new terminal in the linux mint cinnamon(& at the end makes sure the new terminal opens in the background)
  - grep -ir <text> <dir>															# i → case insensitive search, r → recursive
+ - grep -E 'word|$'															# `word` colors the item while `$` selects all lines. i.e: give me all lines, just color what I'm looking for
  - sort                                               # sort the output in alphabetical order, used as `<command> | sort`
  - tail -f <file.ext>										# -f → 	watches live, -n 100 → last 100 lines, -F → if file is deleted, auto reopen new
  - tr ':' '\n'											# replace ':' with new line, used in `<command> | tr <params>`
@@ -210,11 +214,17 @@ General
  - shutdown -h +10								# shuts down after a 10 mins delay(22:30 for after 10PM)
  - poweroff									# does the same as `systemctl poweroff`
  [system]
+ - efibootmgr								# boot info if UEFI is used
  - dmidecode -t bios							# show bios info
  - lspci										# list PCI devices(CPU, GPU, NIC, NVMe, USB controllers)
  - lspci -k									# more details
+ - lspci -k -s 02:00.0						# -k → show kernel driver info, `-s <device_addr>` → only for this device 
  - lscpu										# CPU topology(kernel-level)
  - lsmod										# loaded kernel drivers which are actively managing hardware
+ - dmesg										# kernel boot discovery log
+ - modinfo <driver_name>						# 
+ - modprobe <driver_name>					# load the driver manually
+ - rfkill list								# rfkill = Radio Frequency Kill switch, its a linux interface that controls radio trasmitters such as wifi, bluetooth, WWAN(cellular)
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc)
