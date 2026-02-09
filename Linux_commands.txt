@@ -22,6 +22,7 @@ systemctl
   - systemctl is-enabled <service>                                    # Check if the service is enabled at boot.
   - systemctl list-units --type=service --state=running				  # all running services
   - systemctl --user list-units --type=service --state=running		  # user service
+  - systemctl --user show-environment					# list enviromental variables loaded for the user
   - sudo systemctl list-unit-files | grep -i tomcat					  # find from files
   [analyze]
   - systemd-analyze											# Show overall boot performance summary
