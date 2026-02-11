@@ -69,6 +69,7 @@ internals
  - ls /sys/bus/pci/devices/0000:02:00.0			# currently bound PCI device related data
  - ls /lib/modules								# kernels and their corresponding driver modules
  - ls /lib/firmware								# firmware to be used for the above modules
+ - ls /usr/share/applications							# global .desktop files for application launching
 
 
 ssh
@@ -576,7 +577,15 @@ arch-linux
  - brightnessctl set 10%-  # decrease brightness
 [hyprland]
  - hyprctl reload
- 
+
+Gnome
+[DE]
+ - xdg-mime query filetype <filename.ext>				# show the mime-type
+ - xdg-mime query default <mime-type>					# default application to be used for the mime-type
+[locations]
+ - ls ~/.config/mimeapps.list						# manual config of mime-type
+ - ls ~/.local/share/applications/					# .desktop files for the current user
+
  
 LLC(low level code)
  - gcc -c <file.c>										# create an object(.o) file from the .c file
