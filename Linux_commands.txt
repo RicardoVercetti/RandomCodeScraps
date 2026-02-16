@@ -232,6 +232,7 @@ Shell
  - exec bash                                                                # restart shell(sometimes the shell tries to execute a binary thats long gone due to stale session)
  - ssh -T git@gitlab.com
  - ssh -vT git@gitlab.com
+ - nohup <command>							# ignore the stdin, redirect stdout, log the stderr to stdout of terminal
 
 
 
@@ -571,7 +572,10 @@ arch-linux
  - pacman -Rns <package-name>											# Remove with unused dependencies
  - pacman -Rns $(pacman -Qtdq)											# remove all orphan packages
  - pacman -Qtdq 												# Q - query, t - list unrequired, d - list dependencis, q - quiet(just package names)	
-
+[pacman-key]
+ - pacman-key --init					# initialize the system's pacman GPG keyring(creates the /etc/pacman.d/gnupg/)
+ - pacman-key --populate archlinux
+ - pacman-key --refresh-keys
 [display]
  - brightnessctl set +10%  # increase brightness
  - brightnessctl set 10%-  # decrease brightness
