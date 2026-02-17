@@ -21,6 +21,15 @@ public class HashingIntro {
     // Password hashing
     // 1. PBKDF2 (Standard Java)
     // 2. bcrypt/scrypt/Argon2
+
+
+    // by use-cases
+    // Password storage                 - PBKDF2
+    // File integrity                   - SHA-256
+    // Digital Signatures               - SHA-256/SHA-512
+    // Cache keys                       - SHA-256
+    // Data fingerprint                 - SHA-256
+    // Authentication tokens            - HMAC
     
     public static void main(String[] args) throws Exception {
         System.out.println("Some intro of hashing...");
