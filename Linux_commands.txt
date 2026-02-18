@@ -603,6 +603,7 @@ LLC(low level code)
 
 Variables
  - $$ 								# current process
+ - $SHELL							# current shell being used
  - $TERM							# describes the type of terminal interface your shell is using
  - $TERM_PROGRAM						# terminal program name
  - <command_1> $(<command_2>)					# output of command_2 as input of command_1
