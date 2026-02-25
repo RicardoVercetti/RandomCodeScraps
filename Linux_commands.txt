@@ -576,7 +576,18 @@ arch-linux
  - pacman -R <package-name>											# remove packages
  - pacman -Rns <package-name>											# Remove with unused dependencies
  - pacman -Rns $(pacman -Qtdq)											# remove all orphan packages
- - pacman -Qtdq 												# Q - query, t - list unrequired, d - list dependencis, q - quiet(just package names)	
+ - pacman -Qtdq 												# Q - query, t - list unrequired, d - list dependencis, q - quiet(just package names)
+[yay] → binary often breaks when updating libalpm.so, remove and rebuild with makepkg 
+ - yay -Ss <package_name>							# search for packages
+ - yay -S <package_name>							# install the package
+ - yay -Syu									# update both pacman & AUR packages
+ - yay -R <package_name>							# remove one package
+ - yay -Rns <package_name>							# remove with dependencies
+ - yay -Yc									# remove unused dependencies
+ - yay -Sc									# clean build cache
+ - yay -Scc									# aggressive cleanup
+ - yay -Qm									# view installed AUR packages
+ - yay -Qdt									# list unused packages
 [pacman-key]
  - pacman-key --init					# initialize the system's pacman GPG keyring(creates the /etc/pacman.d/gnupg/)
  - pacman-key --populate archlinux
