@@ -1,0 +1,17 @@
+{
+  "name": "limits-lib",
+  "version": "1.0.0",
+  "description": "A concept code for limit profile and its implementations",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "go": "npm run build && node ./dist/main.js"
+  },
+  "author": "RicardoVercet",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
