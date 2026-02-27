@@ -531,7 +531,7 @@ kafka
 docker
  - docker build -t <app-nick-name> .										# make a docker image from Dockerfile
  - docker exec -it <container> bash											# Open a shell inside a running container(exit → to close)
- - docker exec -it sql2025 ls /var/opt/mssql/backup								# one shot a command inside the docker container without entering it
+ - docker exec -it sql2025 ls /var/opt/mssql/backup								# one shot a command to insert into the docker container without entering it, here the `sql2025` is the name of the running container
  - docker images															# all available images
  - docker logs <container_id_or_name>
  - docker ps																# running containers (-a → all incl stopped)
