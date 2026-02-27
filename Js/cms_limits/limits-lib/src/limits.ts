@@ -85,7 +85,7 @@ export function createLimitProfile(): LimitProfile {
 
 // Limit level profile def
 export interface LimitLevelProfileDef {
-    limit_level_id: number,
+    limit_level_id: number,             // if ID is the only value this stores, there is no need for the limit level profile def separetely
     limit_level_profile_id: number,
     // the idea is to have data on which entity to be used for the limit values
 }
