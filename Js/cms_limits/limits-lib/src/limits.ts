@@ -8,23 +8,20 @@ function next_id(): number {
 
 // Limit profile definitions
 export interface LimitProfileDef {
-    id: number,
-    limit_def_name: string,
     limit_profile_id: number,
+    limit_def_name: string,
     institution_nr: number,
     last_updated_date?: Date,
     last_updated_user?: string
 }
 
 export function createLimitProfileDef(
-    limit_profile_id: number,
     institution_nr: number,
 ): LimitProfileDef {
     const id = next_id();
     return {
-        id: id,
+        limit_profile_id: id,
         limit_def_name: `limit_profile_def_${id}`,
-        limit_profile_id: limit_profile_id,
         institution_nr: institution_nr,
         last_updated_date: new Date(),
         last_updated_user: "SYSTEM"
@@ -58,11 +55,10 @@ export interface LimitProfile {
     // daily, weekly, monthly - CNP
 }
 
-export function createLimitProfile(): LimitProfile {
-    const id = next_id();
+export function createLimitProfile(limit_profile_def: LimitProfileDef): LimitProfile {
     return {
-        limit_profile_id: id,
-        limit_profile_desc: `limit_profile_des_${id}`,
+        limit_profile_id: limit_profile_def.limit_profile_id,
+        limit_profile_desc: `limit_profile_des_${limit_profile_def.limit_profile_id}`,
 
         total_daily_withdrawal_amount_online_atm: 0,
         total_daily_balance_amount_online_atm: 0,

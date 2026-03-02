@@ -14,14 +14,15 @@ const institution = createInstitution();
 const institution2 = createInstitution();
 
 // limit profile definitions
-const limitProfile = createLimitProfile();
-const limitProfileDef = createLimitProfileDef(limitProfile.limit_profile_id, institution.institution_id);
+const limitProfileDef = createLimitProfileDef(institution.institution_id);
+const limitProfile = createLimitProfile(limitProfileDef);
+
 
 // limit level definitions
 const limitLevel = createLimitLevelProfile({use_limits_of: "CARD"});
 const limitLevelProfile = createLimitLevelProfileDef(limitLevel.limit_level_profile_id);
 
-const cardProduct1 = createCardProduct("123456", limitProfile.limit_profile_id);
+const cardProduct1 = createCardProduct("123456", limitProfileDef);
 
 // main entities
 console.log(`institution: ${JSON.stringify(institution, null, 2)}`);
@@ -35,9 +36,9 @@ console.log(`Limit level profile: ${JSON.stringify(limitLevelProfile, null, 2)}`
 // case to prove: when there are multiple limits configured at different level, pick the one thats configured by a limit level profile
 // when a card is linked to a customer - that's when the limit checking comes into play
 
-// Institution, Card Product, Card, Account, Customer - all may have limit profile ID values
+// Institution, Card Product, Card, Account, Customer - all may have limit profile ID values(0 denotes no limit profile)
 // CardAccount - will have limit level profile id saying which one to take
-// when the 
+// Institution - should probably have a limit level profile ID which will be used as the default value when there is none configured at the card-accounts level
 
 
 const card1 = new Card(institution, cardProduct1);

@@ -1,5 +1,5 @@
-import { LimitProfile } from "./limits";
-import { accountsStore, cardAccountsStore, cardsStore } from "./store";
+import { LimitProfile, LimitProfileDef } from "./limits";
+import { accountsStore, cardAccountsStore, cardsStore, limitProfilesDefsStore, limitProfilesStore } from "./store";
 
 // -- Plain entities --
 let id: number = 1;
@@ -36,14 +36,14 @@ export interface CardProduct {
     limit_profile_id: number
 }
 
-export function createCardProduct(bin: string, limit_profile_id: number, product_name?: string): CardProduct {
+export function createCardProduct(bin: string, limit_profile_def: LimitProfileDef, product_name?: string): CardProduct {
     const product_id = generateId();
     const new_product_name = product_name ? product_name : `product_${product_id}`;
     return {
         product_id,
         product_name: new_product_name,
         bin,
-        limit_profile_id
+        limit_profile_id: limit_profile_def.limit_profile_id
     }
 }
 
@@ -88,6 +88,36 @@ export class Card {
 
     public setLimitProfile(limit_profile: LimitProfile) {
         this.limit_profile_id = limit_profile.limit_profile_id;
+    }
+
+    public getLimitProfileDefId(): number {
+        return this.limit_profile_id;
+    }
+
+    public getLimitProfileDef(): LimitProfileDef | number {
+        if (this.getLimitProfileDefId() == 0) {
+            return 0;
+        }
+
+        const limitProfileDef = limitProfilesDefsStore.find(item => item.limit_profile_id === this.limit_profile_id);
+        if (limitProfileDef) {
+            return limitProfileDef;
+        }
+
+        console.log(`no limit profile found for id: ${this.getLimitProfileDefId()}`);
+        return 0;
+    }
+
+    public getLimitProfileValues() {
+        const limitProfileDef = this.getLimitProfileDef();
+        if(limitProfileDef === 0) {
+            return 0;
+        }
+
+        // there could be multiple limit values found, so this must be a list of limit profile values
+        const all_limit_profiles: LimitProfile[] = limitProfilesStore.filter(item => item.limit_profile_id == this.limit_profile_id);
+
+        return all_limit_profiles;      // empty or some()
     }
 
     public static push(thisCard: Card) {
@@ -175,8 +205,9 @@ export class CardAccounts {
     private card_no: string;
     private account_no: string;
     private institution_nr: number;
+    private limit_level_profile_id: number;
 
-    constructor(card: Card, account: Account) {
+    constructor(card: Card, account: Account, limit_level_profile_id?: number) {
         if(card.getInstitutionNr() != account.getInstitutionNr()) {
             throw new Error("card and account must be under the same institution to perform linking process");
         }
@@ -184,6 +215,7 @@ export class CardAccounts {
         this.card_no = card.getCardNo();
         this.account_no = account.getAccountNo();
         this.institution_nr = card.getInstitutionNr();
+        this.limit_level_profile_id = limit_level_profile_id ? limit_level_profile_id : 0;
 
         // check if this link already exists(if yes, ignore), if it doesn't - add it into queue
         CardAccounts.push(this);

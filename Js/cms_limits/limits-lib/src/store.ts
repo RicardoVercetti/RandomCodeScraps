@@ -3,10 +3,10 @@ import { LimitProfileDef, LimitProfile, LimitLevelProfileDef, LimitLevelProfile 
 
 // treat this as synthetic database
 
-export const limitProfilesDefs: LimitProfileDef[] = [];
-export const limitProfiles: LimitProfile[] = [];
-export const limitLevelProfileDefs: LimitLevelProfileDef[] = [];
-export const limitLevelProfiles: LimitLevelProfile[] = [];
+export const limitProfilesDefsStore: LimitProfileDef[] = [];
+export const limitProfilesStore: LimitProfile[] = [];
+export const limitLevelProfileDefsStore: LimitLevelProfileDef[] = [];
+export const limitLevelProfilesStore: LimitLevelProfile[] = [];
 
 export const institutionsStore: Institution[] = [];
 export const cardsStore: Card[] = [];
