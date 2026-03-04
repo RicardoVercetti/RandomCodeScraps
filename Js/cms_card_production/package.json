@@ -1,0 +1,16 @@
+{
+  "name": "cms_card_production",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node dist/main.js",
+    "clean": "rm -rf dist/"
+  },
+  "author": "RicardoVercet",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
