@@ -359,6 +359,7 @@ git commands
   - git branch -vv															# brances with remote links
   - git branch --format="%(refname:short)"                                  # Compact View
   - git branch --show-current
+  - git branch --sort=-committerdate											# list branches from one with latest commits
   - git branch --unset-upstream												# remove the upstream link
   - git branch --merged <target-branch>										# branches that are merged to target through merge or rebase
   - git bundle create --progress <name.bundle> --all							# create a portable file of the whole git repo, --progress to log steps, --all for all refs(branches, tags, remote tracking branches)
