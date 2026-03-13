@@ -193,6 +193,7 @@ General
  - pstree <ID>									# process tree( -s → parent process)
 																			# u | Show the user who owns the process along with extra details. x | Include processes not attached to a terminal (like background apps, daemons, or GUI apps like IntelliJ)
  - top																		# Live process Monitor(Press P to sort by CPU|M - sort by memory, H - threads|Press k then type a PID to kill a process|Press q to quit)																
+ - ulimit -n									# number of file descriptiors
  [users]
  - who																		# Who are the users logged in
  - last																		# sign in history
@@ -534,6 +535,7 @@ docker
  - docker exec -it <container> bash											# Open a shell inside a running container(exit → to close)
  - docker exec -it sql2025 ls /var/opt/mssql/backup								# one shot a command to insert into the docker container without entering it, here the `sql2025` is the name of the running container
  - docker images															# all available images
+ - docker info
  - docker logs <container_id_or_name>
  - docker ps																# running containers (-a → all incl stopped)
  - docker pull <img-name>													# pull from docker hub
