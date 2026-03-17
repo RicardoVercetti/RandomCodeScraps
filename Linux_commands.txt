@@ -497,6 +497,8 @@ Cargo
  - cargo clippy --fix														# auto fix as per linter suggestions(git state must be before running this)
  - cargo info <package-name>
  - cargo install <package-name>											# installs a global binary
+ - cargo install --list													# list installed packages though cargo
+ - cargo install --path .                       # install the current project as binary
  - cargo new project_name													# create new rust project with cargo build tool
  - cargo run																# run the project
  - cargo search <package-name>
