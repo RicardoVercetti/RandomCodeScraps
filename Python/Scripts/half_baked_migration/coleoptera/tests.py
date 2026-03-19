@@ -51,7 +51,9 @@ def sets_in_one_column():
     """
     5th → card status, 
     6th → custom state, 
+    7th → hold response code
     8th → hold response code
+    11th → secure pin offset
     21st → issuer reference
     23rd → branch code
     """
@@ -62,7 +64,7 @@ def sets_in_one_column():
             if line_no == 1:        # skip the manually inserted number in the first line
                 line_no+=1
                 continue
-            card_status_sets.add(line.split(",")[21])
+            card_status_sets.add(line.split(",")[11])
     print(f"all in set: {card_status_sets}")
 
 def all_columns_with_null():
@@ -93,7 +95,11 @@ def all_cards_row():
 def insert_query_for_one_row():
     one_line = ""
     with open("./res/cards.txt", "r") as cards_file:
+        num = 1;
         for line in cards_file:
+            if num == 1:
+                num += 1
+                continue
             one_line = line
             break
     # print(f"oneline: {one_line}")
@@ -132,3 +138,4 @@ def insert_query_for_one_row():
 # insert_query_for_one_row()
 # all_columns_with_null()
 sets_in_one_column()
+# all_cards_row()

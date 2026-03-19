@@ -1,5 +1,5 @@
 import os
-from src.logger_setup import logging
+from src.utils.logger_setup import logging
 
 
 # load all files in the res folder
@@ -58,3 +58,6 @@ def get_and_classify_files() -> dict[str, list[str]]:
     all_files = get_all_files_from_res()
     return classify_files(all_files, os.getcwd() + "/res")
 
+
+if __name__ == "__main__":
+    print("main fn...")

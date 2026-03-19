@@ -1,0 +1,30 @@
+{
+    "run_id": "someID",
+    "prepared_date": "somedate",
+    "hostname": "localhost",
+    "port": 2345,
+    "username": "username",
+    "password": "password",
+    "institution_nr": "",
+    "card_programs": [
+        {
+            "name": "card_program_name",
+            "bin": "123456",
+            "id": ""
+        },
+        {
+            "name": "second_program_name",
+            "bin": "453466",
+            "id": ""
+        }
+    ],
+    "files": {
+        "cards": [],
+        "accounts": [],
+        "customers": [],
+        "card_accounts": [],
+        "customer_accounts": []
+    }
+    
+
+}
