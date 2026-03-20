@@ -42,6 +42,19 @@ cards_header = [
     "last_updated_user"
 ]
 
+account_headers = [
+    "account_id",
+    "account_type",
+    "currency_code",
+    "hold_response_code",
+    "account_product",
+    "extended_fields",
+    "overdraft_limit",
+    "account_nickname",
+    "last_updated_date",
+    "last_updated_user"
+]
+
 def range_of_headers():
     x = [s for s in range(1, 35)]       # this couldv'e been `x = list(range(1, 35))`
     print(",".join(map(str, x)))
@@ -116,26 +129,70 @@ def insert_query_for_one_row():
     # madeup data
     # 1. masked card no
     
-#     insert_query = """
-#     INSERT INTO public.apt_cards
-# (institution_nr, branch_id, card_no, masked_card_no, seq_no, product_id, limits, barcode_no, 
-# card_type, hold_rsp_code, issuance_date, activation_date, track2_value, pvv_or_pin_offset, 
-# validation_data_question, validation_data, cardholder_rsp_info, discretionary_data, 
-# cvv1, cvv2, icvv, dcvv, expiry_date, chip_product_code, physical_product_id, financial_type, 
-# last_updated_date, last_updated_user, expiry_day, from_date, from_day, 
-# trnsn_cntr, no_more_renewal, card_cancel_reason, restrict_emv_txn_without_pin, 
-# restrict_onl_cntctless_txn, restrict_offline_txn, restrict_ecommerce_txn, card_status_id, 
-# enable_domestic_atm_transaction, enable_domestic_pos_transaction, enable_domestic_cnp_transaction, 
-# enable_domestic_contactless_transaction, enable_international_atm_transaction, 
-# enable_international_pos_transaction, enable_international_cnp_transaction, 
-# enable_international_contactless_transaction, insta_kit_id, insta_batch_id, pin_retry_count, 
-# pin_entry_date, cvv2_retry_count, last_cvv2_try_date, inventory_id, card_identify, icvd, 
-# generation_date, card_status_change_date, last_annual_fee_deducted_date, "comments")
-# VALUES(0, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', CURRENT_TIMESTAMP, '', '', '', '', 0, '', '', false, true, false, true, 0, false, false, false, false, false, false, false, false, '', 0, 0, '', 0, '', 0, '', 0, '', '', '', '');
-#     """
+def all_rows_for_accounts():
+    for index, row_name in enumerate(account_headers):
+        print(f"{index}: {row_name}")
+
+def all_rows_for_accounts_with_data():
+    all_rows = []
+    with open("./res/accounts.txt","r") as file:
+        for line in file:
+            one_line = line.strip().split(",")
+            all_rows.append("\n".join(f"{idx}. {name}: {value}" for idx, (name, value) in enumerate(zip(account_headers, one_line))))
+
+    print(all_rows[0])
+
+def all_mandatory_fields_from_accounts():
+    null_value_set = set()
+
+    with open("./res/accounts.txt", "r") as f:
+        for line in f:
+            oneline = line.strip().split(",")
+            for index, item in enumerate(oneline):
+                if item == None or len(item) < 1:
+                    null_value_set.add(index)       # index values starting from 0 are added
+                # else:
+                #     if index == 0:
+                #         print(f"value at index 0: {item}")
+    
+    # non_null_headers = []
+    # for index, header in enumerate(account_headers):
+    #     if index not in null_value_set:
+    #         non_null_headers.append(header)
+
+    print("All mandate values are:")
+    print("\n".join(f"{idx}: {header}" for idx, header in enumerate(account_headers) if idx not in null_value_set))
+
+def atleast_one_instance_from_accounts():
+    atleast_one = set()
+
+    with open("./res/accounts.txt", "r") as file:
+        for line in file:
+            oneline = line.strip().split(",")
+            for idx, item in enumerate(oneline):
+                if item != None and len(item) > 1:
+                    atleast_one.add(idx)
+
+    # currated_headers = [header for idx, header in enumerate(account_headers) if idx in atleast_one]
+    print("alteast one non nul columns:")
+    print("\n".join(f"{index + 1}. {header}" for index, header in enumerate(account_headers) if index in atleast_one))
+
+def any_row_that_has_empty_last_update_value():
+    with open("./res/accounts.txt", "r") as file:
+        for idx, line in enumerate(file):
+            oneline = line.strip().split(",")
+            print(f"lastupdated user: : {oneline[9]}")
+            if oneline[9] == None or len(oneline[9]) < 1:
+                print(f"invalid last_updated_user at line: {idx+1}, data: {",".join(oneline)}")
+            
 
 
 # insert_query_for_one_row()
 # all_columns_with_null()
-sets_in_one_column()
+# sets_in_one_column()
 # all_cards_row()
+# all_rows_for_accounts()
+# all_rows_for_accounts_with_data()
+all_mandatory_fields_from_accounts()
+atleast_one_instance_from_accounts()
+# any_row_that_has_empty_last_update_value()
