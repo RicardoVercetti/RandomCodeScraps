@@ -5,55 +5,7 @@
 #         # print(f"{1}, {2}, {3}: {oneline[0]}, {oneline[1]}, {oneline[2]}")
 #         print(len(oneline))
 
-cards_header = [
-    "pan",
-    "seqence_no",
-    "card_program",
-    "dafault_account_type",
-    "card_status",
-    "custom_state",
-    "expiry_date",
-    "hold_response_code",
-    "track_2_value",
-    "track_2_offset",
-    "secure_pin_len",
-    "secure_pin_offset_or_PVV",
-    "insecure_pin_offset_or_PVV",
-    "validation_data_question",
-    "validation_data",
-    "cardholder_response_information",
-    "mailer_destination",
-    "company_card",
-    "descritionary_data",
-    "date_issued",
-    "date_activated",
-    "issuer_reference",
-    "branch_code",
-    "customer_id",
-    "insecure_pin_length_or_PVKI",
-    "extended_fields",
-    "expiry_day",
-    "from_date",
-    "from_day",
-    "contactless_discretionary_data",
-    "dynamic_cvv_key_index",
-    "batch_number",
-    "last_updated_date",
-    "last_updated_user"
-]
-
-account_headers = [
-    "account_id",
-    "account_type",
-    "currency_code",
-    "hold_response_code",
-    "account_product",
-    "extended_fields",
-    "overdraft_limit",
-    "account_nickname",
-    "last_updated_date",
-    "last_updated_user"
-]
+from src.headers import cards_header, account_headers, customer_headers
 
 def range_of_headers():
     x = [s for s in range(1, 35)]       # this couldv'e been `x = list(range(1, 35))`
@@ -186,6 +138,21 @@ def any_row_that_has_empty_last_update_value():
                 print(f"invalid last_updated_user at line: {idx+1}, data: {",".join(oneline)}")
             
 
+def one_row_from_customers_with_data():
+    with open("./res/customers_copy.txt", "r") as file:
+        for line in file:
+            one_line = line.strip().split(",")
+            # print(len(one_line))
+            # print(f"oneline value: '{one_line}'")
+            for key, (header, value) in enumerate(zip(customer_headers, one_line)):
+                print(f"{key}. {header} - {value}")
+            # break           # stop at one round
+
+def all_non_nulls_from_customers():
+    with open("./res/customers_copy.txt", "r") as file:
+        for line in file:
+            one_line = line.strip().split(",")
+            
 
 # insert_query_for_one_row()
 # all_columns_with_null()
@@ -193,6 +160,9 @@ def any_row_that_has_empty_last_update_value():
 # all_cards_row()
 # all_rows_for_accounts()
 # all_rows_for_accounts_with_data()
-all_mandatory_fields_from_accounts()
-atleast_one_instance_from_accounts()
+# all_mandatory_fields_from_accounts()
+# atleast_one_instance_from_accounts()
 # any_row_that_has_empty_last_update_value()
+one_row_from_customers_with_data()
+
+# print(len(customer_headers))
