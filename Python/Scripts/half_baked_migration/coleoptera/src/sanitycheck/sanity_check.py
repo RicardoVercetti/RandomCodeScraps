@@ -5,7 +5,7 @@
 
 
 from dataclasses import dataclass
-from src.sanitycheck.helpers import remove_double_quotes
+from src.sanitycheck.helpers import remove_double_quotes, is_all_digits
 from src.utils.logger_setup import logger
 
 @dataclass
@@ -97,7 +97,12 @@ def sanity_check_cards(filenames: list[str]) -> ProgressStatus:
                 if len(clean_pan) != 16:
                     # status.errors.append(f"Invalid pan length: '{oneline[0]}', in line {lines} of file: {filename}")
                     status.failed_items += 1
-                    logger.error(f"Invalid pan length: '{oneline[0]}', in line {lines} of file: {filename}")
+                    logger.error(f"Invalid pan length: '{len(clean_pan)}', in line {lines} of file: {filename}")
+                
+                # pan should be all numeric
+                if not is_all_digits(clean_pan):
+                    status.failed_items += 1
+                    logger.error(f"pan number must be all numeric. Got: '{clean_pan}' at line: {lines} of file: {filename}")
 
                 # if card product name is same then bin should be same for each card
                 clean_product_name = remove_double_quotes(oneline[2])
@@ -113,14 +118,14 @@ def sanity_check_cards(filenames: list[str]) -> ProgressStatus:
                 if len(clean_last_updated_date) < 1:
                     # status.errors.append(f"last updated date is invalid at line: {lines} of file: {filename}. Value found: '{oneline[32]}'")
                     status.failed_items += 1
-                    logger.error(f"last updated date is invalid at line: {lines} of file: {filename}. Value found: '{oneline[32]}'")
+                    logger.error(f"last updated date is invalid at line: {lines} of file: {filename}. Value found: '{clean_last_updated_date}'")
 
                 # last updated user cannot be empty
                 clean_last_updated_user = remove_double_quotes(oneline[33])
                 if len(clean_last_updated_user) < 1:
                     # status.error.append(f"last updated user is invalid at line: {lines} of file: {filename}. Value found: '{oneline[33]}'")
                     status.failed_items += 1
-                    logger.error(f"last updated user is invalid at line: {lines} of file: {filename}. Value found: '{oneline[33]}'")
+                    logger.error(f"last updated user is invalid at line: {lines} of file: {filename}. Value found: '{clean_last_updated_user}'")
             logger.info(f"fininshed sanity check on file: {filename}")
 
         total_lines += lines      

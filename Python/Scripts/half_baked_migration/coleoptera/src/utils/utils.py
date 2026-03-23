@@ -27,7 +27,7 @@ def classify_files(file_names: list[str], folder_path: str) -> dict[str, list[st
 
         elif filename.startswith("customers"):
             if classified.get("customers") is not None:
-                classified.get("customer").append(os.path.join(folder_path, filename))
+                classified.get("customers").append(os.path.join(folder_path, filename))
                 continue
             classified.setdefault("customers", [os.path.join(folder_path, filename)])
 

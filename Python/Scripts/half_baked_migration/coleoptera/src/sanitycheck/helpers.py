@@ -1,7 +1,12 @@
+import re
+
 def remove_double_quotes(s: str) -> str:
     if s.startswith("\"") and s.endswith("\""):
         return s[1:-1]
     return s
+
+def is_all_digits(s: str) -> bool:
+    return bool(re.match(r"^\d+$", s))
 
 def main():
     pan = "\"3536110000000004\""
@@ -10,3 +15,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # print(is_all_digits("3243b6"))
