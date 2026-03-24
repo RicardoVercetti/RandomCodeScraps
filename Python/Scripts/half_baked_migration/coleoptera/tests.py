@@ -146,23 +146,62 @@ def one_row_from_customers_with_data():
             # print(f"oneline value: '{one_line}'")
             for key, (header, value) in enumerate(zip(customer_headers, one_line)):
                 print(f"{key}. {header} - {value}")
-            # break           # stop at one round
+            break           # stop at one round
 
 def all_non_nulls_from_customers():
+    null_set = set()
+    line_no = 0
     with open("./res/customers_copy.txt", "r") as file:
         for line in file:
+            line_no += 1
             one_line = line.strip().split(",")
-            
+            for index, column in enumerate(one_line):
+                if column is None or column == "" or len(column) < 1:
+                    null_set.add(index)
+                # if index == 39 and column is None or column == "" or len(column) < 1:
+                #     print(f"last updated data in null at line: {line_no}, value: '{column}'")
+    
+    non_null = [i for i in range(len(customer_headers)) if i not in null_set]
+    # print(f"non nulls: {non_null}")
+    print("non-null values from customers.txt")
+    for item in non_null:
+        print(f"{item + 1}: {customer_headers[item]}")
 
+def atleast_one_non_null():
+    import sys
+    atlease_one_nn = set()
+    line_no = 0
+    with open("./res/customers_copy.txt", "r") as file:
+        for line in file:
+            line_no += 1
+            for idx, value in enumerate(line.strip().split(",")):
+                if value is not None or value != "" or not (len(value) < 1):
+                    atlease_one_nn.add(idx)
+            if len(line.strip().split(",")) != 41:
+                print(f"invalid length at line: {line_no}", file=sys.stderr)
+    
+    print(f"all non-null values:")
+    # print(f"len: {len(atlease_one_nn)}")
+    for idx in atlease_one_nn:
+        print(f"{idx + 1}: {customer_headers[idx]}")
+
+
+# cards
 # insert_query_for_one_row()
 # all_columns_with_null()
 # sets_in_one_column()
 # all_cards_row()
+
+# accounts
 # all_rows_for_accounts()
 # all_rows_for_accounts_with_data()
 # all_mandatory_fields_from_accounts()
 # atleast_one_instance_from_accounts()
 # any_row_that_has_empty_last_update_value()
-one_row_from_customers_with_data()
+
+# customers
+# one_row_from_customers_with_data()
+# all_non_nulls_from_customers()
+atleast_one_non_null()
 
 # print(len(customer_headers))
