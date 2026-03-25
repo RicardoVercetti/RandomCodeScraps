@@ -20,5 +20,20 @@ A half baked python scipt for migrating the card, account, customer, card_accoun
 
 ## Approach
 
-- do a sanity check and verify if the format is correct for the datatype
+- do a static file sanity check and verify if the format is correct for the datatype
+    - cards
+    - accounts
+    - customers
+    - card-accounts
+    - account-customers
 - create a config file for the data that need to be present 
+    - Insitiution nr
+    - file lists under category
+- do a database cross verification check before insertion with the data in config file
+    - instituion_nr
+    - card product names
+    - bin nubmers used
+    - product_code check befro
+- Enter the loop and start insertion
+    - any failed insertions will not block for remaining items
+    - log only failed item details and SQL error messages
