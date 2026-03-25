@@ -37,3 +37,8 @@ A half baked python scipt for migrating the card, account, customer, card_accoun
 - Enter the loop and start insertion
     - any failed insertions will not block for remaining items
     - log only failed item details and SQL error messages
+
+## todo:
+- [ ] separation of sanity check run and migration run
+- [ ] For duplicated product name but different BIN; sort by bin number and let the user input the product_id from DCMS though the config.json 
+- [ ] Eligible files post sanity check to be added in config.json
