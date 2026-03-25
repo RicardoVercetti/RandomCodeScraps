@@ -165,7 +165,7 @@ def all_non_nulls_from_customers():
     # print(f"non nulls: {non_null}")
     print("non-null values from customers.txt")
     for item in non_null:
-        print(f"{item + 1}: {customer_headers[item]}")
+        print(f"{item}: {customer_headers[item]}")
 
 def atleast_one_non_null():
     import sys
@@ -180,11 +180,41 @@ def atleast_one_non_null():
             if len(line.strip().split(",")) != 41:
                 print(f"invalid length at line: {line_no}", file=sys.stderr)
     
-    print(f"all non-null values:")
+    print(f"atleast one non-null values:")
     # print(f"len: {len(atlease_one_nn)}")
     for idx in atlease_one_nn:
         print(f"{idx + 1}: {customer_headers[idx]}")
 
+def is_present(item: str) -> bool:
+    return item != None and len(item) > 0
+
+def print_customer_value_with_header(one_row: list[str]):
+    for header, value in zip(customer_headers, one_row):
+        print(f"{header} - {value}")
+
+def customer_data_with_mutiple_names_n_name_on_cards():
+    line_nr = 0
+    with open("./res/customers_copy.txt", "r") as file:
+        for line in file:
+            line_nr += 1
+            one_line = line.strip().split(",")
+            # if item 2, 3, 4, 5, 6, (any one present) && 7, 8, 9, 10, 11(any one present)
+            if is_present(one_line[2]) or is_present(one_line[3]) or is_present(one_line[4]) or is_present(one_line[5]) or is_present(one_line[6]):
+                print(f"one row found at line: {line_nr}")
+                if  is_present(one_line[7]) or is_present(one_line[8]) or is_present(one_line[9]) or is_present(one_line[10]) or is_present(one_line[11]):
+                    print(f"data found at line: {line_nr}")
+                    print_customer_value_with_header(one_line)
+
+def customer_headers_with_index():
+    for index, header in enumerate(customer_headers):
+        print(f"{index}: {header}")
+
+def encoding_error_file():
+    with open("./res/customers.txt", "r") as file:
+        line_nr = 0
+        for line in file:
+            line_nr += 1
+            print(f"line no: {line_nr}")
 
 # cards
 # insert_query_for_one_row()
@@ -202,6 +232,11 @@ def atleast_one_non_null():
 # customers
 # one_row_from_customers_with_data()
 # all_non_nulls_from_customers()
-atleast_one_non_null()
+# atleast_one_non_null()
+# customer_data_with_mutiple_names_n_name_on_cards()
+# customer_headers_with_index()
 
 # print(len(customer_headers))
+
+
+encoding_error_file()
