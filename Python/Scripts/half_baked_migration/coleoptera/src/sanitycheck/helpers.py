@@ -8,6 +8,9 @@ def remove_double_quotes(s: str) -> str:
 def is_all_digits(s: str) -> bool:
     return bool(re.match(r"^\d+$", s))
 
+def is_empty(input: str) -> bool:
+    return input == None or len(input) < 1
+
 def main():
     pan = "\"3536110000000004\""
     cleaned_pan = remove_double_quotes(pan)

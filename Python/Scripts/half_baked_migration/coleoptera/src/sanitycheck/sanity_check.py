@@ -5,7 +5,7 @@
 
 
 from dataclasses import dataclass
-from src.sanitycheck.helpers import remove_double_quotes, is_all_digits
+from src.sanitycheck.helpers import remove_double_quotes, is_all_digits, is_empty
 from src.utils.logger_setup import logger
 
 @dataclass
@@ -213,6 +213,85 @@ def sanity_check_accounts(filenames: list[str]):
     return status
 
 # customer load file
+def sanity_check_for_customers(filenames: list[str]) -> ProgressStatus:
+    # all non null value
+    # 0: customer_id
+    # 3: c1_first_name
+    # 6: c1_name_on_card
+    # 21: postal_address_1
+    # 23: postal_city
+    # 36: vip_flag
+    # 39: last_updated_date
+    # 40: last_updated_user
+    status = ProgressStatus("customers", 0, 0, [])
+    total_items = 0
+    critical_error = False
+
+    for filename in filenames:
+        logger.info(f"started sanity check for customers file: {filename}")
+        line_nr = 0
+        try:
+            with open(filename, "r") as file:
+                for line in file:
+                    line_nr += 1
+                    one_line = line.strip().split(",")
+
+                    # validation1: total number of values
+                    if len(one_line) != 41:
+                        status.failed_items += 1
+                        logger.error(f"Invalid number of items in line: {line_nr} of file: {filename}. expected: 41, got: {len(one_line)}")
+                        continue
+
+                    # validation2: customer_id must be present
+                    clean_customer_id = remove_double_quotes(one_line[0])
+                    if is_empty(clean_customer_id):
+                        status.failed_items += 1
+                        logger.error(f"customer_id is null at line: {line_nr} of file: {filename}")
+
+                    # validation3: c1_first_name
+                    clean_first_name = remove_double_quotes(one_line[3])
+                    if is_empty(clean_first_name):
+                        status.failed_items += 1
+                        logger.error(f"mandatory first name value is not found in line: {line_nr} of file: {filename}. received: {clean_first_name}")
+
+                    # validation4: c1_name_on_card
+                    clean_name_on_card = remove_double_quotes(one_line[6])
+                    if is_empty(clean_name_on_card):
+                        status.failed_items += 1
+                        logger.error(f"name of card value is not found in line: {line_nr} of file: {filename}, got: '{clean_name_on_card}'")
+
+                    # validation5: postal address - this being null won't cause a problem in DCMS
+                    
+                    # validation6: postal_city - same as above
+                    
+                    # validation7: vip_flag
+                    clean_vip_flag = remove_double_quotes(one_line[36])
+                    if is_empty(clean_vip_flag):
+                        status.failed_items += 1
+                        logger.error(f"VIP flag is empty at line: {line_nr} of file: {filename}. Got: '{clean_vip_flag}'")
+
+                    # validation8: last_updated_date
+                    clean_last_updated_date = remove_double_quotes(one_line[39])
+                    if is_empty(clean_last_updated_date):
+                        status.failed_items += 1
+                        logger.error(f"last updated date in empty at line: {line_nr} of file: {filename}. Got: '{clean_last_updated_date}'")
+                    
+                    # validation9: last_updated_user
+                    clean_last_updated_user = remove_double_quotes(one_line[40])
+                    if is_empty(clean_last_updated_user):
+                        status.failed_items += 1
+                        logger.error(f"last updated user is empty at line: {line_nr} of file: {filename}, Got: '{clean_last_updated_user}'")
+            # end with
+        except UnicodeDecodeError as err:
+            logger.error(f"decode error for file: {filename} at line: {line_nr}, skipping sanity check for this file")
+            status.failed_items += 1
+            logger.error(err)
+
+        total_items += line_nr
+        logger.info(f"finished santiy check for customers file: {filename}")
+    # end for
+    status.total_items = total_items
+    return status
 
 # card_accounts file
 
