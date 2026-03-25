@@ -309,6 +309,7 @@ git commands
   - git add -N .															# For untracked files, you can first add them to the staging area temporarily
   - git add -p <filename>													# lets you review each "hunk" in the file and choose what to stage(y - to stage the hunk, n to skip, s to split the hunk, q to quit)
   - git am <file-name>														# ammend the patch file(usually .patch or .eml) (includes all metadata)
+  - git config --global alias.<name-of-alias> <sub-command>					# eg: `git config alias.st status` makes `git st`	 evaluated into `git status`, the command name git is omitted here
   - git log <branch-name>                                                   # list commits of a certain branch
   - git log --pretty=full													# author and commiter
   - git log --oneline --graph --all --decorate								# --all → Shows commits from all branches, not just the current one(Without this, you’d only see commits reachable from HEAD), --decorate → Adds branch and tag names
@@ -369,6 +370,7 @@ git commands
   - git rm <file-path> 														# remove tracked files
   - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
   - git reset --hard														                            # Discard all changes and reset the working directory
+  - git reset --hard origin/main												# this is done after `git fetch --all` command so that the local resets to the remote version
   - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
   - git restore																# restore the changes back as in the HEAD commit
   - git restore --staged .													                        # unstage all files
