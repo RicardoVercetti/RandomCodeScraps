@@ -1,1 +1,1 @@
-## Python packeage identifier
+# src/sanitycheck/__init__.py

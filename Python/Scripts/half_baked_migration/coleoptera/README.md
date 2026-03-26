@@ -42,3 +42,5 @@ A half baked python scipt for migrating the card, account, customer, card_accoun
 - [ ] separation of sanity check run and migration run
 - [ ] For duplicated product name but different BIN; sort by bin number and let the user input the product_id from DCMS though the config.json 
 - [ ] Eligible files post sanity check to be added in config.json
+- [ ] Test run one large file with synthetic data
+- [ ] buffer in CLI on the file being processed per line(steps)

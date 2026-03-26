@@ -1,3 +1,4 @@
+# src/config.py
 import uuid
 from datetime import datetime
 from dataclasses import dataclass
@@ -9,13 +10,17 @@ from pathlib import Path
 class CardProgram:
     name: str
     bin: str
-    id: Optional[str]
+    id: str = ""
+    min_range: str = ""
+    max_range: str = ""
 
     def to_dict(self) -> dict:
         return {
             "name": self.name,
             "bin": self.bin,
-            "id": self.id
+            "id": self.id,
+            "min_range": self.min_range,
+            "max_range": self.max_range
         }
 
 class ConfigFileNotFoundExcpetion(Exception):

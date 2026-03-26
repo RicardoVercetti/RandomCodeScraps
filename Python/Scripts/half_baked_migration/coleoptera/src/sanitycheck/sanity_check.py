@@ -1,3 +1,5 @@
+# src/sanitycheck/sanity_check.py
+
 # sanity check steps
 # 1. check the given length of the files based on the type of the file
 # 2. check the datatype of appropriate fields
@@ -30,21 +32,37 @@ class CardProducts:
     def __init__(self):
         self.card_products: list[CardProductDto] = []
 
-    def check_and_push(self, pan: str, product_name):
-        # first the product_name have to exist. if it does, the bin have to be the same
-        for product in self.card_products:
-            if product.name == product_name:
-                # here the bin must match, if not - there is been some kinda mistake in the file provided
-                if product.bin == pan[:6]:
-                    return          # all ok
-                else:
-                    raise InvalidCardProgram(f"Product Name matches but bin doesn't. ({product.name}, {product.bin}) != ({product_name}, {pan[:6]})")
+    def check_and_push(self, pan: str, product_name: str):
+        current_bin = pan[:6]
         
-        # if it reaches here, its a new product and bin
-        self.card_products.append(CardProductDto(product_name, pan[:6]))
+        # 1. Check for exact duplicate (Same Name + Same BIN) -> Ignore
+        for product in self.card_products:
+            if product.name == product_name and product.bin == current_bin:
+                return
+        
+        # 2. Check for BIN Conflict (Same BIN + Different Name) 
+        # We mark it as duplicated so the report can flag it, 
+        # or you can choose to raise an error here.
+        is_conflict = False
+        for product in self.card_products:
+            if product.bin == current_bin and product.name != product_name:
+                is_conflict = True
+                product.is_dulplicated = True # Mark the existing one too
+        
+        new_product = CardProductDto(
+            name=product_name, 
+            bin=current_bin, 
+            is_dulplicated=is_conflict
+        )
+        self.card_products.append(new_product)
+
+    def has_critical_conflicts(self) -> bool:
+        """Returns True if any BIN is tied to multiple names."""
+        return any(p.is_dulplicated for p in self.card_products)
 
     def get_all_products(self):
-        return self.card_products
+        # Sort by name for a clean config.json
+        return sorted(self.card_products, key=lambda x: x.name.lower())
 
 @dataclass
 class FileMetaData:

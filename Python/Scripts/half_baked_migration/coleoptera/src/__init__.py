@@ -1,1 +1,1 @@
-## Python package identifier
+# src/__init__.py

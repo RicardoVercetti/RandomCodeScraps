@@ -1,63 +1,51 @@
 import os
-from src.utils.logger_setup import logging
-
+from src.utils.logger_setup import logger # Use the logger instance you created
 
 # load all files in the res folder
-folder_path: str = "./res"
+FOLDER_PATH: str = "./res"
 
 def get_all_files_from_res() -> list[str]:
     """Gets all the files in the folder ./res and returns a list of all files"""
-    files: list[str] = []
-    for filename in os.listdir(folder_path):
-        files.append(filename)
-        # fullpath = os.path.join(folder_path, filename)
-        # if os.path.isfile(fullpath) and filename.endswith(".txt"):
-        #     print(fullpath)
-    return files
+    if not os.path.exists(FOLDER_PATH):
+        logger.error(f"Directory {FOLDER_PATH} does not exist.")
+        return []
+    return [f for f in os.listdir(FOLDER_PATH) if os.path.isfile(os.path.join(FOLDER_PATH, f))]
 
-def classify_files(file_names: list[str], folder_path: str) -> dict[str, list[str]]:
+def classify_files(file_names: list[str], absolute_folder_path: str) -> dict[str, list[str]]:
     classified: dict[str, list[str]] = {}
+    
+    # Mapping of prefixes to their dictionary keys
+    # Order matters: check longer/specific strings first
+    prefixes = {
+        "cardaccounts": "card_accounts",
+        "customeraccounts": "customer_accounts",
+        "cards": "cards",
+        "customers": "customers",
+        "accounts": "accounts"
+    }
+
     for filename in file_names:
-        if filename.startswith("cards"):
-            # if exists in dict, push into the list
-            if classified.get("cards") is not None:
-                classified.get("cards").append(os.path.join(folder_path, filename))
-                continue
-            classified.setdefault("cards", [os.path.join(folder_path, filename)])
-
-        elif filename.startswith("customers"):
-            if classified.get("customers") is not None:
-                classified.get("customers").append(os.path.join(folder_path, filename))
-                continue
-            classified.setdefault("customers", [os.path.join(folder_path, filename)])
-
-        elif filename.startswith("accounts"):
-            if classified.get("accounts") is not None:
-                classified.get("accounts").append(os.path.join(folder_path, filename))
-                continue
-            classified.setdefault("accounts", [os.path.join(folder_path, filename)])
-
-        elif filename.startswith("cardaccounts"):
-            if classified.get("cardaccounts") is not None:
-                classified.get("cardaccounts").append(os.path.join(folder_path, filename))
-                continue
-            classified.setdefault("cardaccounts", [os.path.join(folder_path, filename)])
-
-        elif filename.startswith("customeraccounts"):
-            if classified.get("customeraccounts") is not None:
-                classified.get("customeraccounts").append(os.path.join(folder_path, filename))
-                continue
-            classified.setdefault("customeraccounts", [os.path.join(folder_path, filename)])
+        matched = False
+        full_path = os.path.join(absolute_folder_path, filename)
         
-        else:
-            logging.info(f"{filename} is ignored as its not classified")
+        for prefix, key in prefixes.items():
+            if filename.startswith(prefix):
+                if key not in classified:
+                    classified[key] = []
+                classified[key].append(full_path)
+                matched = True
+                break # Stop checking other prefixes once matched
+        
+        if not matched:
+            logger.info(f"{filename} ignored (not classified)")
 
     return classified
 
 def get_and_classify_files() -> dict[str, list[str]]:
     all_files = get_all_files_from_res()
-    return classify_files(all_files, os.getcwd() + "/res")
-
+    # Using os.path.abspath to ensure the path is solid
+    return classify_files(all_files, os.path.abspath(FOLDER_PATH))
 
 if __name__ == "__main__":
-    print("main fn...")
+    print("Classified files test:")
+    print(get_and_classify_files())
