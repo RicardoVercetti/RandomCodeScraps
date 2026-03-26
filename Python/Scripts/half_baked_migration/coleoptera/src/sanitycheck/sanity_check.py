@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from src.sanitycheck.helpers import remove_double_quotes, is_all_digits, is_empty
 from src.utils.logger_setup import logger
 from typing import Optional
+import sys
 
 @dataclass
 class CardProductDto:
@@ -118,7 +119,14 @@ def sanity_check_cards(filenames: list[str]) -> ProgressStatus:
         try:
             with open(filename, "r") as file:
                 logger.info(f"performing cards extract sanity check on file: {filename}")
-                for line in file:                               # note each line has a '\n' at the end of the file
+                for line_num, line in enumerate(file, 1):                               # note each line has a '\n' at the end of the file
+
+                    # screen update
+                    # Update console every 5000 rows to keep it fast
+                    if line_num % 5000 == 0:
+                        sys.stdout.write(f"\r[ANALYZING] {filename}: {line_num} rows processed...")
+                        sys.stdout.flush()
+
                     # now start checking rules by each line
                     oneline = line.strip().split(",")
                     lines += 1                                  # current line
@@ -206,7 +214,14 @@ def sanity_check_accounts(filenames: list[str]):
         file_metadata = FileMetaData(accounts_file, False, 0)
         with open(accounts_file, "r") as file:
 
-            for line in file:
+            for line_num, line in enumerate(file, 1):
+
+                # progress update
+                # Update console every 5000 rows to keep it fast
+                if line_num % 5000 == 0:
+                    sys.stdout.write(f"\r[ANALYZING] {filename}: {line_num} rows processed...")
+                    sys.stdout.flush()
+
                 oneline = line.strip().split(",")
                 lines+=1
 
@@ -291,7 +306,13 @@ def sanity_check_for_customers(filenames: list[str]) -> ProgressStatus:
         file_metadata = FileMetaData(filename, False, 0)
         try:
             with open(filename, "r") as file:
-                for line in file:
+                for line_num, line in enumerate(file, 1):
+
+                    # Update console every 5000 rows to keep it fast
+                    if line_num % 5000 == 0:
+                        sys.stdout.write(f"\r[ANALYZING] {filename}: {line_num} rows processed...")
+                        sys.stdout.flush()
+                        
                     line_nr += 1
                     one_line = line.strip().split(",")
 
