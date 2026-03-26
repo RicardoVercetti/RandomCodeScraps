@@ -171,6 +171,7 @@ General
  - tree -L <depth>															# show until that deep of the file structure
  - tree -L 2 --prune -I "node_modules"										# Ignore certain files or directories
  - tree -d -L 2																# only show directories
+ - tree -L 2 -I "folder"							# just ignore the contents of this folder
  [storage]
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
