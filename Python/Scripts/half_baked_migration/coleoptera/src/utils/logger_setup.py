@@ -3,26 +3,44 @@ import logging
 from datetime import datetime
 import os
 
-os.makedirs("logs", exist_ok=True)
+# ANSI Escape Codes for Terminal Colors
+RED = "\033[31m"
+RESET = "\033[0m"
+BOLD = "\033[1m"
 
-log_file = f"logs/script_log{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+class ColorConsoleFormatter(logging.Formatter):
+    """Custom formatter to inject ANSI colors into the console output."""
+    
+    FORMAT = "%(asctime)s [%(levelname)s] %(message)s"
+
+    def format(self, record):
+        log_fmt = self.FORMAT
+        
+        # If the level is ERROR or CRITICAL, wrap the whole line in red
+        if record.levelno >= logging.ERROR:
+            log_fmt = f"{RED}{BOLD}{self.FORMAT}{RESET}"
+        elif record.levelno == logging.WARNING:
+            log_fmt = f"\033[33m{self.FORMAT}{RESET}" # Yellow for warnings
+            
+        formatter = logging.Formatter(log_fmt)
+        return formatter.format(record)
+
+# Setup directories
+os.makedirs("logs", exist_ok=True)
+log_file = f"logs/script_log_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# file handler
+# --- File Handler (Plain Text - No Colors) ---
 file_handler = logging.FileHandler(log_file)
 file_handler.setFormatter(logging.Formatter(
     "%(asctime)s [%(levelname)s] %(message)s"
 ))
 
-
-# console handler
+# --- Console Handler (Colored Output) ---
 console_handler = logging.StreamHandler()
-console_handler.setFormatter(logging.Formatter(
-    "%(asctime)s [%(levelname)s] %(message)s"
-))
+console_handler.setFormatter(ColorConsoleFormatter())
+
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
-
-# logger.info(f"logging started at: {datetime.now()}")
