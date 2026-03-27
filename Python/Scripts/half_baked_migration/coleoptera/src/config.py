@@ -11,6 +11,7 @@ from pathlib import Path
 class CardProgram:
     name: str
     bin: str
+    product_code: str = ""
     id: str = ""
     min_range: str = ""
     max_range: str = ""
@@ -19,6 +20,7 @@ class CardProgram:
         return {
             "name": self.name,
             "bin": self.bin,
+            "product_code": self.product_code,
             "id": self.id,
             "min_range": self.min_range,
             "max_range": self.max_range
@@ -109,6 +111,8 @@ class Config:
         for prog in raw_programs:
             if not prog.get("bin"):
                 raise IncorrectInput("BIN number missing in card program entry")
+            if not prog.get("min_range") or not prog.get("max_range"):
+                raise IncorrectInput("min_range and max_range must be specified for each card product")
             conf.card_programs_list.append(CardProgram(
                 name=prog.get("name", ""),
                 bin=prog.get("bin"),

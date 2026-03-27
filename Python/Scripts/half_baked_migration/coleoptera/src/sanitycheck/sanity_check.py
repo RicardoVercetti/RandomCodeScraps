@@ -16,15 +16,16 @@ import sys
 class CardProductDto:
     name: str
     bin: str
+    product_code: str
     is_dulplicated: bool
 
     def to_dict(self) -> dict[str, str]:
-        return_dict = {
+        return {
             "name": self.name,
             "bin": self.bin,
+            "product_code": self.product_code,
             "is_duplicated": self.is_dulplicated
         }
-        return return_dict
 
 class InvalidCardProgram(Exception):
     pass
@@ -35,24 +36,29 @@ class CardProducts:
 
     def check_and_push(self, pan: str, product_name: str):
         current_bin = pan[:6]
+        # Product code is the first two characters after the bin (index 6 and 7)
+        current_product_code = pan[6:8]
         
-        # 1. Check for exact duplicate (Same Name + Same BIN) -> Ignore
+        # 1. Check for exact duplicate (Name + BIN + Product Code) -> Ignore
         for product in self.card_products:
-            if product.name == product_name and product.bin == current_bin:
+            if (product.name == product_name and 
+                product.bin == current_bin and 
+                product.product_code == current_product_code):
                 return
         
-        # 2. Check for BIN Conflict (Same BIN + Different Name) 
-        # We mark it as duplicated so the report can flag it, 
-        # or you can choose to raise an error here.
+        # 2. Check for BIN+Code Conflict (Same BIN & Code, but Different Name)
         is_conflict = False
         for product in self.card_products:
-            if product.bin == current_bin and product.name != product_name:
+            if (product.bin == current_bin and 
+                product.product_code == current_product_code and 
+                product.name != product_name):
                 is_conflict = True
-                product.is_dulplicated = True # Mark the existing one too
+                product.is_dulplicated = True 
         
         new_product = CardProductDto(
             name=product_name, 
             bin=current_bin, 
+            product_code=current_product_code,
             is_dulplicated=is_conflict
         )
         self.card_products.append(new_product)
@@ -62,8 +68,8 @@ class CardProducts:
         return any(p.is_dulplicated for p in self.card_products)
 
     def get_all_products(self):
-        # Sort by name for a clean config.json
-        return sorted(self.card_products, key=lambda x: x.name.lower())
+        # Sort primarily by name, then bin, then product code
+        return sorted(self.card_products, key=lambda x: (x.name.lower(), x.bin, x.product_code))
 
 @dataclass
 class FileMetaData:
