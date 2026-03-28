@@ -1,3 +1,4 @@
+# main.py
 import traceback
 from src.utils.logger_setup import logger
 from src.utils.utils import get_and_classify_files
