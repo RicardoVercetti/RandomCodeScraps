@@ -48,3 +48,6 @@ Thumbs.db
 
 # ignore java build code
 **/bin/
+
+# ignore object files
+*.o
