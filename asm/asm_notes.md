@@ -32,4 +32,4 @@ section .text
 ## questions:
 
 - what does the `len equ $ - txt` do?
-- 
+- why is there always a `10` or `0A` after any string literal at the `section .data`
