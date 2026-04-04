@@ -85,6 +85,12 @@ DX - Data
 | RESQ        | Reserve a Quad word         |
 | REST        | Reserve a Ten Bytes         |
 
+## Constants
+
+1. EQU
+2. %assign
+3. %define
+
 ## questions:
 
 - what does the `len equ $ - txt` do?
