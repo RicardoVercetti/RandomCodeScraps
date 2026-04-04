@@ -55,6 +55,7 @@ DX - Data
     - Carry flag(CF)
 
 ## Linux system calls(are listed in `/usr/include/asm/unistd.h`)
+
 | %eax | Name       | %ebx              | %ecx          | %edx      |
 |------|------------|-------------------|---------------|-----------|
 | 1    | sys_exit   | int               | -             | -         |
@@ -63,6 +64,26 @@ DX - Data
 | 4    | sys_write  | unsigned int      | const char *  | size_t    |
 | 5    | sys_open   | const char *      | int           | int       |
 | 6    | sys_close  | unsigned int      | -             | -         |
+
+## Allocating space for initialized data
+
+| Directive |       Purpose         |       storage space       |
+|-----------|-----------------------|---------------------------|
+|   DB      |   Define byte         |       1 bytes             |
+|   DW      |   Define word         |       2 bytes             |
+|   DD      |   Define double word  |       4 bytes             |
+|   DQ      |   Define Quad word    |       8 bytes             |
+|   DT      |   Define ten bytes    |       10 bytes            |
+
+## Allocating for uninitialized data
+
+| Directive   | Purpose                     |
+|-------------|-----------------------------|
+| RESB        | Reserve a byte              |
+| RESW        | Reserve a Word              |
+| RESD        | Reserve a Double word       |
+| RESQ        | Reserve a Quad word         |
+| REST        | Reserve a Ten Bytes         |
 
 ## questions:
 
