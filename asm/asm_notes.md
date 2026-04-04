@@ -54,8 +54,24 @@ DX - Data
     - Parity flag(PF)
     - Carry flag(CF)
 
+## Linux system calls(are listed in `/usr/include/asm/unistd.h`)
+| %eax | Name       | %ebx              | %ecx          | %edx      |
+|------|------------|-------------------|---------------|-----------|
+| 1    | sys_exit   | int               | -             | -         |
+| 2    | sys_fork   | struct pt_regs    | -             | -         |
+| 3    | sys_read   | unsigned int      | char *        | size_t    |
+| 4    | sys_write  | unsigned int      | const char *  | size_t    |
+| 5    | sys_open   | const char *      | int           | int       |
+| 6    | sys_close  | unsigned int      | -             | -         |
+
 ## questions:
 
 - what does the `len equ $ - txt` do?
 - why is there always a `10` or `0A` after any string literal at the `section .data`
     - its new line character
+- how to do new line character if the value we're trying to print is doesn't contain the new line character, basically a string concatenation
+
+## PTRs
+
+- when eax is given the sys_call, ebx is given the the first parameter, the ecx takes a memory address in hex, not literal values.
+- and the edx takes the number of bytes after the item that ecx points to 
