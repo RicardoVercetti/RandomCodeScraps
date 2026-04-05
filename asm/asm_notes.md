@@ -95,6 +95,16 @@ DX - Data
 
 - AL(8bit), AX(16bits), EAX(32bits) will always be the first operand, therefore the mul explicitly takes 1 operand - `mul bl`, would mean: `al = al x bx`
 
+## Logical Instructions
+
+| Instruction        |              Format                       |
+|--------------------|-------------------------------------------|
+|   AND              |      AND operand1, operand2               |
+|   OR               |      OR operand1, operand2                |
+|   XOR              |      XOR operand1, operand2               |
+|   TEST             |      TEST operand1, operand2              |
+|   NOT              |      NOT operand1                         |
+
 ## questions:
 
 - what does the `len equ $ - txt` do?
@@ -107,3 +117,5 @@ DX - Data
 
 - when eax is given the sys_call, ebx is given the the first parameter, the ecx takes a memory address in hex, not literal values.
 - and the edx takes the number of bytes after the item that ecx points to 
+- jz - jump if zero, uses zero flag(prolly)
+- jmp - unconditional jumping
