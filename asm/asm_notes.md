@@ -105,6 +105,44 @@ DX - Data
 |   TEST             |      TEST operand1, operand2              |
 |   NOT              |      NOT operand1                         |
 
+## Conditional jumps
+
+### Signed Data
+
+| Instruction               |       Description                             |       Flag tested             |
+|---------------------------|-----------------------------------------------|-------------------------------|
+|   JE/JZ                   |   Jump Equal or Jump Zero                     |           ZF                  |
+|   JNE/JNZ                 |   Jump not equal or jump Not Zero             |           ZF                  |
+|   JG/JNLE                 |   Jump greater or Jump not Less/Equal         |         OF, SF, ZF            |
+|   JGE/JNL                 |   Jump greater/Equal or Jump not Less         |           OF, SF              |
+|   JL/JNGE                 |   Jump less or Jump not Greater/Equal         |           OF, SF              |
+|   JLE/JNG                 |   Jump less/Equal or Jump Not Greater         |         OF, SF, ZF            |
+
+### Unsigned Data
+
+| Instruction               |       Description                             |       Flag tested             |
+|---------------------------|-----------------------------------------------|-------------------------------|
+|   JE/JZ                   |   Jump Equal or Jump Zero                     |           ZF                  |
+|   JNE/JNZ                 |   Jump not Equal or Jump Not Zero             |           ZF                  |
+|   JA/JNBE                 |   Jump above or jump not below/Equal          |          CF, ZF               |
+|   JAE/JNB                 |   Jump above/Equal or Jump not Below          |           CF                  |
+|   JB/JNAE                 |   Jump below or jump not above/Equal          |           CF                  |
+|   JBE/JNA                 |   Jump below/equal or jump Not Above          |         AF, CF                |
+
+### Special uses
+
+| Instructions              |       Description                             |       Flags tested            |
+|---------------------------|-----------------------------------------------|-------------------------------|
+|   JXCZ                    |   Jump if CX is Zero                          |           None                |
+|   JC                      |   Jump if carry                               |           CF                  |
+|   JNC                     |   Jump if no carry                            |           CF                  |
+|   JO                      |   Jump if Overflow                            |           OF                  |
+|   JNO                     |   Jump if No Overflow                         |           OF                  |
+|   JP/JPE                  |   Jump parity or Jump parity even             |           PF                  |
+|   JNP/JPO                 |   Jump no parity Jump parity Odd              |           PF                  |
+|   JS                      |   Jump sign (negative value)                  |           SF                  |
+|   JNS                     |   Jump no sign (positive value)               |           SF                  |
+
 ## questions:
 
 - what does the `len equ $ - txt` do?
