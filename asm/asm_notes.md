@@ -91,12 +91,17 @@ DX - Data
 2. %assign
 3. %define
 
+## Mul/iMul
+
+- AL(8bit), AX(16bits), EAX(32bits) will always be the first operand, therefore the mul explicitly takes 1 operand - `mul bl`, would mean: `al = al x bx`
+
 ## questions:
 
 - what does the `len equ $ - txt` do?
 - why is there always a `10` or `0A` after any string literal at the `section .data`
     - its new line character
 - how to do new line character if the value we're trying to print is doesn't contain the new line character, basically a string concatenation
+- how does subbing '0' from a ascii makes it into an integer? and adding '0' to integer makes it ascii? 
 
 ## PTRs
 
