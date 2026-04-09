@@ -150,6 +150,7 @@ DX - Data
     - its new line character
 - how to do new line character if the value we're trying to print is doesn't contain the new line character, basically a string concatenation
 - how does subbing '0' from a ascii makes it into an integer? and adding '0' to integer makes it ascii? 
+- new keywords: `push`, `pop`, `loop` 
 
 ## PTRs
 
