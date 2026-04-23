@@ -23,7 +23,7 @@ void display_item(item* items, size_t size) {
 item* binary_search(item* items, size_t size, item* findable) {
     // go from middle, if pos of finable is equal, return this, if less than middle, go left, else go right
     int to_find = findable->value;
-    int mid = (size+2-1)/2;
+    int mid = (size+2-1)/2;     // why is there a +2?
     int start_pos = 0;
     int end_pos = size;
     printf("findable: %d\n", to_find);
