@@ -1,39 +1,48 @@
 import pygame
+WIDTH = 1280
+HEIGHT = 720
+pygame.init()
 
-pygame.init()       # what does this does anyway?
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()     # what does this do?
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+clock = pygame.time.Clock()
 running = True
-dt = 0
 
-player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
+
+# task
+# draw a circle that will auto hit the edges and get bounced back in the opposite direction
+# requirements:
+# 1. being able to put a circle
+# 2. circle has a width? starting position in the screen/canvas
+# 3. has a momentum to one direction
+# 4. when the edge of the circle touches(equal to or greater than the edges), the momentum reverses
+# 5. this repeats without any external input
+
+# extras
+# 1. spawn in random with random size
+# 2. spawn several other loons and make them move in random
+# 3. when they collide with each other, they should bounce opposite?
+# 4. smaller ones get more momentum when hitting against bigger ones
+# 5. try acceleration part soon after they hit against one another, then return to their constant speeds
+
+player_pos = pygame.Vector2(0, 0)
 
 while running:
-    # same poll for events
+    
+    # check for quit event I guess
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            print("pressed the close button!")
             running = False
-    
-    # fill the screen again?
-    screen.fill("purple")
+            continue        # perhaps return right away than going through the rest of the loop
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+    # screen filling first
+    screen.fill("purple")        # maybe try some other color next time
 
-    keys = pygame.key.get_pressed()
+    # draw the content
+    pygame.draw.circle(screen, "red", player_pos, 200)      # so the last item is the size
 
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
-    
     pygame.display.flip()
 
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate independent physics
-    dt = clock.tick(60) / 1000
+    clock.tick(60)
 
 pygame.quit()
