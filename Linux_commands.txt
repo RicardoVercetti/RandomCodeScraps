@@ -507,6 +507,11 @@ Cargo
  - cargo run																# run the project
  - cargo search <package-name>
  - cargo test															# runs all tests acessible
+
+uv
+ - uv python list --all-versions
+ - uv venv --python x.xx									# create a env with specific python version
+ - uv init
  
 npm
  - npm install -g typescript												# globally install tsc
