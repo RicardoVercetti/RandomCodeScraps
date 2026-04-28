@@ -1,4 +1,7 @@
 import pygame
+import random
+import time
+
 WIDTH = 1280
 HEIGHT = 720
 pygame.init()
@@ -24,7 +27,28 @@ running = True
 # 4. smaller ones get more momentum when hitting against bigger ones
 # 5. try acceleration part soon after they hit against one another, then return to their constant speeds
 
-player_pos = pygame.Vector2(0, 0)
+
+def random_position_in_screen():
+    x = random.randrange(WIDTH + 1)
+    y = random.randrange(HEIGHT + 1)
+    return pygame.Vector2(x, y)
+
+def random_size_of_circle():
+    return random.randrange(60, 200)
+
+def change_circle_pos(player_pos):
+    # logic for changing the player pos
+    return player_pos
+
+
+player_pos = pygame.Vector2(WIDTH/2, HEIGHT/2)
+circle_size = 100
+
+last_pressed = time.time()
+
+def is_time_since_last_pressed():
+    now = time.time()
+    return now - last_pressed > 0.1 
 
 while running:
     
@@ -35,11 +59,18 @@ while running:
             running = False
             continue        # perhaps return right away than going through the rest of the loop
 
+    keys = pygame.key.get_pressed()
+    # if a specific key is pressed, change position randomly
+    if keys[pygame.K_SPACE] and is_time_since_last_pressed():
+        player_pos = random_position_in_screen()
+        circle_size = random_size_of_circle()
+        last_pressed = time.time()
+
     # screen filling first
     screen.fill("purple")        # maybe try some other color next time
 
     # draw the content
-    pygame.draw.circle(screen, "red", player_pos, 200)      # so the last item is the size
+    pygame.draw.circle(screen, "red", change_circle_pos(player_pos), circle_size)      # so the last item is the size
 
     pygame.display.flip()
 
