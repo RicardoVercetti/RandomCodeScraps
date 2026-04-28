@@ -40,15 +40,41 @@ def change_circle_pos(player_pos):
     # logic for changing the player pos
     return player_pos
 
+class Circle:
+    def __init__(self, x_pos, y_pos, x_dir, y_dir, size):
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.x_dir = x_dir
+        self.y_dir = y_dir
+        self.size = size
+
+    def update_position(self):
+        half_size = self.size/2
+        if (self.x_pos + half_size) >= WIDTH or (self.x_pos - half_size) <= 0:
+            self.x_dir *= -1
+        if (self.y_pos + half_size) >= HEIGHT or (self.y_pos - half_size) <= 0:
+            self.y_dir *= -1
+
+        self.x_pos += self.x_dir
+        self.y_pos += self.y_dir
+
+    @staticmethod
+    def random_pos():
+        speed = 10
+        x_dir = -(speed) if random.randrange(6) % 2 == 0 else speed
+        y_dir = -(speed) if random.randrange(6) % 2 == 0 else speed
+        # size = random.randrange(100, 120)
+        size = 100
+        return Circle(random.randrange(WIDTH), random.randrange(HEIGHT), x_dir, y_dir, size)
 
 player_pos = pygame.Vector2(WIDTH/2, HEIGHT/2)
-circle_size = 100
+# last_pressed = time.time()
+one_circle = Circle.random_pos()
 
-last_pressed = time.time()
 
-def is_time_since_last_pressed():
-    now = time.time()
-    return now - last_pressed > 0.1 
+# def is_time_since_last_pressed():
+#     now = time.time()
+#     return now - last_pressed > 0.1 
 
 while running:
     
@@ -59,21 +85,15 @@ while running:
             running = False
             continue        # perhaps return right away than going through the rest of the loop
 
-    keys = pygame.key.get_pressed()
-    # if a specific key is pressed, change position randomly
-    if keys[pygame.K_SPACE] and is_time_since_last_pressed():
-        player_pos = random_position_in_screen()
-        circle_size = random_size_of_circle()
-        last_pressed = time.time()
 
     # screen filling first
     screen.fill("purple")        # maybe try some other color next time
 
+    one_circle.update_position()
+
     # draw the content
-    pygame.draw.circle(screen, "red", change_circle_pos(player_pos), circle_size)      # so the last item is the size
-
+    pygame.draw.circle(screen, "red", pygame.Vector2(one_circle.x_pos, one_circle.y_pos), one_circle.size)      # so the last item is the size
     pygame.display.flip()
-
     clock.tick(60)
 
 pygame.quit()
