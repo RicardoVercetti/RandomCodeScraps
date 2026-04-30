@@ -1,14 +1,15 @@
-import pygame
+"Pygame tryout"
 import random
-import time
+import pygame
+from pygame.constants import QUIT
 
 WIDTH = 1280
 HEIGHT = 720
-pygame.init()
+# pygame.base.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
-running = True
+RUNNING = True
 
 
 # task
@@ -28,19 +29,8 @@ running = True
 # 5. [ ] try acceleration part soon after they hit against one another, then return to their constant speeds
 
 
-def random_position_in_screen():
-    x = random.randrange(WIDTH + 1)
-    y = random.randrange(HEIGHT + 1)
-    return pygame.Vector2(x, y)
-
-def random_size_of_circle():
-    return random.randrange(60, 200)
-
-def change_circle_pos(player_pos):
-    # logic for changing the player pos
-    return player_pos
-
 class Circle:
+    "A single circle you can draw in a pygame screen"
     def __init__(self, x_pos, y_pos, x_dir, y_dir, size):
         self.x_pos = x_pos
         self.y_pos = y_pos
@@ -49,8 +39,10 @@ class Circle:
         self.size = size
 
     def update_position(self):
+        """update the position of the current circle, direction is 
+        changed when the circle reaches any one of the edges"""
         # change direction if we hit the corners
-        half_size = self.size/2
+        half_size = self.size
         if (self.x_pos + half_size) >= WIDTH or (self.x_pos - half_size) <= 0:
             self.x_dir *= -1
         if (self.y_pos + half_size) >= HEIGHT or (self.y_pos - half_size) <= 0:
@@ -62,6 +54,7 @@ class Circle:
 
     @staticmethod
     def random_pos():
+        """Create a random circle parameters with random speed and direction"""
         speed = random.randrange(7, 12)
         x_dir = -(speed) if random.randrange(6) % 2 == 0 else speed
         y_dir = -(speed) if random.randrange(6) % 2 == 0 else speed
@@ -73,13 +66,12 @@ player_pos = pygame.Vector2(WIDTH/2, HEIGHT/2)
 # last_pressed = time.time()
 list_of_circle = [Circle.random_pos() for i in range(10)]
 
-while running:
-    
+while RUNNING:
     # check for quit event I guess
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == QUIT:
             print("pressed the close button!")
-            running = False
+            RUNNING = False
             continue        # perhaps return right away than going through the rest of the loop
 
 
@@ -94,4 +86,5 @@ while running:
     pygame.display.flip()
     clock.tick(60)
 
+# pylint: disable=no-member
 pygame.quit()

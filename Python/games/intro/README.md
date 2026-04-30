@@ -1,8 +1,8 @@
 ## list
 
 ###  DEV env basics
-- [X] linter for python in vscodium
-- [ ] code analyzer extension in vscodium
+- [X] linter for python in vscodium → ctrl + shift + p and select python interpreter
+- [X] code analyzer extension in vscodium → Pylint
 
 ### Tasks
 - [X] Sample from official documentation
