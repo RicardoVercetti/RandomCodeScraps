@@ -69,6 +69,7 @@ internals
  - ls /sys/bus/pci/devices/0000:02:00.0			# currently bound PCI device related data
  - ls /lib/modules								# kernels and their corresponding driver modules
  - ls /lib/firmware								# firmware to be used for the above modules
+ - ls /usr/bin/*session							# could return graphical desktop environment names
  - ls /usr/share/applications							# global .desktop files for application launching
 
 
@@ -96,6 +97,7 @@ General
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
  - compgen -c									# list all executable commands in path
+ - env											# lists all environmental variables used by system
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
@@ -117,6 +119,7 @@ General
  - type <command/binary/exec>									# handles aliases, shell builtins, functions & binaries
  - uniq                                               # gives the unique lines, -c → count the duplicated, used as `<command> | uniq -c`
  - update-desktop-database ~/.local/share/applications						# refresh your app database
+ - uptime											# gives the time the device is up and running(-p → pretty, -s → Since)
  [file handling]
  - ls -l filename															# basic file information
  - ls lh								# list files with details
