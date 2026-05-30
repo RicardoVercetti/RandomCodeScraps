@@ -523,6 +523,7 @@ uv
  - uv python list --all-versions
  - uv venv --python x.xx									# create a env with specific python version
  - uv init
+ - uv run python -c "import sys; print(sys.prefix)"		# prints the location of  python version used by uv in current run
  
 npm
  - npm install -g typescript												# globally install tsc
