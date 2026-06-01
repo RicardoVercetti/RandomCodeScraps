@@ -379,6 +379,7 @@ git commands
   - git clone --recurse-submodules https://github.com/example/repo.git		# ensures that all submodules are also cloned and initialized in one step
   - git rm <file-path> 														# remove tracked files
   - git rm -r --cached target/												                      # This ensures that target folder is ignored going forward, and any previously tracked files in target are removed from the repository.
+  - git reset									                                              # can be used to unstage items from a newly crated git repo
   - git reset --hard														                            # Discard all changes and reset the working directory
   - git reset --hard origin/main												# this is done after `git fetch --all` command so that the local resets to the remote version
   - git reset --soft HEAD~1													                        # Undo Last Commit but Keep Changes (Soft Reset)
@@ -486,7 +487,7 @@ storage analyzer
 Gradle
  - gradle --version
  - ./gradlew dependencies													# download dependencies without building
- - ./gradlew bootRun														# run the project
+ - ./gradlew bootRun														# run the project, `--offline` to check for dependencies only in offline
  - ./gradlew build --refresh-dependencies									# force gradle to redownload dependencies
  - gradle --stop  															# Stop any running Gradle daemons
  - gradlew test --info												# run with debug info of gradle process
