@@ -521,6 +521,7 @@ Cargo
  - cargo tree --workspace												# show dependency tree
 
 uv
+ - uv pip install <package-name>							# install package in the uv managed venv
  - uv python list --all-versions
  - uv venv --python x.xx									# create a env with specific python version
  - uv init
