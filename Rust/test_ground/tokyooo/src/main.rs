@@ -6,11 +6,54 @@
 // 5. processing the file while the download is on(like the inline doc says in prek)?
 // 6. use sha256 to calculate the hash and [u8] → hex string
 // 7. try a closure function that will have different methods to extract content from the checksum URL
+// 8. working with buffers
 
-use futures::TryStreamExt;
-use tokio_util::compat::FuturesAsyncReadCompatExt;
+use std::path::Path;
 
+use tokio::io::AsyncReadExt;
+use tokio_util::compat::TokioAsyncReadCompatExt;
+// use futures::TryStreamExt;
+use tokio_util::compat::{FuturesAsyncReadCompatExt};
+use tokio::fs::File;
+// use 
+// use std::io::prelude::*;
+use std::io::Error;
+use std::io::Read;
 
+use futures::{
+    AsyncWriteExt, 
+    TryStreamExt
+};
+
+#[allow(dead_code)]
+fn reading_from_buffers() -> Result<(), Error> {
+    println!("Hello omniverse...");
+
+    let mut sample_str = "this is a test string".as_bytes();
+    println!("value in string before: {:?}", sample_str.to_ascii_lowercase());
+    
+
+    let mut buffer = [0; 5];
+
+    loop {
+        match sample_str.read(&mut buffer) {
+            Ok(0) => break,
+            Ok(value) => {
+                // some value is read
+                // println!("len read: {}", value);
+                println!("str: {}", str::from_utf8(&buffer[0..value]).expect("UTF-8 String error"));
+            },
+            Err(err) => {
+                println!("Error occurred while reading from the bytes: {}", err);
+                let ret = err.kind();
+                println!("{}", ret.to_string());
+            }
+        }
+    }
+    Ok(())
+}
+
+#[allow(dead_code)]
 fn get_filename_from_url(full_url: &String) -> Option<String> {
     // get the string after the last '/'
     let pos = full_url.rfind("/");
@@ -30,23 +73,21 @@ fn get_filename_from_url(full_url: &String) -> Option<String> {
     None
 }
 
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("Hello omniverse...");
-
-    let full_url = String::from("https://releases.astral.sh/github/uv/releases/download/0.11.17/uv-i686-unknown-linux-gnu.tar.gz");
+#[allow(dead_code)]
+async fn async_function() {
+    println!("Inside async function");
+    let full_url = String::from("https://releases.astral.sh/github/uv/releases/download/0.11.17/uv-i686-unknown-linux-gnu.tar.gz.sha256");
 
     let filename = get_filename_from_url(&full_url);
 
-    if let Some(fname) = filename {
+    if let Some(fname) = &filename {
         println!("filename is: {}", fname);
     } else {
         println!("Function did not return a filename");
     }
 
     let response = reqwest::get(&full_url)
-    .await?;
+    .await.expect("some error occurred inside...");
 
     let _response_headers = response.headers().clone();      // if the file name is not found from the URL, gotta rely on the names in the header
     // let _response_bytes = response.bytes().await?;
@@ -57,11 +98,48 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .into_async_read()
         .compat();
 
+
+    // read from the tarbar and write it into a file
+    let owned_file_name = filename.or_else(|| Some("Default_value".to_string())).unwrap();
+    let path = Path::new(&owned_file_name);
+    let file_to_write = File::create_new(path).await.expect("failed to create file");
     
+    let mut reader = tokio::io::BufReader::with_capacity(20, tarball);
+    let mut writer = tokio::io::BufWriter::with_capacity(20, file_to_write);
+
+    let mut buffer= &[0; 20];
+
+    loop {
+        match reader.read_buf(&mut buffer) {
+            Ok(0) => {
+                println!("reached end of stream!");
+                break;
+            },
+            Ok(n) => {
+                let ret = writer.write(&buffer[0..n]).await;
+            }
+        }
+    }
+
+    // match tokio::io::copy(&mut reader, &mut writer).await {
+    //     Ok(value) => println!("some value returned when writing the buffer into the writer: {}", value),
+    //     Err(err) => {
+    //         println!("error occurred when writing the buffer to the writer");
+    //         println!("error kind: {}", err.kind())
+    //     }
+    // }
+
+}
 
 
-
-
+#[tokio::main]
+async 
+fn main()
+-> Result<(), Box<dyn std::error::Error>> 
+{
+    println!("Welcome...");
+    let ret = tokio::spawn(async_function());
+    ret.await?;
 
     Ok(())
 }
