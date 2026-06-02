@@ -123,6 +123,8 @@ General
  - update-desktop-database ~/.local/share/applications						# refresh your app database
  - uptime											# gives the time the device is up and running(-p → pretty, -s → Since)
  [file handling]
+ - diff <file1.ext> <file2.ext>												# standard diff, -u(unified format) → for git like diff
+ - diff -ur dir1/ dir2/                               # compare directory recursively
  - ls -l filename															# basic file information
  - ls lh								# list files with details
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
@@ -519,6 +521,7 @@ Cargo
  - cargo search <package-name>
  - cargo test															# runs all tests acessible
  - cargo tree --workspace												# show dependency tree
+ - cargo update
 
 uv
  - uv pip install <package-name>							# install package in the uv managed venv
