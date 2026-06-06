@@ -501,6 +501,7 @@ Gradle
 
 Rustup
  - rustup component list --installed									# things like clippy, fmt
+ - rustup doc --book
  - rustup show												# show toolchains & targets
  - rustup targer list --installed
  - rustup toolchain list										# list all toolchains
