@@ -507,6 +507,8 @@ Rustup
  - rustup toolchain list										# list all toolchains
  
 Cargo
+ - cargo add <crate-name>												# add a crate into the `Cargo.toml`, -F → for features
+ - cargo add --dry-run <crate-name>										# list features, crate will not be installed due to dry run
  - cargo build															# compile without running
  - cargo build --release													# produce optimized build
  - cargo check 																# check project for errors
