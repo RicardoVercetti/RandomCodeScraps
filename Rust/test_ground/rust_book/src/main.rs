@@ -1,3 +1,7 @@
+use std::{ops::Add, time::Duration};
+
+use time::{Date, Time};
+
 #[allow(dead_code)]
 fn first_word(full_string: &str) -> &str {
     let bytes = full_string.as_bytes();
@@ -36,4 +40,11 @@ println!("Some and None values");
 
 fn main() {
     println!("hay there...");
+
+    let duration = Duration::from_secs(25);
+
+    let time = Time::from_hms(12, 25, 26).unwrap();
+    let second_time = time.add(duration);
+    println!("{}", time);
+    println!("{}", second_time);
 }
