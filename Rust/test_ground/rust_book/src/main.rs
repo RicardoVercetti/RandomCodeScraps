@@ -1,6 +1,9 @@
 use std::{ops::Add, time::Duration};
 
-use time::{Date, Time};
+use time::{
+    // Date, 
+    Time
+};
 
 #[allow(dead_code)]
 fn first_word(full_string: &str) -> &str {
@@ -38,6 +41,24 @@ println!("Some and None values");
 
 }
 
+#[cfg(feature = "foo")]
+fn some_function() {
+    println!("this function does nothing....");
+
+    let value = cfg!(target_os = "ios");
+    println!("value for mac: {}", value);
+
+    if cfg!(target_os = "linux") {
+        println!("Running in linux BTW...");
+    }
+
+}
+
+// #[cfg(unix)]
+// fn some_other_function() {
+//     println!("This function also does nothing...");
+// }
+
 fn main() {
     println!("hay there...");
 
@@ -47,4 +68,7 @@ fn main() {
     let second_time = time.add(duration);
     println!("{}", time);
     println!("{}", second_time);
+
+    some_function();
+    // some_other_function();
 }
