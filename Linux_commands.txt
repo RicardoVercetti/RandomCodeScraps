@@ -388,6 +388,7 @@ git commands
   - git restore																# restore the changes back as in the HEAD commit
   - git restore --staged .													                        # unstage all files
   - git rebase main															# Updates your branch to match the latest state of <target-branch>
+  - git revert <commit-hash>												# re-apply the opposite of what ever the change the commit had
   - git clean -f															                              # if tracked, git doesn't remove it
   - git clean -fd															                              # files n directories
   - git clean -fx															                              # remove ignorted files too
