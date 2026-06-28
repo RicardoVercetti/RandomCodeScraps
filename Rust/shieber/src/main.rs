@@ -2,6 +2,10 @@
 // composite types  : tuple, array 
 
 use shieber::stack::Stack;
+use shieber::stack_problem::{
+    is_valid_bracket,
+    is_valid_multi_brackets
+};
 
 #[allow(dead_code)]
 fn stack_and_stroll() {
@@ -48,10 +52,9 @@ fn stack_and_stroll() {
     println!("13. peek: {:?}, expected: 6", my_stack.peek());
 }
 
-fn main() {
-    println!("helo, russians?");
-
-    let mut my_stack = Stack::new();
+#[allow(dead_code)]
+fn stack_exercises() {
+let mut my_stack = Stack::new();
 
     my_stack.push(1);
     my_stack.push(2);
@@ -82,4 +85,32 @@ fn main() {
     for item in iter_mut {
         println!("item: {}", item);
     }
+}
+
+#[allow(dead_code)]
+fn valid_parenthesis() {
+    let brackets = String::from("()(())");
+    let brackets2 = String::from("()((()");
+
+    let result1 = is_valid_bracket(&brackets);
+    let result2 = is_valid_bracket(&brackets2);
+
+    let brackets3 = String::from("{ { ( [ ] [ ] ) } ( ) }");
+    let brackets4 = String::from("( ( ( ) ] ) )");
+
+    let result3 = is_valid_multi_brackets(&brackets3);
+    let result4 = is_valid_multi_brackets(&brackets4);
+
+    println!("res1: {result1}");
+    println!("res2: {result2}");
+    println!("res3: {result3}");
+    println!("res4: {result4}");
+}
+
+
+
+fn main() {
+    println!("helo, russians?");
+
+    valid_paranthesis();
 }

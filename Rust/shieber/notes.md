@@ -7,3 +7,4 @@
 ## doubts
 - what about the iterator that is lazy? don't access the data until the method is called?
 - try to have some kinda pointer number, so that when the next is called, get element with the pointer. Perhaps the struct from the book example can have one more member called pointer!
+- why does the comparison of an owned value and borrowed value not directly usable in an if condition with `==`?
