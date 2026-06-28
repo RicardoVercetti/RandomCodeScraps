@@ -6,6 +6,10 @@ use shieber::stack_problem::{
     is_valid_bracket,
     is_valid_multi_brackets
 };
+use shieber::decimal_conversions::{
+    divide_by_sixteen,
+    divide_by_two
+};
 
 #[allow(dead_code)]
 fn stack_and_stroll() {
@@ -107,10 +111,25 @@ fn valid_parenthesis() {
     println!("res4: {result4}");
 }
 
+#[allow(dead_code)]
+fn decimal_conversions() {
+    let num = 233;
+    let num1 = 10;
+    let num2 = 43;
+    let result = divide_by_two(num);
+    let result2 = divide_by_sixteen(num);
+    let result3 = divide_by_two(num1);
+    let result4 = divide_by_sixteen(num2);
+    
+    println!("final collection: {}", result);
+    println!("final collection2: '{}'", result2);
 
+    println!("num3: {}", result3);
+    println!("num4: {}", result4);
+}
 
 fn main() {
     println!("helo, russians?");
 
-    valid_paranthesis();
+    decimal_conversions();
 }
