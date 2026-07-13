@@ -229,6 +229,7 @@ General
  [system]
  - efibootmgr								# boot info if UEFI is used
  - dmidecode -t bios							# show bios info
+ - hostnamectl								# active OS info
  - lspci										# list PCI devices(CPU, GPU, NIC, NVMe, USB controllers)
  - lspci -k									# more details
  - lspci -k -s 02:00.0						# -k → show kernel driver info, `-s <device_addr>` → only for this device 
