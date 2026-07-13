@@ -10,6 +10,7 @@ use shieber::decimal_conversions::{
     divide_by_sixteen,
     divide_by_two
 };
+use shieber::queue::Queue;
 
 #[allow(dead_code)]
 fn stack_and_stroll() {
@@ -128,13 +129,24 @@ fn decimal_conversions() {
     println!("num4: {}", result4);
 }
 
+#[allow(dead_code)]
+fn queue_impl() {
+    // test scenario
+    let mut q = Queue::new();
+    println!("is_empty: {}", q.is_empty());
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    println!("dequeue: {}", q.dequeue().unwrap());
+    q.enqueue(4);
+    q.enqueue(5);
+    println!("dequeue: {}", q.dequeue().unwrap());
+    println!("size: {}", q.size());
+    println!("is_empty: {}", q.is_empty());
+}
+
 fn main() {
     println!("helo, russians?");
-    
-    // infix to prefix and postfix
-    // B O D M A S
-    // a + b * c            => (a + (b * c))                    => +a*bc
-    // a * (b + c) / e + f  => (((a * (b + c)) / e) + f)        => +/*a+bcef
-    // (A + B) * C - (D + E) / (F + G) => ((A + B) * C) - ((D + E)/(F + G)) => -*+ABC/+DE+FG
-    
+
+    queue_impl();
 }
