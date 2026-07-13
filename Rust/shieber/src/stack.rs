@@ -54,7 +54,7 @@ impl<T> Stack<T> {
         IntoIter(self)
     }
 
-    pub fn iter(&self) -> Iter<T> {
+    pub fn iter<'a>(&'a self) -> Iter<'a, T> {
         let mut iterator = Iter { stack: Vec::new() };
         for item in self.items.iter() {         // note: isn't this kinda in efficient?
             // println!("pushing to vec in iter...");
@@ -64,7 +64,7 @@ impl<T> Stack<T> {
         iterator
     }
 
-    pub fn iter_mut(&mut self) -> IterMut<T> {
+    pub fn iter_mut<'a>(&'a mut self) -> IterMut<'a, T> {
         let mut iterator = IterMut { stack: Vec::new() };
         for item in self.items.iter_mut() {
             // println!("pushing vec in iter_mut...");
