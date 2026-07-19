@@ -67,16 +67,20 @@ public class ComparatorExample {
             System.out.println(i + ". " + students.get(i).toString());
         }
 
-//        Student s1 = new Student("Marzia", 29);
-//        Student s2 = new Student("Marzia", 28);
-//
-//        var comparedValue = s1.compareTo(s2);
-//        System.out.println("compared value: " + comparedValue);
 
         Collections.sort(students, new StudentDescendingComparator());
         System.out.println("-- After Descending sort --");
         for (int i=0; i<students.size(); i++) {
             System.out.println(i + ". " + students.get(i).toString());
         }
+
+
+        Student s1 = new Student("Marzia", 29);
+        Student s2 = new Student("Marzia", 28);
+
+        var comparedValue = s1.compareTo(s2);
+        System.out.println("compared value: " + comparedValue);
+
+
     }
 }

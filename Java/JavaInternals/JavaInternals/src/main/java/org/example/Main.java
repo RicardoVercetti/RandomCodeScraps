@@ -35,6 +35,9 @@ public class Main {
     // 4. primitives are only allowed in native arrays, ArrayList or any wildcard <E> should pass in Objects(should use wrapper classes)
     // 5. native arrays are declared with `{ }` syntax
     // 6. `arr.length` on native arrays, `arr.size()` on blankets
+    // 7. to use .compareTo(), have to implement `Comparable` interface.
+    // 8. Collection.sort() is for dyn arrays
+    // 9. the operator like `>` or `<` will only work on primitive even if you implement comparable interface - By design, it is this way.
 
     public static void main(String[] args) {
         System.out.println("Started...");
