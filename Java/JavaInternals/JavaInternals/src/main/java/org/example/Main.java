@@ -15,11 +15,11 @@ public class Main {
     // [OK] add/remove from arrays
 
     // [OK] check duplicates
-    // [  ] sort array in ascending/descending
+    // [OK] sort array in ascending/descending
     //          - [OK] inbuilt ascending sort
     //          - [OK] inbuilt descending sort
-    //          - [  ] custom ascending sort
-    //          - [  ] custom descending sort
+    //          - [OK] custom ascending sort
+    //          - [OK] custom descending sort
 
     // things to test and find out
     // [OK] altering a static array inside a function changes the parent reference - it changes
