@@ -36,18 +36,28 @@ public class SlidingWindowMaximum {
     }
 
     public static ArrayList<Integer> nahIdBruteForceIt(int[] inputArray, int k) {
-        // when you've hard-found the highest among a row, can keep comparing the next
-        // just make sure the last pos is not that highest, if it is, re-hard-find it again
+        // when you've hard-found the highest among a row, can keep comparing the next to the current highest
+        // just make sure the last highest pos is in between the start and end pos, if it is, re-hard-find it again
 
         boolean is_ended = false;
         int start = 0;
         int end = start + k - 1;
         ArrayList<Integer> numbers = new ArrayList<Integer>();
+        int currentHighestPos = -1;
+        int currentHighestElement = -1;
 
         while (!is_ended) {
-               int currentHighestPos = hardFindLargest(inputArray, start, end);
-               int currentHighestElement = inputArray[currentHighestPos];
-               numbers.add(currentHighestElement);
+                if (currentHighestPos > 0 && currentHighestPos >= start) {  // if the last gratest is still between start and end pos
+                    if (inputArray[end] >= currentHighestElement) {
+                        currentHighestElement = inputArray[end];
+                        currentHighestPos = end;
+                    }
+                    numbers.add(currentHighestElement);
+                } else {                                                   // hard find if
+                    currentHighestPos = hardFindLargest(inputArray, start, end);
+                    currentHighestElement = inputArray[currentHighestPos];
+                    numbers.add(currentHighestElement);
+                }
 
                if (end >= inputArray.length-1) is_ended = true;
                start += 1;
