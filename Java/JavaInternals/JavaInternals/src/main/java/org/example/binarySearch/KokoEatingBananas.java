@@ -22,7 +22,7 @@ public class KokoEatingBananas {
 
     public static void main(String[] args) {
         System.out.println("here goes nothing...");
-        int[] piles = {1, 4, 3, 2};
+        int[] piles = {1,4,3,2};
         int h = 9;
 
         int output = nahIdBruteForceIt(piles, h);
@@ -31,35 +31,25 @@ public class KokoEatingBananas {
     }
 
     public static int nahIdBruteForceIt(int[] inputArray, int h) {
-        // b = h / len(n) will give a rough idea of minimum number above which the k may occur
-        // if ith term is < b, skip
-        // if i > b, loop and check h taken for that k is < target
-        // keep track of the minimum k until the end
+        // the idea number is where calculated hours is highest among all the numbers that are less than the limit hour. i.e: ch < h
 
-        int candidateK = -1;
-        int candidateH = -1;
-//        int b = h / inputArray.length;
-        for (int i: inputArray) {
-//            if (i >= b) {
-            // calculate the h for this
-            int calculatedH = calculateH(inputArray, i);
-            System.out.println("calculatedH: " + calculatedH + ", for: " + i);
-            if (candidateK == -1) {
-                candidateK = i;
-                candidateH = calculatedH;
-                System.out.println("setting default candidate: " + i);
+        int ch = 0;
+        for (int i=0; i<inputArray.length; i++) {
+            int cal = calculateH(inputArray, inputArray[i]);
+            if (cal <= h && cal > ch) ch = inputArray[i];
+         }
 
-            } else if (calculatedH <= h && calculatedH < candidateH && i < candidateK) {
-//                lowestH = calculatedH;
-                System.out.println("setting candidate: " + i);
-                candidateK = i;
-                candidateH = calculatedH;
-            }
-//            }
-        }
-
-        return candidateK;
+        return ch;
     }
+
+//    public static int averageToTheNearestCeil(int[] inputArray) {
+//        int sum = 0;
+//        for (int i: inputArray) {
+//            sum += i;
+//        }
+//        if (sum % inputArray.length == 0) return sum / inputArray.length;
+//        return sum/inputArray.length + 1;
+//    }
 
     public static int calculateH(int[] inputArray, int rate) {
         int k = 0;
