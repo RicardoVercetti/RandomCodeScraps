@@ -529,6 +529,13 @@ Cargo
  - cargo tree --workspace												# show dependency tree
  - cargo update
 
+go-lang
+ - go get mod/package					# actually adds the dependency and puts an entry in the go.mod file(could also use `go mod tidy`)
+ - go mod edit -replace mod/package=../mod		# adds an entry in the go.mod about where to find the module
+ - go mod init mod/name					# initialize an empty
+ - go mod tidy						# install dependencies
+ - go run .
+
 uv
  - uv pip install <package-name>							# install package in the uv managed venv
  - uv python list --all-versions
