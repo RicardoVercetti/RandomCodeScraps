@@ -38,56 +38,47 @@ public class FindMinimumInRotatedSortedArray {
 
     public static int mayBeOkaySolution(int[] inputArray) {
         // a main loop.
-        // start from the left most, and pick the middle
-        // the condition is, if the left and right are not in ascending the lowest is in between.
-        // if the left and right are in ascending either go left, or the leftmost is the answer.
-        // keep shortening the search set until p-1 > p where p is the position
+        // start from comparing the leftmost
+        // first check if current is the smallest(arr[p] < arr[p-1]), and also check if current + 1 is the smallest.
+        // cut the remaining in half by getting the middle, check if it's ascending from the last position.
+        // if ascending, check the current + 1 is the smallest.
+        // if not, cap that position as the right most and move left and cut middle.
+        // keep cutting and checking until the left most and the right most becomes 1 digit apart.
+        // then check the same(arr[p] < arr[p-1])
 
-        boolean isNotFound = true;
         int leftMost = 0;
-        int rightMost = inputArray.length - 1;
-        int middle = inputArray.length / 2;
-        while (isNotFound) {
-            System.out.println("leftMost: " + leftMost + ", middle: " + middle + ", rightMost: " + rightMost);
-            if (rightMost >= inputArray.length) break;
-            if (leftMost < 0) break;
-
-            // if the numbers are 1 digit apart, lets check all of them
-            if (leftMost<=middle && middle <=rightMost) {
-                if (isLowest(inputArray, leftMost)) return inputArray[leftMost];
-                if (isLowest(inputArray, middle)) return inputArray[middle];
-                if (isLowest(inputArray, rightMost)) return inputArray[rightMost];
-            }
+        int rightMost = inputArray.length-1;
+        int middle = (rightMost - leftMost)/2 + leftMost;
+        int lastMin = inputArray[0];
+        while (leftMost < rightMost) {
+//            System.out.println("(l, m, r, lm)=(" + leftMost + ", " + middle + ", " + rightMost + ", " + lastMin + ")");
+            // check leftmost and right most
+            if (isLowest(inputArray, leftMost)) return inputArray[leftMost];
+            if (isLowest(inputArray, rightMost)) return inputArray[rightMost];
 
             if (isLowest(inputArray, middle)) {
-                isNotFound = false;
+//                System.out.println("isLowestIs true for pos: " + middle);
                 return inputArray[middle];
-            } else if (isInBetween(inputArray, leftMost, middle)) {
-                System.out.println("isInbetween: "+ leftMost + ", " + middle);
-                rightMost = middle;
-                middle = rightMost - leftMost + rightMost;
-            } else {        // move to the right
-                leftMost = middle;
-                middle = rightMost - 1;
-                System.out.println("moving to right: "+ leftMost + ", " + middle);
+            } else {
+                // keep cutting based on last min value
+                if (lastMin < inputArray[middle]) {     // still ascending, gotta go right
+                    lastMin = inputArray[middle];
+                    leftMost = middle;
+                    middle = (rightMost - leftMost)/2 + leftMost;
+
+                } else if (lastMin > inputArray[middle]) {      // its descending, the cutoff is either current pos or on the left side
+                    rightMost = middle;
+                    middle = (rightMost - leftMost)/2 + leftMost;
+                }
             }
         }
 
         return -1;
     }
 
-    public static int getPreviousPos(int[]inputArray, int currentPos) {
-        if (currentPos - 1 < 0) return inputArray.length-1;
-        return currentPos - 1;
-    }
-
-    public static boolean isInBetween(int[] inputArray, int startPos, int endPos) {
-        return inputArray[startPos] > inputArray[endPos];
-    }
-
     public static boolean isLowest(int[] inputArray, int pos) {
         if (pos - 1 < 0) { // its comparison of first and last
-            return inputArray[0] > inputArray[inputArray.length-1];
+            return inputArray[0] < inputArray[inputArray.length-1];
         }
         return inputArray[pos-1] > inputArray[pos];
     }
