@@ -43,9 +43,7 @@ public class ReverseLinkedList {
         ListNode target = null;
         boolean isNotEnded = true;
 
-        int n = 0;
         while (isNotEnded) {
-            n++;
             if (source != null) {
                 if (target != null) {
                     ListNode node = new ListNode(source.val);
