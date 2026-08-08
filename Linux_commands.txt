@@ -168,7 +168,7 @@ General
  - dnf list installed
  - dnf upgrade									# dnf update is same as upgrade(can use flag --exclude=packageName)
  - dnf info <package>								# --cacheonly to get from local data
- - dnf install <package>
+ - dnf install <package>							# `dnf install @development-tools` - base-devel counter part for fedora
  - dnf reinstall <package>
  - dnf remove <package>
  - dnf repolist all								# list all the remote repos
