@@ -1,7 +1,6 @@
 package org.example.linkedList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReorderLinkedList {
     // Problem Statement:
@@ -30,45 +29,68 @@ public class ReorderLinkedList {
         ListNode b = new ListNode(4);
         ListNode c = new ListNode(6);
         ListNode d = new ListNode(8);
-        ListNode e = new ListNode(5);
+        ListNode e = new ListNode(10);
+//        ListNode f = new ListNode(6);
+//        ListNode g = new ListNode(7);
 
         a.next = b;
         b.next = c;
         c.next = d;
         d.next = e;
+//        e.next = f;
+//        f.next = g;
 
-        var out = theSolution(a);
-        System.out.println("out: " + out);
+        System.out.println("input: " + displayList(a));
+        theSolution(a);
+        System.out.println("out: " + displayList(a));
     }
 
-    public static ArrayList<Integer> theSolution(ListNode head) {
-        // convert the nodes into a list
-        // split the list in half, and go one at first and one at the last
+    public static void theSolution(ListNode head) {
+        // no need to convert to list, have a fast and slow pointer so that we can split the node into two.
+        // break the connection of the middle one, reverse the second half by rearranging the connections
+        // merge both by taking one from each.
 
-        ArrayList<Integer> items = toList(head);
-        ArrayList<Integer> returnList = new ArrayList<>();
-        int last = items.size() - 1;
-        boolean hasEven = last % 2 != 0;
-        int mid = hasEven ? last/2 + 1 : last/2;
+        ListNode slow = head;
+        ListNode fast = head.next;
 
-        for (int i=0; i<mid; i++) {
-            returnList.add(items.get(i));
-            returnList.add(items.get(last - i));
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        if (!hasEven) returnList.add(items.get(mid));
+        // now, reverse the second half
+        ListNode second = slow.next;
+        slow.next = null;
+        ListNode prev = null;
+        while (second != null) {
+            ListNode temp = second.next;
+            second.next = prev;
+            prev = second;
+            second = temp;
+        }
 
-        return returnList;
+        // go by each and keep adding into the node
+        ListNode firstHead = head;
+        ListNode secondHead = prev;
+        while (secondHead != null) {
+            ListNode tempFirst = firstHead.next;
+            ListNode tempSecond = secondHead.next;
+            firstHead.next = secondHead;
+            secondHead.next = tempFirst;
+            firstHead = tempFirst;
+            secondHead = tempSecond;
+        }
     }
 
-    public static ArrayList<Integer> toList(ListNode nodes) {
-        ArrayList<Integer> returnList = new ArrayList<>();
-        ListNode node = nodes;
-        while(node != null) {
-            returnList.add(node.val);
-            node = node.next;
+    public static ArrayList<Integer> displayList(ListNode ln) {
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        ListNode head = ln;
+        while (head != null) {
+            arr.add(head.val);
+            head = head.next;
         }
-        return returnList;
+        return arr;
     }
 
     public static class ListNode {
