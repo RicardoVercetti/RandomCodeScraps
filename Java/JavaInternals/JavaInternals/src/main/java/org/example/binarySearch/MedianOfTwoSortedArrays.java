@@ -1,7 +1,6 @@
 package org.example.binarySearch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MedianOfTwoSortedArrays {
     // Problem statement:
@@ -53,9 +52,13 @@ public class MedianOfTwoSortedArrays {
                     start = mid;
                 }
 
+                if (end - start == 1) {
+                    mid = end + 1;
+                    break;
+                }
+
                 mid = (end - start)/2 + start;
 
-                if ((start == mid & end - 1 == mid) || (end == mid && mid - 1 == start)) break;
             }
 //            System.out.println("num: " + number + ", mid: " + mid);
             arrayList.add(mid, number);
@@ -72,14 +75,14 @@ public class MedianOfTwoSortedArrays {
             return ((float)arrayList.get(mid_first) + (float)arrayList.get(mid_second))/2;
         }
 
-        return (float) arrayList.get(size - 1);
+        return (float) arrayList.get(size/2);
     }
 
     public static void main(String[] args) {
         System.out.println(1/2);
         System.out.println("here goes nothing...");
-        int[] nums1 = {1, 2};
-        int[] nums2 = {3};
+        int[] nums1 = {1, 3};
+        int[] nums2 = {2, 4};
 
         float median = findMedian(nums1, nums2);
 

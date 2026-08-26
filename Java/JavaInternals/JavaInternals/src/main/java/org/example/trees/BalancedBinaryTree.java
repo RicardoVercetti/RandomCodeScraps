@@ -62,8 +62,8 @@ public class BalancedBinaryTree {
         int right = dfs(root.right);
 
         if (left == -1 || right == -1) return -1;
-        int diff = left - right;
-        if (diff < -1 || diff > 1) return -1;
+        int diff = Math.abs(left - right);
+        if (diff > 1) return -1;
         return 1 + Math.max(left, right);
     }
 

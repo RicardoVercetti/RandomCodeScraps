@@ -23,7 +23,10 @@ public class LongestRepeatingCharacterReplacement {
     //    0 <= k <= s.length
 
     // Time and Space complexity recommendations
-    // ?
+    // time: O(n)
+    // space: O(m)
+
+    // mine: O(n) + O(m*n*n) → m = number of unique characters in the string, n = total number of elements in the string
 
     public static void main(String[] args) {
         System.out.println("here goes nothing...");
@@ -34,17 +37,23 @@ public class LongestRepeatingCharacterReplacement {
         System.out.println("output: " + output);
     }
 
+    public static int aBetterWay(String inputStr, int k) {
+        // a set(char, [pos-largest-count])
+
+        return 0;
+    }
+
     public static int nahIdBruteForceIt(String inputStr, int k) {
         // breakdown:
         // 1. find the longest substrings with interruptions, and their interruptions in numbers
         // 2. return the number of which the k replacements is the maximum out of them all.
 
-        HashMap<Character, String> uniqueCharArrays = new HashMap<Character, String>();
+        HashMap<Character, String> uniqueCharArrays = new HashMap<Character, String>();         // could use Set here to track what's already processed
         for (char oneItem: inputStr.toCharArray()) {
             if (uniqueCharArrays.containsKey(oneItem)) {
                 continue;
             }
-            uniqueCharArrays.put(oneItem, getPositionalFrequencyString(inputStr, oneItem));
+            uniqueCharArrays.put(oneItem, getPositionalFrequencyString(inputStr, oneItem));     // could do the below operation here itself
         }
 
         int longestCount = 0;
@@ -85,9 +94,6 @@ public class LongestRepeatingCharacterReplacement {
                         lengthAndGap.gap += 1;
                         lengthAndGap.length += 1;
                     }
-//                    else {
-//                        lengthAndGap.gap += 1;
-//                    }
                 }
 
                 // finally add this one's gap entry

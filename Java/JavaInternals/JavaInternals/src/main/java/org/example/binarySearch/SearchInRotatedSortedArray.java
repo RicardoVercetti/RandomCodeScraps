@@ -29,8 +29,8 @@ public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("here goes nothing...");
-        int[] inputArray = {16, 17, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-        int result = letsSeeWhatIcanDo(inputArray, 18);
+        int[] inputArray = {3,4,5,6,1,2};
+        int result = letsSeeWhatIcanDo(inputArray, 4);
 
         System.out.println("output: " + result);
     }
@@ -71,25 +71,19 @@ public class SearchInRotatedSortedArray {
 
             if (isAscending(inputArray, leftMost, middle)) {
                 if (inputArray[leftMost] < target && inputArray[middle] > target) {
-//                    System.out.println("first IF, IF");
                     rightMost = middle;
-                    middle = (rightMost - leftMost)/2 + leftMost;
                 } else {
-//                    System.out.println("first IF, ELSE");
                     leftMost = middle;
-                    middle = (rightMost - leftMost)/2 + leftMost;
                 }
             } else {
                 if (inputArray[middle] > target && inputArray[rightMost] < target) {
 //                    System.out.println("second ELSE, IF");
                     leftMost = middle;
-                    middle = (rightMost - leftMost)/2 + leftMost;
                 } else {        // the cutoff is here
-//                    System.out.println("second ELSE, ELSE");
                     rightMost = middle;
-                    middle = (rightMost - leftMost)/2 + leftMost;
                 }
             }
+            middle = (rightMost - leftMost)/2 + leftMost;
         }
         return -1;
     }
