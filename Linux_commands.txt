@@ -138,12 +138,14 @@ General
  - find ~ -type d -regex "regex"					# -name doesnt expect regex, `-type d` for directory
  - wc -l filename.txt														# number of lines in a text file
  - wc -l < filename.txt														# number of lines without the filename
+ - unxz <filename>.xz							                # decompress
  [package managers]
  - dpkg -S /usr/bin/nvim                                                    # finding the package name of binary
  - dpkg -l																	# list all installed packages
  - sudo apt purge <package_name>                                            # uninstall and remove the config/residual files too
  - sudo apt remove <package_name>											# just uninstall
  - uname -m                                                                 # System's architecture
+ - uname -r								                                                  # Kernel release
  - apt-cache policy <package-name>                                          # available versions of package
  - apt autoremove
  - apt install ./package.deb												# use with sudo, shold preceed filename with './'
@@ -300,6 +302,10 @@ Network
  - ufw status verbose													# Detailed status
  - ufw delete <number>							# delete rule by the number
  - ufw reload															# After making changes, reload the firewall to take effect (never needed this though)
+ [others]
+ - curl -OL <url>							                                # also direct download files
+ - gpg2 --verify <file-name> <file-name>.sign				          # verify the signature
+ - wget <url>								                                  # direct download files
 
 
 Java
