@@ -40,16 +40,13 @@ journalctl
  - journalctl -u <service_name>					# -u filters by systemd service units, -k for kernel logs
  - journalctl --since "today"					# log of only the day
  - journalctl -p err						# error logs(-p → Priority = Error and more severe); (0, emerg),(1, alert),(2, crit),(3,err),(4,warning),(5,notice),(6,info),(7,debug)
+ - journalctl -xe						# -x → add message explainations, -e → show from pager end 
  - sudo journalctl						# view system level logs
 
 chmod
  - ls -l filename													# list the permissions. First charecter → File type; - = regular file
 																	# d = directory l = symbolic link; next 3s → Owner, Group, Others
  - chmod u+x filename												# u → user(owner), g → group, o → others, default → a all, same as no prefix
-
-
-admins
- - groups															# all 
 
 
 internals
@@ -99,6 +96,7 @@ General
  - Ctrl + Alt + F2(or any F1–F6 key)										# For switching TTY (Terminal Session)															
  - command -v rg															# check if command exists
  - compgen -c									# list all executable commands in path
+ - date										# current date(-u → for date in UTC)
  - env											# lists all environmental variables used by system
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
@@ -188,7 +186,7 @@ General
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
  - du -h filename														   # disk usage of file
- - df -h																	                                  # check disk usage
+ - df -h																	                                  # file system space usage
  - baobab																	                                  # gnome disk usage analyzer
  [disk]
  - fdisk -l							# gives all disks like `lsblk`
@@ -208,6 +206,15 @@ General
  - top																		# Live process Monitor(Press P to sort by CPU|M - sort by memory, H - threads|Press k then type a PID to kill a process|Press q to quit)																
  - ulimit -n									# number of file descriptiors
  [users]
+ - EDITOR=nano visudo							# opens the sudo configuration
+ - groups								# list all the groups the current user is in
+ - passwd <username>							# set password for the user
+ - su - <username>							# run commands as substitute user
+ - useradd -m <username>							# create a new linux user. -m → creates `/home/username` directory. Must create password.
+ - usermod -d /new/home -m username					# moves users home directory to new location
+ - usermod -l <newname> <oldname>					# change username
+ - usermod -L <username>						# locks account - temporarily disables logins
+ - usermod -U <username>						# unlock account - restore login access
  - who																		# Who are the users logged in
  - whoami								# username of currently logged-in user
  - last																		# sign in history
@@ -228,6 +235,7 @@ General
  - sudo journalctl -b | grep -i fsck						# File System Consistency Check when abrupt boot/reboot happens
  - shutdown -h now								# -h → halt/power off
  - shutdown -h +10								# shuts down after a 10 mins delay(22:30 for after 10PM)
+ - shutdown --show								# list all schedule shutdowns
  - poweroff									# does the same as `systemctl poweroff`
  [system]
  - efibootmgr								# boot info if UEFI is used
@@ -677,6 +685,7 @@ LLC(low level code)
 
 Variables
  - $$ 								# current process
+ - $USER							# current user's name
  - $SHELL							# current shell being used
  - $TERM							# describes the type of terminal interface your shell is using
  - $TERM_PROGRAM						# terminal program name
