@@ -186,7 +186,7 @@ General
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
  - du -h filename														   # disk usage of file
- - df -h																	                                  # file system space usage
+ - df -h																	                                  # file system space usage(-hT → type of file space)
  - baobab																	                                  # gnome disk usage analyzer
  [disk]
  - fdisk -l							# gives all disks like `lsblk`
@@ -250,6 +250,7 @@ General
  - modinfo <driver_name>						# 
  - modprobe <driver_name>					# load the driver manually
  - rfkill list								# rfkill = Radio Frequency Kill switch, its a linux interface that controls radio trasmitters such as wifi, bluetooth, WWAN(cellular)
+ - timedatectl								# system clock and hardware clock(RTC)
 
 Shell
  - source <filename>                                                        # Reloads the file in question for the shell session(used after editing .bashrc) and can also mean read this shell script and execute its command when used as →`source script.sh`
