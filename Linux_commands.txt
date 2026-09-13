@@ -126,6 +126,7 @@ General
  - ls -l filename															# basic file information
  - ls lh								# list files with details
  - rm -rf <directory_name>                                                  # remove a directory with all contents(using the -rf option, as it will permanently delete files without any confirmation)
+ - md5sum <filename.ext>							# calculate md5sum checksum for the file
  - mv [options] <source_folder> <destination>                               # move folder
  - mv /path/to/folder /path/to/destination/
  - cp /source /destination						# copy file/folder, -r → recursive, -p → preservation of attributes(permissions, timestamps), -i → Interactively, -v → verbose
@@ -134,9 +135,15 @@ General
  - find ~ -name '*text*' 2>/dev/null                                       # 2> means redirect stderr, /dev/null is a 'black hole' that discards anything sent to it
  - find ~dir -type f														# find all in the dir. f → folders, d → directories
  - find ~ -type d -regex "regex"					# -name doesnt expect regex, `-type d` for directory
+ - sha1sum <filename.ext>
+ - sha256sum <filename.ext>						# calculate checksum
+ - tar -cf <filename.tar> file1.ext file2.ext				# create a tarball of the files passed
+ - tar --extract --file <filename.tar>					# extract the contents of the file(this sliently replaces the files if file of same name already present) 
+ - tar --list --file <filename.tar>					# list the files inside the tarball
  - wc -l filename.txt														# number of lines in a text file
  - wc -l < filename.txt														# number of lines without the filename
  - unxz <filename>.xz							                # decompress
+ - unzip <filename>.zip									# extract the zip file contents
  [package managers]
  - dpkg -S /usr/bin/nvim                                                    # finding the package name of binary
  - dpkg -l																	# list all installed packages
