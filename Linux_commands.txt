@@ -690,7 +690,9 @@ LLC(low level code)
  - nasm -f elf32 <file.asm>                   # to object file
  - objdump -d <binfile>									# assembly code of binary
  - xxd <filename>										# print the hex dump of the binary
- 
+
+GNUtools
+ - make								# script runner based on `Makefile` cookbook
 
 Variables
  - $$ 								# current process
