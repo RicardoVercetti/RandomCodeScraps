@@ -80,6 +80,7 @@ ssh
  - ssh -i ~/.ssh/mykey user@server_ip                                                                     # use custom key
  - ssh username@your-server-ip										                                                        # connect to a remote linux system(exit	to close a connection). SSH is a systemctl service.
  - ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_personal                        # create an ssh key(private key → ~/.ssh/id_ed25519, public key → ~/.ssh/id_ed25519.pub). Here, the mail is just a label, can use anything.
+ - sshd -t                                                                                                # test ssh daemon config file(sitting at `/etc/ssh/sshd_config`)
 
 
 Tmux
@@ -101,6 +102,7 @@ General
  - eval "string"                                                                          # execute the string as command(can use the output of command as another command to run)
  - <executable> | tee app.log							# log the standard out to a file while showing it in console(tee -a file.ext to append to the file)
  - which <cli-command-name>                                                 # find the location in the executable(alt: 'whereis')
+ - hash                                                                         # list hashed paths in bash, this is a shell builtin
  - history 												# history of commands executed
  - nl									# number lines, used as `<command> | nl`
  - pwd																		# current working directory
@@ -647,7 +649,7 @@ arch-linux
  - pacman -Qi <package-name>                        # search for the package with the specific name
  - pacman -Qm													# only AUR packages
  - pacman -Qo /usr/bin/executable										# tells which package owns the binary
- - pacman -Qs <package-name>												# search installed packages(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
+ - pacman -Qs <package-name>												# search installed packages by keywords(pacman -Qs "^sl$", ^ → matches the start of the string, $ → matches the end of the string)
  - pacman -Qu													# list upgradable packages
  - pacman -Sy													# update package database
  - pacman -Syu													# both package database and installed packages
