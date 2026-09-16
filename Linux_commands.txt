@@ -266,6 +266,14 @@ Shell
  - ssh -T git@gitlab.com
  - ssh -vT git@gitlab.com
  - nohup <command>							# ignore the stdin, redirect stdout, log the stderr to stdout of terminal
+ [shell-redirections]
+ - >									# redirect stdout to a file(override)
+ - >>									# redirect stdout(append)
+ - <									# redirect stdin from a file
+ - 2>									# redirect stderr to a file
+ - 2>>									# append stderr to a file
+ - &>									# Redirect both stdout & stderr
+ - |									# pipe output to another command
 
 
 
