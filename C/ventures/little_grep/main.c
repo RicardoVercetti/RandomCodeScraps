@@ -13,19 +13,41 @@
 // 4. if -a is passed in the command liner, print all lines with highlight on found line
 
 // skills:
-// colors in terminal
-// cli parsing 
+// [  ] colors in console outs
+// [  ] cli parsing 
 
 // things to know
 // 1. [  ] play with structs
 // 2. [  ] booleans are kinda wierd here, why import? then where does the return values for if conditions come from?
 // 3. [  ] arrays seems to be differently used than what I'm familiar with
 
+#define MAX_SIZE_STR 50
 
-// struct MyGrepParams {
-//     bool is_all_string;
-//     char[] search_string;
-// };
+struct MyGrepParams {
+    bool is_all_string;
+    char search_string[MAX_SIZE_STR];       // maybe this should be heap allocated string 
+};
+
+struct MyGrepParams parseParams(int argc, char *argv[]) {
+    struct MyGrepParams params;
+    char* all_flag = "-a";
+    bool is_value_already_set = false;
+
+
+    for (int i=1; i<argc; i++) {
+        if (strcmp(all_flag, argv[i]) == 0) {
+            params.is_all_string = true;
+        } else {
+            // this must be the string for search
+            // there cannot be more than one of these
+            if (!is_value_already_set) {
+                strcpy(params.search_string, argv[i]);
+                is_value_already_set = true;
+            }
+        }
+    }
+    return params;
+}
 
 int main(int argc, char *argv[]) {
     printf("application runs though...\n");
@@ -44,27 +66,13 @@ int main(int argc, char *argv[]) {
     // parse commmand line for text and flags
     // read things stdin stream and process by line
     // look for string matches and print to console in color for matched string
+    struct MyGrepParams params;
+    params = parseParams(argc, argv);
+
+    printf("is_all_string: %d\n", params.is_all_string);
+    printf("search_string: %s\n", params.search_string);
 
     return 0;
 }
 
-// MyGrepParams parseParams(int argc, char *argv[]) {
-//     struct MyGrepParams params;
-//     char* all_flag = "-a";
-//     bool is_value_already_set = false;
-
-
-//     for (int i=1; i<argc; i++) {
-//         if (strcomp(all_flag, argv[i])) {
-//             params.is_all_string = true;
-//         } else {
-//             // this must be the string for search
-//             // there cannot be more than one of these
-//             if (!is_value_already_set) {
-//                 params.search_string = argv[i];
-//             }
-//         }
-//     }
-//     return params;
-// }
 
