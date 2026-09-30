@@ -589,6 +589,7 @@ npm
  - npm list									# list all the installed packages
  - npm list -g									# global packages
  - npm list --depth=0								# only direct dependencies
+ - npx vite-bundle-visualizer                                                   # build size graph
 
 nvim
  - shift + esc                                        # mode change to normal
