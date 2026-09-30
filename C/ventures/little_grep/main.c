@@ -6,6 +6,12 @@
 // for cli, the first input is the binary name
 // and pieped inputs are to be read from stdin stream of the porgram
 
+
+// Questions:
+// i.   [  ] why does some functions requierd * at the front: eg: *fgets(), else the compiler fails with error
+//          - fgets returns a char pointer in the request and returns the same char pointer in the response if the read is successfull, else it returns `NULL`
+// ii.  [  ] working with a char array in c
+
 // TODO:
 // 1. take stdin and search for text mentioned in the cli
 // 2. search by each line, and find results by line
@@ -58,6 +64,7 @@ int main(int argc, char *argv[]) {
     // printf("value1: %s\n", argv[0]);
     // printf("value2: %s\n", argv[1]);
 
+    for(int i=0; i<argc; i++) printf("arg[%d]= %s\n", i, argv[i]);
 
     // char inp[1024];
 
