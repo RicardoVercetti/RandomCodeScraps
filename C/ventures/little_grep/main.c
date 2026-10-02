@@ -17,9 +17,10 @@
 // [  ] cli parsing 
 
 // things to know
-// 1. [  ] play with structs
-// 2. [  ] booleans are kinda wierd here, why import? then where does the return values for if conditions come from?
-// 3. [  ] arrays seems to be differently used than what I'm familiar with
+// 1. [OK] play with structs
+// 2. [OK] booleans are kinda wierd here, why import? then where does the return values for if conditions come from?
+// 3. [OK] arrays seems to be differently used than what I'm familiar with
+// 4. [  ] direcly assigning to a struct from return value of function is not possible for some reasons
 
 #define MAX_SIZE_STR 50
 
@@ -30,6 +31,8 @@ struct MyGrepParams {
 
 struct MyGrepParams parseParams(int argc, char *argv[]) {
     struct MyGrepParams params;
+    params.is_all_string = false;
+    // *params.search_string = (void *)NULL;
     char* all_flag = "-a";
     bool is_value_already_set = false;
 
@@ -68,6 +71,10 @@ int main(int argc, char *argv[]) {
     // look for string matches and print to console in color for matched string
     struct MyGrepParams params;
     params = parseParams(argc, argv);
+
+    if (params.search_string == NULL) {
+        printf("No search string provided :(\n");
+    }
 
     printf("is_all_string: %d\n", params.is_all_string);
     printf("search_string: %s\n", params.search_string);

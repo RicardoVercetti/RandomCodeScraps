@@ -181,7 +181,7 @@ General
  - dnf provides <package>							# check which packages provides a utility
  - dnf reinstall <package>
  - dnf remove <package>
- - dnf repolist all								# list all the remote repos
+ - dnf repolist --all								# list all the remote repos
  - dnf repolist enabled								# or diabled to see only that list
  [fonts]
  - fc-list									# list all fonts
