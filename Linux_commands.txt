@@ -616,7 +616,7 @@ docker
  - docker exec -it sql2025 ls /var/opt/mssql/backup								# one shot a command to insert into the docker container without entering it, here the `sql2025` is the name of the running container
  - docker images															# all available images
  - docker info
- - docker logs <container_id_or_name>
+ - docker logs <container_id_or_name>                                                                                           # `-f <container-id>` → follow log output
  - docker ps																# running containers (-a → all incl stopped)
  - docker pull <img-name>													# pull from docker hub
  - docker rm <container>													# Remove a stopped container
@@ -691,16 +691,22 @@ Gnome
 
  
 LLC(low level code)
- - gcc -c <file.c>										# create an object(.o) file from the .c file
+ - gcc -c <file.c>										# create an object(.o) file from the .c file. -c → compile only
  - gcc <file1.o> <file2.o> -o <main>						# link the object files to create a single binary
  - gcc <filename> -o <outfilename>						# compile and link the c code in one go
  - gcc -m32 -nostartfiles <filename.o> -o <out>
  - gcc -g hello.c -o hello_debug							# compile with debug symbols
  - gcc -o0 <filename> -o <outfilee>						# no optimization(default), others → -O1(basic), -O2(strong, safe), -O3(very aggressive, may increase size), -Os(smaller binary size), -Og(optimized but debuggable)
+ - gcc -shared -fPIC -O2 <code.c> -o <libfile.so>                               # -shared → produce a shared library, -fPIC → position independent code, -O2 → one instruction version
  - ld -m elf_i386 -s -o <outname> filname.o				# create executable from the object file
  - musl-gcc -static <filename>.c -o <bin_name>					# generate binary with statically linked libs(requires musl-gcc)
  - nasm -f elf32 <file.asm>                   # to object file
- - objdump -d <binfile>									# assembly code of binary
+ - nm <file.o>                                                                  # show function defintions. T → defined here, U → undefined, need to be resolved
+ - nm -D <file.so>                                                              # -D → Dynammic symbols
+ - nm -D --defined-only <file.so>                                               # only exported/defined dynamic symbols
+ - nm -D -u <file.so>                                                           # only undefined dynamic symbols
+ - nm -D -C <file.so>                                                           # demangle C++ names
+ - objdump -d <binfile.o>									# assembly code of binary
  - xxd <filename>										# print the hex dump of the binary
 
 GNUtools
