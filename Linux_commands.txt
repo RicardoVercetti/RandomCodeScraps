@@ -645,6 +645,7 @@ docker-associated
 arch-linux
 [packages]
  - pacman -Ss <package-name>												# search for packages
+ - pacman -Sc                                                                                                   # clean cache
  - pacman -Q													# list all packages(official repos + AUR)
  - pacman -Qe													# explicitly installed
  - pacman -Qi <package-name>                        # search for the package with the specific name
