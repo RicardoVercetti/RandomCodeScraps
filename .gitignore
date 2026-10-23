@@ -51,3 +51,7 @@ Thumbs.db
 
 # ignore object files
 *.o
+
+# zig files
+**/.zig-cache
+**/zig-out
