@@ -137,6 +137,7 @@ General
  - find ~ -name '*text*' 2>/dev/null                                       # 2> means redirect stderr, /dev/null is a 'black hole' that discards anything sent to it
  - find ~dir -type f														# find all in the dir. f → folders, d → directories
  - find ~ -type d -regex "regex"					# -name doesnt expect regex, `-type d` for directory
+ - ln -s <source/file/location> <target/location/filename>		# creates a symlink of the file, can remove with `unlink <linkname>` or `rm <filename>`
  - sha1sum <filename.ext>
  - sha256sum <filename.ext>						# calculate checksum
  - tar -cf <filename.tar> file1.ext file2.ext				# create a tarball of the files passed
@@ -194,6 +195,7 @@ General
  - tree -d -L 2																# only show directories
  - tree -L 2 -I "folder"							# just ignore the contents of this folder
  [storage]
+ - du --exclue=<filepattern>							# can give literal file names, and that will be excluded
  - du -sh folder_name														                            # du(Diskusage) -s(total size) -h(human readable)
  - du -h --max-depth=1 folder_name											                    # sizes of all sub dirs inside a folder
  - du -h filename														   # disk usage of file
@@ -594,6 +596,10 @@ npm
 
 zig
  - zig build-exe <filename.zig>							# compile code
+ - zig build-exe <filename.zig> -Osmall						# small binary(without the debug symbols)
+ - zig run <filename.zig>							# directly run the code file
+ - zig std									# offile std lib documentation through web server
+ - zig test <filename.zig>							# run tests
 
 nvim
  - shift + esc                                        # mode change to normal
