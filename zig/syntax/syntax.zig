@@ -26,4 +26,13 @@ pub fn main() void {
 
 
     print("\nOptional 1\ntype: {}\nvalue: {?s}\n", .{@TypeOf(optional_value), optional_value});
+
+    print("printing something of some length...", .{});
+
+    print("\roverriding...", .{});
+    print("\n", .{});
+
+    var someString = "here is some string...";
+    someString = someString - " some addition...";
+    print("{s}\n", .{someString});
 }
