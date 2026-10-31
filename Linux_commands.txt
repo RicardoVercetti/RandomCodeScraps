@@ -54,6 +54,7 @@ internals
  - cat /etc/os-release
  - cat /etc/issue
  - cat /etc/resolv.conf							# DNS server info
+ - cat /proc/swaps                                                      # show swap details
  - cat /sys/class/tty/tty0/active				# gives active tty
  - ls /dev/tty*									# gives the list of virtual consoles
  - ls /sys/firmware/efi							# this exists only if the system booted in UEFI mode
@@ -233,13 +234,16 @@ General
  - last																		# sign in history
  - w																		# who's logged in, what they're doing, and system load
  [swap file & zram]
- - fallocate -l 8G /swapfile                                                # allocate the swap memory
+ - fallocate -l 8G /swapfile                                                # allocate the swap memory(may fail on some file systems, have to use `dd` in that case)
  - chmod 600 /swapfile                                                      # give permission to system
  - mkswap /swapfile                                                         # make swap file
  - swapon /swapfile                                                         # turn on swap
  - echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab         # add it to file system table(fstab) to mount on boot
+ - swapoff /swapfile                                                        # turns off the swap but the file still remains, have to be removed manually with `rm` command
  - swapon --show                                                            # see changes
  - free -h
+ - zramctl                                                                  # zram details
+ 
  [terminals]
  - tty											# gives which tty you're currently on
  - echo "hello from vtty" > /dev/tty3			# writes output to tty3
@@ -478,8 +482,8 @@ git commands
   - git submodule status													# check if project has any submodules
   - git submodule foreach --recursive 'echo $path'							# print path of each submodule
   - git tag																	# list all tags
-  - git tag v1.2.0															# adds a lightweight tag to HEAD
-  - git tag v1.2.0 abc1234													# tag a specific commit
+  - git tag v1.2.0															# adds a lightweight tag to HEAD(use `git push --follow-tags` to push the tags along with commits)
+  - git tag v1.2.0 abc1234													# tag a specific commit(`git push --tags` should also work, but it pushes all tags)
   - git tag -a v1.2.0 -m "Release v1.2.0"									# annotated tag
   - git worktree add path/to/folder branch-name                            # branch name itself is optional, can also use '-b new-branch'
   - git worktree remove path/to/folder
