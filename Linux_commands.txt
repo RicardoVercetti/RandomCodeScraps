@@ -108,7 +108,7 @@ General
  - pwd																		# current working directory
  - sudo kill -9 <PID>
  - sudo netstat -tulnp | grep 22											# find the process running in port 22
- - ss -tulnp								# t → TCP, u → UDP, l → listening, n → numeric(no DNS), p → process details
+ - ss -tulnp								# t → TCP, u → UDP, l → listening, n → numeric(no DNS), p → process details(if process details not shown, try as sudo)
  - inxi -S																	# system info
  - less																		# some-command | less → gives walkable console outs
  - lsusb																	# hardwares in USB bus
@@ -208,7 +208,7 @@ General
  - lsblk /dev/diskname						# info of specific disk
  [processes]
  - lsof -i -P -n								# list all listening port processes
- - lsof -i :8080											# Find the Process Using Port 8080
+ - lsof -i :8080											# Find the Process Using Port 8080(sometimes this doesn't work, prefix `sudo` or us `ss` command as sudo
  - ps aux									# list all running processes, a → all users, u → user-orented format(CPU, memory, owner, etc), x → include items not attached to termianl
  - ps -e												# snapshot view of all running processes(-e → show all processes.-f → show full details)
  - ps -p <PID> -f															# details on the one running in PID
