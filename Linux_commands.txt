@@ -370,8 +370,10 @@ git commands
   - git am <file-name>														# ammend the patch file(usually .patch or .eml) (includes all metadata)
   - git config --global alias.<name-of-alias> <sub-command>					# eg: `git config alias.st status` makes `git st`	 evaluated into `git status`, the command name git is omitted here
   - git log <branch-name>                                                   # list commits of a certain branch
+  - git log --all                                                           # shows stashed commits as well(can use `--grep="string"` to find commit by commit message)
   - git log --pretty=full													# author and commiter
   - git log --oneline --graph --all --decorate								# --all → Shows commits from all branches, not just the current one(Without this, you’d only see commits reachable from HEAD), --decorate → Adds branch and tag names
+  - git log --all --oneline --name-status -- '*file_name_pattern'           # search file by file name from the git history(print the name of each changed file along with a one-letter status code)
   - git commit --amend --reset-author										# resets the author of last commit
   - git status --untracked-files=all										# all the trackable files inside untracked directory
   - git show                                                                # Last commits changes (full details)
