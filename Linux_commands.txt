@@ -724,6 +724,7 @@ LLC(low level code)
  - nm -D -u <file.so>                                                           # only undefined dynamic symbols
  - nm -D -C <file.so>                                                           # demangle C++ names
  - objdump -d <binfile.o>									# assembly code of binary
+ - objdump -h <binfile.o>							# header of binary.(-p for object specific file header, -x for all headers)
  - xxd <filename>										# print the hex dump of the binary
 
 GNUtools
