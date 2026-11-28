@@ -69,6 +69,8 @@ internals
  - ls /lib/modules								# kernels and their corresponding driver modules
  - ls /lib/firmware								# firmware to be used for the above modules
  - ls /usr/bin/*session							# could return graphical desktop environment names
+ - ls /usr/include/							# header files that can be used in the c code
+ - ls /usr/lib/								# all the user libararies
  - ls /usr/share/applications							# global .desktop files for application launching
 
 
@@ -710,6 +712,7 @@ Gnome
 
  
 LLC(low level code)
+ - as -o <objfile.o> <sourceasm.asm>						# gcc assembler to compiler asm code into object files
  - gcc -c <file.c>										# create an object(.o) file from the .c file. -c → compile only
  - gcc <file1.o> <file2.o> -o <main>						# link the object files to create a single binary
  - gcc <filename> -o <outfilename>						# compile and link the c code in one go
@@ -719,7 +722,7 @@ LLC(low level code)
  - gcc -shared -fPIC -O2 <code.c> -o <libfile.so>                               # -shared → produce a shared library, -fPIC → position independent code, -O2 → one instruction version
  - ld -m elf_i386 -s -o <outname> filname.o				# create executable from the object file
  - musl-gcc -static <filename>.c -o <bin_name>					# generate binary with statically linked libs(requires musl-gcc)
- - nasm -f elf32 <file.asm>                   # to object file
+ - nasm -f elf32 <file.asm>                   					# .asm file to object file
  - nm <file.o>                                                                  # show function defintions. T → defined here, U → undefined, need to be resolved
  - nm -D <file.so>                                                              # -D → Dynammic symbols
  - nm -D --defined-only <file.so>                                               # only exported/defined dynamic symbols
@@ -733,6 +736,7 @@ GNUtools
  - make								# script runner based on `Makefile` cookbook
 
 Variables
+ - $?								# the return-code of the most recent command
  - $$ 								# current process
  - $USER							# current user's name
  - $SHELL							# current shell being used
